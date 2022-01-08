@@ -12,6 +12,39 @@ The **Webstone Education Platform** changes how we educate people in software de
 
 Each lesson is **interactive** and contains a **mix of text**, **short videos**, **code samples**, **hands-on exercises** and **quizzes** to reinforce learning.
 
+## Table of contents
+
+- [Webstone Education Platform](#webstone-education-platform)
+  - [Table of contents](#table-of-contents)
+  - [How does it work for students?](#how-does-it-work-for-students)
+    - [At the center is an application](#at-the-center-is-an-application)
+    - [BYOC - Build your own curriculum](#byoc---build-your-own-curriculum)
+    - [Learning experience](#learning-experience)
+  - [How does it work for teachers / creators?](#how-does-it-work-for-teachers--creators)
+    - [Create a new module](#create-a-new-module)
+    - [Strict module guidelines](#strict-module-guidelines)
+  - [Developer environment provisioning](#developer-environment-provisioning)
+  - [Pricing](#pricing)
+  - [The team](#the-team)
+    - [Mike Nikles](#mike-nikles)
+    - [You?](#you)
+  - [Architecture](#architecture)
+    - [Template course monorepo](#template-course-monorepo)
+      - [`package.json`](#packagejson)
+    - [Student course monorepo](#student-course-monorepo)
+      - [`config.yaml`](#configyaml)
+      - [`package.json`](#packagejson-1)
+      - [Additional modules](#additional-modules)
+    - [Modules](#modules)
+      - [`config.yaml`](#configyaml-1)
+      - [`package.json`](#packagejson-2)
+- [Open questions](#open-questions)
+  - [What does the most minimal usable product look like?](#what-does-the-most-minimal-usable-product-look-like)
+  - [What do we call _web_, _styles_, _api_, _database_?](#what-do-we-call-web-styles-api-database)
+  - [What's a better name for _backend_?](#whats-a-better-name-for-backend)
+  - [Where / how do we configure module compatibility?](#where--how-do-we-configure-module-compatibility)
+  - [How do we mock modules without giving away the source for free?](#how-do-we-mock-modules-without-giving-away-the-source-for-free)
+
 ## How does it work for students?
 
 ### At the center is an application
