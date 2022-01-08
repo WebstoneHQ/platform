@@ -1,0 +1,16 @@
+# Learn more about this file at https://www.gitpod.io/docs/references/gitpod-yml
+tasks:
+  - before: npm i -g pnpm
+    init: pnpm install
+    command: |
+      export HMR_HOST=`gp url 3000`
+      pnpm dev
+
+ports:
+  - port: 3000
+    onOpen: ignore
+
+vscode:
+  extensions:
+    - svelte.svelte-vscode
+    - bradlc.vscode-tailwindcss
