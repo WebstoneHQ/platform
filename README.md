@@ -24,18 +24,18 @@ Some developers prefer React for the frontend web application, others prefer Sve
 
 > Each student configures their own curriculum, we call this BYOC as in **B**uild **Y**our **O**wn **C**urriculum.
 
-Alice may choose a Svelte web app, styled with Tailwind CSS, that communicates with SvelteKit through a REST API. The data may be persisted in a MySQL database hosted on Railway whereas the web app, API & backend services are deployed to Vercel.
+Alice may choose a Svelte web app, styled with Tailwind CSS, that communicates with SvelteKit through a REST API. The data may be persisted in a MySQL database hosted on Railway whereas the web app & API services are deployed to Vercel.
 Bob on the other hand may prefer a React web app developed with Next.js and a a Postgres database, all hosted on AWS.
 
 To visualise that, please see the following diagram.
 
-https://excalidraw.com/#json=61BtnkMzKuI4VaovNXwaD,aEckWJpj1BNhopSF1zl96g
+https://excalidraw.com/#json=khoU0_kx1jVic3JlDFCFE,BuXAFx2X_9ZaGhcgA5CwJg
 
 **Module selection**
 
-Students may choose one or more modules. For example, Bob is a backend developer who wants to learn about web development. When he selects his modules, he only picks a _web_ module. The platform will automatically provision _api_, _backend_, and _database_ modules for him so he can focus on web development only, but still in the context of the overall application.
+Students may choose one or more modules. For example, Bob is a backend developer who wants to learn about web development. When he selects his modules, he only picks a _web_ module. The platform will automatically provision _api_ and _database_ modules for him so he can focus on web development only, but still in the context of the overall application.
 
-Students may also add additional modules later. Let's take Alice's example from above. Once she completes her learning path, she may decide to learn how to develop a React web app with styled-components. She obtains the React and styled-components _web_ and _styles_ modules and learns these modules in the same repository she already developed the Svelte with Tailwind CSS app. A simple config change allows her to develop & test that new application with the same _backend_ and _database_ modules she previously learned about.
+Students may also add additional modules later. Let's take Alice's example from above. Once she completes her learning path, she may decide to learn how to develop a React web app with styled-components. She obtains the React and styled-components _web_ and _styles_ modules and learns these modules in the same repository she already developed the Svelte with Tailwind CSS app. A simple config change allows her to develop & test that new application with the same _api_ and _database_ modules she previously learned about.
 
 ### Learning experience
 
@@ -45,7 +45,7 @@ For any lesson, students may decide to let the editor extension show the solutio
 
 ## How does it work for teachers / creators?
 
-The platform acts as a marketplace for teachers to publish their own modules. Someone may be proficient in C# and decides to publish a C# _backend_ module only whereas a full-stack developer may create modules for _web_, _styles_, _API_ & _backend_.
+The platform acts as a marketplace for teachers to publish their own modules. Someone may be proficient in C# and decides to publish a C# _api_ module only whereas a full-stack developer may create modules for _web_, _styles_, & _api_.
 
 ### Create a new module
 
@@ -57,7 +57,7 @@ In phase 1, teachers contribute their content to the above repository directly. 
 
 When creating modules, teachers must adhere to strict guidelines. For example, to develop a _web_ module, the final HTML structure of each _web_ module has to contain well-defined `data-*` attributes on elements such as buttons, links, forms, etc. These attributes are used by end-to-end tests provided by the platform to validate a module's completeness. Automated tests will validate that a module works in all possible BYOC combinations.
 
-The same applies to _backend_ modules, _database_ schema definitions, etc.
+The same applies to _api_ modules, _database_ schema definitions, etc.
 
 ## Developer environment provisioning
 
@@ -99,14 +99,17 @@ The directory structure looks as follows:
 
 ```
 .
-├── backend
-│   ├── graphql-sveltekit-postgres
+├── api
+│   ├── graphql-nodejs-postgres
 │   ├── rest-rust-planetscale
-│   └── rest-sveltekit-mysql
+│   └── rest-csharp-mysql
+├── frameworks
+│   ├── sveltekit-rest-mysql
+│   └── nextjs-graphql-mongodb
 ├── package.json
 └── web
     ├── react-css-rest
-    ├── react-styledcomponents-react
+    ├── react-styledcomponents-rest
     ├── react-tailwindcss-graphql
     ├── svelte-css-rest
     └── svelte-tailwindcss-graphql
@@ -124,8 +127,8 @@ When a student builds their own curriculum, a new monorepo is created in a git h
 
 ```
 .
-├── backend
-│   └── rest-sveltekit-mysql
+├── api
+│   └── rest-nodejs-mysql
 ├── config.yaml
 ├── package.json
 └── web
@@ -136,8 +139,8 @@ The above directory structure matches the following curriculum:
 
 - _Web_: Svelte
 - _Styles_: Tailwind CSS
-- _API_: Rest
-- _Backend_: SvelteKit
+- _API Type_: Rest
+- _API_: Node.js
 - _Database_: MySQL
 
 #### `config.yaml`
@@ -148,12 +151,12 @@ The `config.yaml` file for the above curriculum looks as follows:
 stack:
   web: "svelte"
   styles: "tailwindcss"
-  api: "rest"
-  backend: "sveltekit"
+  apitype: "rest"
+  api: "nodejs"
   database: "mysql"
 deployment:
   web: "vercel"
-  backend: "vercel"
+  api: "vercel"
   database: "railway"
 ```
 
@@ -171,12 +174,12 @@ The `config.yaml` file can be adjusted accordingly:
 stack:
   web: "react"
   styles: "css"
-  api: "rest"
-  backend: "sveltekit"
+  apitype: "rest"
+  api: "nodejs"
   database: "mysql"
 deployment:
   web: "vercel"
-  backend: "vercel"
+  api: "vercel"
   database: "railway"
 ```
 
@@ -225,10 +228,10 @@ My current thinking (Jan 5, 2021) is:
 - Svelte and React _web_ modules
 - A CSS _styles_ module only
 - A REST _api_ module only
-- The _backend_ & _database_ modules are hosted and not available to choose from
-- Deployment on Vercel (_web_, _api_, _backend_) and Railway (for the db)
+- The _api_ & _database_ modules are hosted and not available to choose from
+- Deployment on Vercel (_web_ & _api_) and Railway (for the db)
 
-### What do we call _web_, _styles_, _api_, _backend_, _database_?
+### What do we call _web_, _styles_, _api_, _database_?
 
 My first thought is "tier". Although, the "styles tier" feels awkward.
 
@@ -237,21 +240,23 @@ My first thought is "tier". Although, the "styles tier" feels awkward.
 - Services? Application or business (layer)? Server?
 - Drop "backend" and combine it with the _api_ modules? Every backend module is tightly coupled with one api module anyway.
 
+**Decision**: We renamed _backend_ to _api_ and the previous _api_ module is now _apitype_.
+
 ### Where / how do we configure module compatibility?
 
-Do we even need that? If all modules adhere to "strict module guidelines" (see above), any module may be compatible with any other module. However, a React _web_ module with a Nuxt.js _backend_ module may not be the best idea, but may technically work 🤔?! Maybe we show a warning instead, highly recommending not to do that (in that case we do need a compatibility matrix).
+Do we even need that? If all modules adhere to "strict module guidelines" (see above), any module may be compatible with any other module. However, a React _web_ module with a Nuxt.js _api_ module may not be the best idea, but may technically work 🤔?! Maybe we show a warning instead, highly recommending not to do that (in that case we do need a compatibility matrix).
 
 ### How do we mock modules without giving away the source for free?
 
-Each lesson is taught in the context of the overall application. If a student only chooses to learn about the _web_ and _styles_ modules, we need a way to provide them with an API endpoint, a backend and a database so they can develop their web application. Likewise, if a student only wants to learn about _API_ & _backend_ modules, we need to provide a functioning _web_ & _styles_ modules
+Each lesson is taught in the context of the overall application. If a student only chooses to learn about the _web_ and _styles_ modules, we need a way to provide them with an API and a database so they can develop their web application. Likewise, if a student only wants to learn about an _API_ module, we need to provide functioning _web_, _styles_, & _database_ modules
 
 **Hosted option**
 
-We host versions of certain _api-backend_ combinations and can use a single hosted _database_. When a student creates a curriculum, the platform provisions the _api-backend-dsatabase_ combination and provides the student with the API endpoint to use in their web module.
+We host an _api_ and a _database_ module. When a student creates a curriculum, the platform provisions the _api-database_ combination and provides the student with the API endpoint to use in their web module.
 
 **_Pros_**:
 
-- We can completely isolate the code and do not expose any of the _api-backend-database_ modules to students who didn't add them to their curriculum.
+- We can completely isolate the code and do not expose any of the _api-database_ modules to students who didn't add them to their curriculum.
 
 **_Cons_**:
 
