@@ -1,0 +1,10 @@
+stack:
+  web: ""
+  styles: ""
+  apitype: ""
+  api: ""
+  database: ""
+deployment:
+  web: ""
+  api: ""
+  database: ""
