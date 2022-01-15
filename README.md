@@ -8,7 +8,9 @@ Most importantly, it is nearly impossible to develop a real-world full-stack web
 
 Today, developers require countless hours of reading forums, talking to others, and trial & error to maybe eventually make it all work. Is it secure though? Are secrets exposed by accident? Well, it's hard to tell.
 
-The **Webstone Education Platform** changes how we educate people in software development. Courses are based on a real-world application! Everything a student learns happens in the context of this application. At all times, students are aware of the application architecture and where their current lesson fits in.
+As an instructor, keeping your video courses current means re-recording every time a dependency introduces a new feature or a major new version. The alternative is to edit existing videos, pause and add awkward voice-over explanations of how the code in the video is outdated and what a student has to do instead.
+
+The **Webstone Education Platform** changes how we educate people in software development. Courses are based on a real-world application that contains the features needed in most web applications! Everything a student learns happens in the context of this application. At all times, students are aware of the application architecture and where their current lesson fits in.
 
 Each lesson is **interactive** and contains a **mix of text**, **short videos**, **code samples**, **hands-on exercises** and **quizzes** to reinforce learning.
 
@@ -16,10 +18,11 @@ Each lesson is **interactive** and contains a **mix of text**, **short videos**,
 
 - [Webstone Education Platform](#webstone-education-platform)
   - [Table of contents](#table-of-contents)
-  - [How does it work for students?](#how-does-it-work-for-students)
-    - [At the center is an application](#at-the-center-is-an-application)
-    - [BYOC - Build your own curriculum](#byoc---build-your-own-curriculum)
-    - [Learning experience](#learning-experience)
+  - [What makes the Webstone Education platform different?](#what-makes-the-webstone-education-platform-different)
+    - [One application](#one-application)
+    - [BYOC - **B**uild **Y**our **O**wn **C**urriculum](#byoc---build-your-own-curriculum)
+  - [Lesson plan](#lesson-plan)
+  - [Learning experience](#learning-experience)
   - [How does it work for teachers / creators?](#how-does-it-work-for-teachers--creators)
     - [Create a new module](#create-a-new-module)
     - [Strict module guidelines](#strict-module-guidelines)
@@ -45,46 +48,95 @@ Each lesson is **interactive** and contains a **mix of text**, **short videos**,
   - [Where / how do we configure module compatibility?](#where--how-do-we-configure-module-compatibility)
   - [How do we mock modules without giving away the source for free?](#how-do-we-mock-modules-without-giving-away-the-source-for-free)
 
-## How does it work for students?
+## What makes the Webstone Education platform different?
 
-### At the center is an application
+We radically improve the learning experience with two core concepts:
 
-Throughout the course, students are reminded where in the overall application architecture any given lesson fits in. This provides a better understanding of what they work on, why and how they can apply it to their own projects. It is also more rewarding to work on an actual application rather than individual, standalone tutorials where each tutorial starts with repetitive setup instructions.
+- One application
+- BYOC - **B**uild **Y**our **O**wn **C**urriculum
 
-### BYOC - Build your own curriculum
+Let's learn more.
 
-Some developers prefer React for the frontend web application, others prefer Svelte or Vue. Likewise, a REST or GraphQL API may connect to a backend that leverages Next.js, SvelteKit or Rust.
+### One application
 
-> Each student configures their own curriculum, we call this BYOC as in **B**uild **Y**our **O**wn **C**urriculum.
+Students develop a blog platform that includes:
 
-Alice may choose a Svelte web app, styled with Tailwind CSS, that communicates with SvelteKit through a REST API. The data may be persisted in a MySQL database hosted on Railway whereas the web app & API services are deployed to Vercel.
-Bob on the other hand may prefer a React web app developed with Next.js and a a Postgres database, all hosted on AWS.
+- CRUD (create, read, update, delete) operations for blog posts and static pages
+- Authentication (email/password, OAuth, Password-less)
+- Media uploads, storage and how to serve these assets on the web app
+- Blog post comments for anonymous and authenticated users
+- More features as the platform evolves (RSS feed, progressive web app, push notifications, etc.)
 
-To visualise that, please see the following diagram.
+Every lesson, every quiz, everything students learn about happens in the context of that application. With that, students have a better understanding of how they can apply what they learn to their own personal projects or at work.
 
-https://excalidraw.com/#json=khoU0_kx1jVic3JlDFCFE,BuXAFx2X_9ZaGhcgA5CwJg
+As students progress through the course, their understanding of the application architecture improves and with that, they learn what it takes to develop, deploy & operate a full-stack web application.
+
+### BYOC - **B**uild **Y**our **O**wn **C**urriculum
+
+Some people want to learn about React, others about Svelte.
+
+Some people want to learn about GraphQL, others about REST APIs.
+
+Some people want to learn about a Node.js API, others about a Java Spring API.
+
+On the Webstone Education platform, students decide what they want to learn and select from the following modules:
+
+- **Web** framework: React, Svelte, Angular, jQuery, etc.
+- **Styles**: CSS, Tailwind CSS, Chakra UI, etc.
+- **API type**: Form POST submission, REST, GraphQL
+- **API**: Node.js, Rust, Java, etc.
+- **Database**: MySQL, MongoDB, PlanetScale, etc.
+- **Deployment**: Vercel, GCP, Railway, etc.
+
+To visualise that, please see the following diagram: https://excalidraw.com/#json=khoU0_kx1jVic3JlDFCFE,BuXAFx2X_9ZaGhcgA5CwJg
+
+Based on a student's selection, the platform creates a personalized course curriculum.
 
 **Module selection**
 
-Students may choose one or more modules. For example, Bob is a backend developer who wants to learn about web development. When he selects his modules, he only picks a _web_ module. The platform will automatically provision _api_ and _database_ modules for him so he can focus on web development only, but still in the context of the overall application.
+Students may choose one or more modules. For example, Bob is a backend developer who wants to improve his web development skills. When he selects his modules, he only picks _web_ and _styles_ modules. The platform will automatically provision _api_ and _database_ modules for him so he can focus on web development only, but still in the context of the overall application.
 
-Students may also add additional modules later. Let's take Alice's example from above. Once she completes her learning path, she may decide to learn how to develop a React web app with styled-components. She obtains the React and styled-components _web_ and _styles_ modules and learns these modules in the same repository she already developed the Svelte with Tailwind CSS app. A simple config change allows her to develop & test that new application with the same _api_ and _database_ modules she previously learned about.
+Alice on the other hand wants to study full-stack web development. She may choose a Svelte web app, styled with Tailwind CSS, that communicates with SvelteKit through a REST API. The data may be persisted in a MySQL database hosted on Railway whereas the web app & API services are deployed to Vercel.
 
-### Learning experience
+_Study what you want, when you want_
 
-Lessons are available via a web interface for mobile & desktop. To ensure an immersive learning experience, an accompanying VS Code (_keep this open for JetBrains, etc._) extension is available to assist students when they work on hands-on course material. Rather than integrating a code editor in the web experience, students learn in their familiar code editor environment.
+Students may add additional modules later. Let's take Alice's example from above. Once she completes her learning path, she may decide to learn how to develop a React web app with styled-components. She obtains the React and styled-components _web_ and _styles_ modules and learns these modules in the same repository she already developed the Svelte with Tailwind CSS app. A config change allows her to develop & test that new application with the same _api_ and _database_ modules she previously learned about.
 
-For any lesson, students may decide to let the editor extension show the solution. This can be achieved by clicking a "Show me how" button and acts as an escape hatch to ensure students stay engaged and motivated in difficult situations.
+## Lesson plan
+
+Regardless of which modules students select, the lesson plan is consistent across modules of the same layer, e.g. all _web_ modules.
+
+**Web**
+
+1. TODO
+
+**API**
+
+1. TODO
+
+**Framework**
+
+_Framework modules are special in that they cover web, api, and database modules. Think of frameworks like Next.js, SvelteKit, Ruby on Rails._
+
+1. TODO
+
+## Learning experience
+
+Lessons are available via a web interface for mobile & desktop devices. To ensure an immersive learning experience, an accompanying VS Code (_keep this open for JetBrains, etc._) extension is available to assist students when they work on hands-on course material. Rather than integrating a code editor in the web experience, students learn in their familiar code editor environment.
+
+For any lesson, students may decide to let the editor extension show the solution. This can be achieved by clicking a "Show me how" button which acts as an escape hatch to ensure students stay engaged and motivated in difficult situations.
 
 ## How does it work for teachers / creators?
 
-The platform acts as a marketplace for teachers to publish their own modules. Someone may be proficient in C# and decides to publish a C# _api_ module only whereas a full-stack developer may create modules for _web_, _styles_, & _api_.
+The platform acts as a marketplace for teachers to publish their own modules. Someone may be proficient in C# and decides to publish a C# _api_ module only, whereas a full-stack developer may create modules for _web_, _styles_, & _api_.
 
 ### Create a new module
 
 All course modules, including their lessons and supporting assets, are available in the [`WebstoneHQ/courses`](https://github.com/WebstoneHQ/courses) repository (private).
 
 In phase 1, teachers contribute their content to the above repository directly. At a later time, the platform will provide a web interface to create new course modules.
+
+When students build their own curriculum, the platform will pick the correct module(s) from the `WebstoneHQ/courses` repository and provide them to the students.
 
 ### Strict module guidelines
 
@@ -96,7 +148,7 @@ The same applies to _api_ modules, _database_ schema definitions, etc.
 
 When a student completes building their own curriculum, the platform creates a git repository on a student's choice of git hosting provider (i.e. GitHub, GitLab, Bitbucket, ...).
 
-The content of that repository depends on which modules a student's curriculum contains. For example, if a student only selected a _web_ module, their repository will contain that given _web_ module. They will connect to a hosted API so they can learn the _web_ module in the context of a full-stack application.
+The content of that repository depends on which modules a student's curriculum contains. For example, if a student only selected a _web_ module, their repository will contain that given _web_ module. They will connect to a hosted API so they can learn the _web_ module in the context of the same full-stack application they would develop if they had also chosen _api_ and _database_ modules.
 
 Each repository will provide a configuration for a ready-to-code developer environment on [Gitpod](https://www.gitpod.io) as well as scripts to set up the project on a local computer. The Gitpod configuration provides students with a one-click developer environment accessible via their browser or preferred desktop IDE - no setup required.
 
@@ -124,7 +176,7 @@ Please contact me on Twitter [@mikenikles](https://twitter.com/mikenikles) if al
 
 ### Template course monorepo
 
-A private monorepo contains the code for all available course modules. Individual module directories also contain the necessary teaching assets, such as lessons, videos, diagrams, etc.
+A private monorepo contains the code for all available course modules. Individual module directories also contain the necessary teaching assets, such as lessons, videos, diagrams, quizes, etc.
 
 The repo is available at [WebstoneHQ/courses](https://github.com/WebstoneHQ/courses) (private).
 
