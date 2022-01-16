@@ -13,6 +13,25 @@
   }
 </style>
 
+<svelte:head>
+  <title>Learn full-stack web development | Webstone Education</title>
+  <meta
+    name="description"
+    content="Webstone Education is on a mission to simplify full-stack web development education."
+  />
+  <meta
+    property="og:title"
+    content="Learn full-stack web development | Webstone Education"
+  />
+  <meta
+    property="og:description"
+    content="Webstone Education is on a mission to simplify full-stack web development education."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://webstone.app" />
+  <meta property="og:image" content="https://webstone.app/og-image.png" />
+</svelte:head>
+
 <div class="bg-white">
   <main>
     <!-- Hero section -->
@@ -70,7 +89,7 @@
                 <div class="mt-4 sm:mt-0 sm:ml-3">
                   <button
                     type="submit"
-                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-white shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-black shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
                     >Notify me</button
                   >
                 </div>
