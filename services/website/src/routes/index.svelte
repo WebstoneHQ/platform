@@ -1,3 +1,18 @@
+<script lang="ts">
+  import { enhance } from "$lib/actions/form";
+
+  const signUpSuccessful = async (_, form: HTMLFormElement) => {
+    form.reset();
+    form.style.setProperty("--success", "visible");
+  };
+</script>
+
+<style>
+  form {
+    --success: hidden;
+  }
+</style>
+
 <div class="bg-white">
   <main>
     <!-- Hero section -->
@@ -33,22 +48,38 @@
                 One application, end-to-end, build your own curriculum.
               </p>
             </div>
-            <form action="#" class="mt-12 sm:max-w-lg sm:w-full sm:flex">
-              <div class="min-w-0 flex-1">
-                <label for="hero-email" class="sr-only">Email address</label>
-                <input
-                  id="hero-email"
-                  type="email"
-                  class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
-                  placeholder="Enter your email"
-                />
+            <form
+              action="/api/sign-up.json"
+              method="post"
+              use:enhance="{{
+                result: signUpSuccessful,
+              }}"
+              class="mt-12"
+            >
+              <div class="sm:max-w-lg sm:w-full sm:flex">
+                <div class="min-w-0 flex-1">
+                  <label for="hero-email" class="sr-only">Email address</label>
+                  <input
+                    id="hero-email"
+                    type="email"
+                    name="email"
+                    class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-3">
+                  <button
+                    type="submit"
+                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-white shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                    >Notify me</button
+                  >
+                </div>
               </div>
-              <div class="mt-4 sm:mt-0 sm:ml-3">
-                <button
-                  type="submit"
-                  class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-white shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
-                  >Notify me</button
-                >
+              <div
+                class="mt-4 text-gray-900"
+                style="visibility: var(--success);"
+              >
+                <p>Thank you, we will send you updates.</p>
               </div>
             </form>
             <!-- <div class="mt-6">
@@ -408,22 +439,38 @@
                 pricing.
               </p>
             </div>
-            <form action="#" class="mt-12 sm:mx-auto sm:max-w-lg sm:flex">
-              <div class="min-w-0 flex-1">
-                <label for="cta-email" class="sr-only">Email address</label>
-                <input
-                  id="cta-email"
-                  type="email"
-                  class="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
-                  placeholder="Enter your email"
-                />
+            <form
+              action="/api/sign-up.json"
+              method="post"
+              use:enhance="{{
+                result: signUpSuccessful,
+              }}"
+              class="mt-12"
+            >
+              <div class="sm:mx-auto sm:max-w-lg sm:flex">
+                <div class="min-w-0 flex-1">
+                  <label for="cta-email" class="sr-only">Email address</label>
+                  <input
+                    id="cta-email"
+                    type="email"
+                    name="email"
+                    class="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div class="mt-4 sm:mt-0 sm:ml-3">
+                  <button
+                    type="submit"
+                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
+                    >Notify me</button
+                  >
+                </div>
               </div>
-              <div class="mt-4 sm:mt-0 sm:ml-3">
-                <button
-                  type="submit"
-                  class="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
-                  >Notify me</button
-                >
+              <div
+                class="mt-4 text-white text-center"
+                style="visibility: var(--success);"
+              >
+                <p>Thank you, we will send you updates.</p>
               </div>
             </form>
           </div>
