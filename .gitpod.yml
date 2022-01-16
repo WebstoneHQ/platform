@@ -4,7 +4,7 @@ tasks:
     init: pnpm install
     command: |
       export HMR_HOST=`gp url 3000`
-      pnpm dev
+      WEBHOOK_ENDPOINT_SIGN_UP=$WEBHOOK_ENDPOINT_SIGN_UP pnpm dev
 
 ports:
   - port: 3000

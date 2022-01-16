@@ -42,6 +42,6 @@
 	"homepage": "https://github.com/WebstoneHQ/platform#readme",
 	"lint-staged": {
 		"*.{js,ts}": "pnpm lint",
-		"*.{js,json,md,ts,yaml,yml}": "prettier --plugin-search-dir=./services/website --write"
+		"*.{js,json,md,svelte,ts,yaml,yml}": "prettier --plugin-search-dir=./services/website --write"
 	}
 }
