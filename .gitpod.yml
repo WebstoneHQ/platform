@@ -10,6 +10,11 @@ ports:
   - port: 3000
     onOpen: ignore
 
+github:
+  prebuilds:
+    addBadge: true
+    branches: true
+
 vscode:
   extensions:
     - bradlc.vscode-tailwindcss
