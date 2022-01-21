@@ -1,0 +1,16 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 62" width="120" height="62">
+  <!-- svg-source:excalidraw -->
+  
+  <defs>
+    <style>
+      @font-face {
+        font-family: "Virgil";
+        src: url("https://excalidraw.com/Virgil.woff2");
+      }
+      @font-face {
+        font-family: "Cascadia";
+        src: url("https://excalidraw.com/Cascadia.woff2");
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="120" height="62" fill="#ffffff"></rect><g stroke-linecap="round" transform="translate(10 10) rotate(0 50 21)"><path d="M10.5 0 L89.5 0 L94.09 0.66 L97.38 2.63 L99.34 5.91 L100 10.5 L100 31.5 L99.34 36.09 L97.38 39.38 L94.09 41.34 L89.5 42 L10.5 42 L5.91 41.34 L2.63 39.38 L0.66 36.09 L0 31.5 L0 10.5 L0.66 5.91 L2.63 2.63 L5.91 0.66 L10.5 0" stroke="none" stroke-width="0" fill="#000"></path><path d="M10.5 0 M10.5 0 C34.57 0, 58.63 0, 89.5 0 M10.5 0 C27.66 0, 44.82 0, 89.5 0 M89.5 0 C96.5 0, 100 3.5, 100 10.5 M89.5 0 C96.5 0, 100 3.5, 100 10.5 M100 10.5 C100 16.91, 100 23.31, 100 31.5 M100 10.5 C100 14.81, 100 19.12, 100 31.5 M100 31.5 C100 38.5, 96.5 42, 89.5 42 M100 31.5 C100 38.5, 96.5 42, 89.5 42 M89.5 42 C73.06 42, 56.62 42, 10.5 42 M89.5 42 C59.39 42, 29.28 42, 10.5 42 M10.5 42 C3.5 42, 0 38.5, 0 31.5 M10.5 42 C3.5 42, 0 38.5, 0 31.5 M0 31.5 C0 23.16, 0 14.82, 0 10.5 M0 31.5 C0 26.09, 0 20.68, 0 10.5 M0 10.5 C0 3.5, 3.5 0, 10.5 0 M0 10.5 C0 3.5, 3.5 0, 10.5 0" stroke="#fff" stroke-width="1" fill="none"></path></g><g transform="translate(15 19.5) rotate(0 45 11.5)"><text x="45" y="18" font-family="Helvetica, Segoe UI Emoji" font-size="20px" fill="#fff" text-anchor="middle" style="white-space: pre;" direction="ltr">REST</text></g></svg>

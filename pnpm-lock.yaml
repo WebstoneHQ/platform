@@ -46,6 +46,7 @@ importers:
       tailwindcss: ^3.0.12
       tslib: ^2.3.1
       typescript: ^4.4.3
+      uuid: ^8.3.2
     devDependencies:
       "@sveltejs/adapter-auto": 1.0.0-next.10
       "@sveltejs/kit": 1.0.0-next.231_svelte@3.45.0
@@ -65,6 +66,7 @@ importers:
       tailwindcss: 3.0.15_ef48b3b8837f8a23677bffe8f9cd866d
       tslib: 2.3.1
       typescript: 4.5.4
+      uuid: 8.3.2
 
 packages:
   /@babel/code-frame/7.12.11:
@@ -2555,6 +2557,14 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: { integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8= }
+    dev: true
+
+  /uuid/8.3.2:
+    resolution:
+      {
+        integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==,
+      }
+    hasBin: true
     dev: true
 
   /v8-compile-cache/2.3.0:

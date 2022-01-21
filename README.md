@@ -88,7 +88,7 @@ On the Webstone Education platform, students decide what they want to learn and 
 - **Database**: MySQL, MongoDB, PlanetScale, etc.
 - **Deployment**: Vercel, GCP, Railway, etc.
 
-To visualise that, please see the following diagram: https://excalidraw.com/#json=khoU0_kx1jVic3JlDFCFE,BuXAFx2X_9ZaGhcgA5CwJg
+To visualise that, please see the following diagram: https://excalidraw.com/#json=3tSOSoXcslt9VL38IqUoU,89gJwZrPnpEkRp67GzRWxQ
 
 Based on a student's selection, the platform creates a personalized course curriculum.
 
