@@ -10,7 +10,7 @@
 </script>
 
 <img
-  src="/static/svg/byoc/{layer}/{name}.svg"
+  src="/svg/byoc/{layer}/{name}.svg"
   alt="{name} logo"
   class:cursor-pointer="{!readOnly}"
   class="w-20 h-20"
