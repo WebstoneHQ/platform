@@ -183,6 +183,16 @@
               With Webstone, you are in control of your full-stack web
               development learning journey.
             </p>
+            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
+              Learn exactly what is valuable to you. You can come back at any
+              time and configure a new curriculum. When you do so, the new
+              lessons will be added to your existing student repository.
+            </p>
+            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
+              Until we launch Webstone Education, you become automatically
+              eligible for the <strong>early adopter pricing</strong>
+              if you build your curriculum now.
+            </p>
           </div>
           <div class="mt-12 lg:mt-0">
             <Byoc />
