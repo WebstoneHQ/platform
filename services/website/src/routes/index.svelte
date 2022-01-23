@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from "$lib/actions/form";
+  import Byoc from "$lib/components/byoc/index.svelte";
 
   const signUpSuccessful = async (_, form: HTMLFormElement) => {
     form.reset();
@@ -117,11 +118,11 @@
         </div>
       </div>
 
-      <div class="sm:mx-auto sm:max-w-3xl sm:px-6">
+      <div class="hidden sm:block sm:mx-auto sm:max-w-3xl sm:px-6">
         <div
           class="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"
         >
-          <div class="hidden sm:block">
+          <div>
             <div
               class="absolute inset-y-0 left-1/2 w-screen bg-gray-50 rounded-l-3xl lg:left-80 lg:right-0 lg:w-full"
             ></div>
@@ -159,6 +160,43 @@
           <!-- <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pl-12">
             <img class="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/task-app-rose.jpg" alt="">
           </div> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-32">
+      <div
+        class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
+      >
+        <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+          <div>
+            <h2
+              class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl"
+            >
+              Build your own curriculum
+            </h2>
+            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
+              Select your preferred technologies and we will create a
+              personalised course for you.
+            </p>
+            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
+              With Webstone, you are in control of your full-stack web
+              development learning journey.
+            </p>
+            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
+              Learn exactly what is valuable to you. You can come back at any
+              time and configure a new curriculum. When you do so, the new
+              lessons will be added to your existing student repository.
+            </p>
+            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
+              Until we launch Webstone Education, you become automatically
+              eligible for the <strong>early adopter pricing</strong>
+              if you build your curriculum now.
+            </p>
+          </div>
+          <div class="mt-12 lg:mt-0">
+            <Byoc />
+          </div>
         </div>
       </div>
     </div>
