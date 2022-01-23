@@ -66,12 +66,21 @@
     web: {
       angular: {
         styles: {
+          bootstrap: {},
           css: {},
           tailwind: {},
         },
         apitype: {
           graphql: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -108,6 +117,14 @@
           },
           rest: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -146,6 +163,7 @@
       },
       nextjs: {
         styles: {
+          bootstrap: {},
           chakraui: {},
           css: {},
           styledcomponents: {},
@@ -180,6 +198,7 @@
       },
       nuxtjs: {
         styles: {
+          bootstrap: {},
           css: {},
           tailwind: {},
         },
@@ -212,6 +231,7 @@
       },
       react: {
         styles: {
+          bootstrap: {},
           chakraui: {},
           css: {},
           styledcomponents: {},
@@ -220,6 +240,14 @@
         apitype: {
           graphql: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -256,6 +284,14 @@
           },
           rest: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -294,12 +330,21 @@
       },
       svelte: {
         styles: {
+          bootstrap: {},
           css: {},
           tailwind: {},
         },
         apitype: {
           graphql: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -336,6 +381,14 @@
           },
           rest: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -374,6 +427,7 @@
       },
       sveltekit: {
         styles: {
+          bootstrap: {},
           css: {},
           tailwind: {},
         },
@@ -406,12 +460,21 @@
       },
       vue: {
         styles: {
+          bootstrap: {},
           css: {},
           tailwind: {},
         },
         apitype: {
           graphql: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
@@ -448,6 +511,14 @@
           },
           rest: {
             api: {
+              django: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               go: {
                 database: {
                   mongodb: {},
