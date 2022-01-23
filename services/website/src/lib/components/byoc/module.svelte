@@ -1,4 +1,7 @@
 <script lang="ts">
+  import type { Writable } from "svelte/store";
+  import type { CurriculumSelections } from "$lib/components/byoc/index.svelte";
+
   import { getContext } from "svelte";
   import { contextKeyCurriculum } from "$lib/context-keys";
 
@@ -6,7 +9,8 @@
   export let name: string;
   export let readOnly = false;
 
-  const curriculum = getContext(contextKeyCurriculum);
+  const curriculumSelections: Writable<CurriculumSelections> =
+    getContext(contextKeyCurriculum);
 </script>
 
 <img
@@ -14,5 +18,5 @@
   alt="{name} logo"
   class:cursor-pointer="{!readOnly}"
   class="w-20 h-20"
-  on:click="{() => !readOnly && ($curriculum[layer] = name)}"
+  on:click="{() => !readOnly && ($curriculumSelections[layer] = name)}"
 />

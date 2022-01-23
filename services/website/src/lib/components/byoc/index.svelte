@@ -1,6 +1,16 @@
+<script lang="ts" context="module">
+  export type CurriculumSelections = {
+    web?: string;
+    styles?: string;
+    apitype?: string;
+    api?: string;
+    database?: string;
+  };
+</script>
+
 <script lang="ts">
   import { setContext } from "svelte";
-  import { writable } from "svelte/store";
+  import { writable, Writable } from "svelte/store";
   import { enhance } from "$lib/actions/form";
   import { contextKeyCurriculum } from "$lib/context-keys";
 
@@ -12,25 +22,25 @@
     form.style.setProperty("--success", "visible");
   };
 
-  const curriculum: {
-    web?: string;
-    styles?: string;
-    apitype?: string;
-    api?: string;
-    database?: string;
-  } = writable({});
-  setContext(contextKeyCurriculum, curriculum);
+  const curriculumSelections: Writable<CurriculumSelections> = writable({});
+  setContext(contextKeyCurriculum, curriculumSelections);
 
-  let sectionToShow: "web" | "styles" | "apitype" | "api" | "database";
-  $: sectionToShow = !$curriculum.web
+  let sectionToShow:
+    | "web"
+    | "styles"
+    | "apitype"
+    | "api"
+    | "database"
+    | "completed";
+  $: sectionToShow = !$curriculumSelections.web
     ? "web"
-    : !$curriculum.styles
+    : !$curriculumSelections.styles
     ? "styles"
-    : !$curriculum.apitype
+    : !$curriculumSelections.apitype
     ? "apitype"
-    : !$curriculum.api
+    : !$curriculumSelections.api
     ? "api"
-    : !$curriculum.database
+    : !$curriculumSelections.database
     ? "database"
     : "completed";
 
@@ -39,7 +49,7 @@
   $: if (sectionToShow === "completed" && !isCurriculumSubmitted) {
     isCurriculumSubmitted = true;
     fetch("/api/curriculum", {
-      body: JSON.stringify($curriculum),
+      body: JSON.stringify($curriculumSelections),
       headers: {
         "Content-Type": "application/json",
       },
@@ -371,7 +381,7 @@
 
   {#if sectionToShow === "styles"}
     <Section title="2. Select a type of styling">
-      {#each Object.keys(curriculumConfiguration.web[$curriculum.web].styles) as name}
+      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].styles) as name}
         <Module layer="styles" name="{name}" />
       {/each}
     </Section>
@@ -379,7 +389,7 @@
 
   {#if sectionToShow === "apitype"}
     <Section title="2. Select a type of styling">
-      {#each Object.keys(curriculumConfiguration.web[$curriculum.web].apitype) as name}
+      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype) as name}
         <Module layer="apitype" name="{name}" />
       {/each}
     </Section>
@@ -387,7 +397,7 @@
 
   {#if sectionToShow === "api"}
     <Section title="4. Select an API framework">
-      {#each Object.keys(curriculumConfiguration.web[$curriculum.web].apitype[$curriculum.apitype].api) as name}
+      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype[$curriculumSelections.apitype].api) as name}
         <Module layer="api" name="{name}" />
       {/each}
     </Section>
@@ -395,7 +405,7 @@
 
   {#if sectionToShow === "database"}
     <Section title="5. Select a database">
-      {#each Object.keys(curriculumConfiguration.web[$curriculum.web].apitype[$curriculum.apitype].api[$curriculum.api].database) as name}
+      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype[$curriculumSelections.apitype].api[$curriculumSelections.api].database) as name}
         <Module layer="database" name="{name}" />
       {/each}
     </Section>
@@ -448,13 +458,13 @@
 </div>
 
 <div class="min-h-[8rem]">
-  {#if $curriculum.web}
+  {#if $curriculumSelections.web}
     <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
       Your curriculum
     </p>
     <div class="flex flex-wrap space-x-2">
       <!-- {"web":"react","styles":"nodejs","apitype":"rest"} -->
-      {#each Object.entries($curriculum) as [layer, name]}
+      {#each Object.entries($curriculumSelections) as [layer, name]}
         <Module layer="{layer}" name="{name}" readOnly />
       {/each}
     </div>
