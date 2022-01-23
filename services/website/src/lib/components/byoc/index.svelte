@@ -69,6 +69,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
@@ -169,6 +170,7 @@
           css: {},
           styledcomponents: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
@@ -203,6 +205,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
@@ -239,6 +242,7 @@
           css: {},
           styledcomponents: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
@@ -337,6 +341,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
@@ -435,6 +440,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
@@ -469,6 +475,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          unocss: {},
           windicss: {},
         },
         apitype: {
