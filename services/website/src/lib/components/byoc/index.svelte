@@ -112,6 +112,38 @@
           },
         },
       },
+      nextjs: {
+        styles: {
+          chakraui: {},
+          css: {},
+          styledcomponents: {},
+          tailwind: {},
+        },
+        apitype: {
+          graphql: {
+            api: {
+              nextjs: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  postgresql: {},
+                },
+              },
+            },
+          },
+          rest: {
+            api: {
+              nextjs: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  postgresql: {},
+                },
+              },
+            },
+          },
+        },
+      },
       react: {
         styles: {
           chakraui: {},
@@ -220,6 +252,36 @@
                 },
               },
               rust: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  postgresql: {},
+                },
+              },
+            },
+          },
+        },
+      },
+      sveltekit: {
+        styles: {
+          css: {},
+          tailwind: {},
+        },
+        apitype: {
+          graphql: {
+            api: {
+              sveltekit: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  postgresql: {},
+                },
+              },
+            },
+          },
+          rest: {
+            api: {
+              sveltekit: {
                 database: {
                   mongodb: {},
                   mysql: {},

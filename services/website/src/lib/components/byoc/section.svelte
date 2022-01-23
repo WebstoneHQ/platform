@@ -6,7 +6,7 @@
   <p class="max-w-3xl text-lg font-semibold leading-7 text-gray-500">
     {title}
   </p>
-  <div class="flex justify-start space-x-2">
+  <div class="flex flex-wrap justify-start space-x-2">
     <slot />
   </div>
 </div>
