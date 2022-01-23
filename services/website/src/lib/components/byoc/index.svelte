@@ -76,6 +76,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -83,6 +84,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -90,6 +92,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -101,6 +104,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -108,6 +112,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -115,6 +120,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -136,6 +142,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -147,6 +154,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -166,6 +174,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -177,6 +186,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -198,6 +208,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -205,6 +216,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -212,6 +224,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -223,6 +236,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -230,6 +244,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -237,6 +252,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -256,6 +272,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -263,6 +280,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -270,6 +288,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -281,6 +300,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -288,6 +308,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -295,6 +316,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -314,6 +336,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -325,6 +348,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -344,6 +368,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -351,6 +376,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -358,6 +384,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -369,6 +396,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -376,6 +404,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
@@ -383,6 +412,7 @@
                 database: {
                   mongodb: {},
                   mysql: {},
+                  planetscale: {},
                   postgresql: {},
                 },
               },
