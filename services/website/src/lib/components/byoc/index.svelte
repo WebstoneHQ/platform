@@ -72,14 +72,6 @@
         apitype: {
           graphql: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -116,14 +108,6 @@
           },
           rest: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -236,14 +220,6 @@
         apitype: {
           graphql: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -280,14 +256,6 @@
           },
           rest: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -332,14 +300,6 @@
         apitype: {
           graphql: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -376,14 +336,6 @@
           },
           rest: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -460,14 +412,6 @@
         apitype: {
           graphql: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
@@ -504,14 +448,6 @@
           },
           rest: {
             api: {
-              django: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
               go: {
                 database: {
                   mongodb: {},
