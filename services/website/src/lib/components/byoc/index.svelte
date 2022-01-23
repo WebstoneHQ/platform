@@ -72,6 +72,14 @@
         apitype: {
           graphql: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -100,6 +108,14 @@
           },
           rest: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -204,6 +220,14 @@
         apitype: {
           graphql: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -232,6 +256,14 @@
           },
           rest: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -268,6 +300,14 @@
         apitype: {
           graphql: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -296,6 +336,14 @@
           },
           rest: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -364,6 +412,14 @@
         apitype: {
           graphql: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
@@ -392,6 +448,14 @@
           },
           rest: {
             api: {
+              go: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  planetscale: {},
+                  postgresql: {},
+                },
+              },
               java: {
                 database: {
                   mongodb: {},
