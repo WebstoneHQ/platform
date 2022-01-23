@@ -154,6 +154,36 @@
           },
         },
       },
+      nuxtjs: {
+        styles: {
+          css: {},
+          tailwind: {},
+        },
+        apitype: {
+          graphql: {
+            api: {
+              nuxtjs: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  postgresql: {},
+                },
+              },
+            },
+          },
+          rest: {
+            api: {
+              nextjs: {
+                database: {
+                  mongodb: {},
+                  mysql: {},
+                  postgresql: {},
+                },
+              },
+            },
+          },
+        },
+      },
       react: {
         styles: {
           chakraui: {},
