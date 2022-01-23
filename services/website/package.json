@@ -1,6 +1,7 @@
 {
   "name": "website",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "build": "svelte-kit build",
     "clean": "rm -rf .svelte-kit ./node_modules",
