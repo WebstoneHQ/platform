@@ -69,6 +69,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
@@ -168,6 +169,7 @@
           css: {},
           styledcomponents: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
@@ -201,6 +203,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
@@ -236,6 +239,7 @@
           css: {},
           styledcomponents: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
@@ -333,6 +337,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
@@ -430,6 +435,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
@@ -463,6 +469,7 @@
           bootstrap: {},
           css: {},
           tailwind: {},
+          windicss: {},
         },
         apitype: {
           graphql: {
