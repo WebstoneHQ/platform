@@ -18,6 +18,6 @@
   alt="{name} logo"
   title="{name}"
   class:cursor-pointer="{!readOnly}"
-  class="w-20 h-20"
+  class="w-20 h-20 dark:invert"
   on:click="{() => !readOnly && ($curriculumSelections[layer] = name)}"
 />
