@@ -17,6 +17,8 @@
   src="/svg/byoc/{layer}/{name}.svg"
   alt="{name} logo"
   title="{name}"
+  height="80px"
+  width="80px"
   class:cursor-pointer="{!readOnly}"
   class="w-20 h-20"
   on:click="{() => !readOnly && ($curriculumSelections[layer] = name)}"

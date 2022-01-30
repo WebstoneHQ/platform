@@ -592,7 +592,7 @@
             >
           </div>
         </div>
-        <div class="mt-4 text-gray-900" style="visibility: var(--success);">
+        <div class="mt-4" style="visibility: var(--success);">
           <p>Thank you, we will send you updates.</p>
         </div>
       </form>

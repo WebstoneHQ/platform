@@ -1,6 +1,7 @@
 <script lang="ts">
   import { enhance } from "$lib/actions/form";
   import Byoc from "$lib/components/byoc/index.svelte";
+  import Link from "$lib/components/link.svelte";
 
   const signUpSuccessful = async (_, form: HTMLFormElement) => {
     form.reset();
@@ -61,11 +62,14 @@
               </a>
             </div> -->
             <div class="mt-6 sm:max-w-xl">
-              <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl">
+              <h1
+                class="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-orange-500 dark:to-white dark:from-orange-500 sm:text-5xl"
+              >
                 Learn full-stack web development
               </h1>
               <p class="mt-6 text-xl">
-                One application, end-to-end, build your own curriculum.
+                The only comprehensive full-stack learning environment, from
+                HTML to databases and anything in-between.
               </p>
             </div>
             <form
@@ -90,7 +94,7 @@
                 <div class="mt-4 sm:mt-0 sm:ml-3">
                   <button
                     type="submit"
-                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-slate-900 shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-orange-500 text-base font-medium text-slate-900 shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
                     >Notify me</button
                   >
                 </div>
@@ -186,11 +190,41 @@
               <p class="mt-6 max-w-3xl text-lg leading-7">
                 Until we launch Webstone Education, you become automatically
                 eligible for the <strong>early adopter pricing</strong>
-                if you build your curriculum now.
+                if you build your curriculum now and provide your email address at
+                the end.
               </p>
             </div>
             <div class="mt-12 lg:mt-0">
               <Byoc />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-32">
+        <div
+          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
+        >
+          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            One application, many course modules
+          </h2>
+          <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+            <div>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                You develop a single full-stack web application, end-to-end!
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Instead of a Tetris game, a weather widget and a Todo app, you
+                focus on individual lessons that are part of one real-world
+                application.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                The best part: You, and you alone decide which modules you want
+                to learn about and which technology stack interests you most.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Read on and configure your personal curriculum 👇️.
+              </p>
             </div>
           </div>
         </div>
@@ -249,14 +283,14 @@
               >
                 <img
                   class="absolute inset-0 h-full w-full object-cover"
-                  src="https://images.unsplash.com/photo-1521510895919-46920266ddb3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-100"
-                  alt=""
+                  src="mike-profile.jpg"
+                  alt="A headshot of Mike Nikles"
                 />
                 <div
-                  class="absolute inset-0 bg-rose-500 mix-blend-multiply"
+                  class="absolute inset-0 bg-orange-500 mix-blend-multiply"
                 ></div>
                 <div
-                  class="absolute inset-0 bg-gradient-to-t from-rose-600 via-rose-600 opacity-90"
+                  class="absolute inset-0 bg-gradient-to-t from-orange-600 via-orange-600 opacity-0"
                 ></div>
                 <div class="relative px-8">
                   <!-- <div>
@@ -267,7 +301,7 @@
                       class="relative text-lg font-medium text-white md:flex-grow"
                     >
                       <svg
-                        class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-rose-400"
+                        class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-orange-400"
                         fill="currentColor"
                         viewBox="0 0 32 32"
                         aria-hidden="true"
@@ -283,7 +317,7 @@
                     </div>
 
                     <footer class="mt-4">
-                      <p class="text-base font-semibold text-rose-200">
+                      <p class="text-base font-semibold text-orange-200">
                         Mike Nikles, Founder at Webstone
                       </p>
                     </footer>
@@ -305,27 +339,47 @@
                 <p class="text-lg">
                   Learning how to develop software is broken. Tens of thousands
                   of videos, tutorials, blog posts, articles, etc. are readily
-                  available yet how do you know what is worth your time? How do
-                  you know the content is correct, up-to-date, or scales to more
-                  than ten users in a real-world scenario? Most importantly, it
-                  is nearly impossible to develop a real-world full-stack web
-                  application based on individual tutorials.
+                  available, yet how do you know what is worth your time?
                 </p>
-                <p class="text-base leading-7">
-                  The <strong>Webstone Education Platform</strong> changes how we
-                  educate people in software development. Courses are based on a
-                  real-world application that contains the features needed in most
-                  web applications! Everything a student learns happens in the context
-                  of this application. At all times, students are aware of the application
-                  architecture and where their current lesson fits in.
-                </p>
-                <p class="text-base leading-7">
-                  Each lesson is <strong>interactive</strong> and contains a
+                <p class="text-lg leading-7">
+                  The <strong>Webstone Education Platform</strong> changes how
+                  we educate full-stack web developers. Each lesson is
+                  <strong>interactive</strong> and contains a
                   <strong
                     >mix of text, short videos, code samples, hands-on exercises</strong
                   >
                   and <strong>quizzes</strong> to reinforce learning.
                 </p>
+                <p class="text-lg leading-7">
+                  Mike has been a full-stack web developer for 20+ years. He is
+                  also the author and creator of the following books & courses:
+                </p>
+                <ul>
+                  <li>
+                    <Link
+                      href="https://www.mikenikles.com/cloud-native-web-development"
+                      >📚️ Cloud Native Web Development</Link
+                    >
+                  </li>
+                  <li>
+                    <Link
+                      href="https://mikenikles.gumroad.com/l/a-smart-guide-for-your-career-as-a-software-engineer"
+                      >📚️ A Smart Guide for Your Career as a Software Engineer</Link
+                    >
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.educative.io/courses/cloud-native-development"
+                      >🧑‍🎓 Cloud Native Development with Tailwind, Google
+                      Cloud and Firebase</Link
+                    >
+                  </li>
+                  <li>
+                    <Link href="https://www.youtube.com/watch?v=OUzaUJ3gEug"
+                      >🧑‍🎓 Full Stack Web Development in the Cloud</Link
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -449,7 +503,7 @@
           class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <div
-            class="relative rounded-2xl px-6 py-10 bg-rose-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"
+            class="relative rounded-2xl px-6 py-10 bg-orange-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"
           >
             <div
               aria-hidden="true"
@@ -484,7 +538,8 @@
                 <p class="mt-6 mx-auto max-w-2xl text-lg text-rose-100">
                   Follow us on Twitter <a
                     href="https://twitter.com/webstonehq"
-                    target="_blank">@webstonehq</a
+                    target="_blank"
+                    rel="noreferrer">@webstonehq</a
                   > or provide your email address below for updates and early bird
                   pricing.
                 </p>
@@ -592,6 +647,7 @@
         <a
           href="https://twitter.com/webstonehq"
           target="_blank"
+          rel="noreferrer"
           class="hover:text-gray-300"
         >
           <span class="sr-only">Twitter</span>
@@ -610,6 +666,7 @@
         <a
           href="https://github.com/WebstoneHQ/platform"
           target="_blank"
+          rel="noreferrer"
           class="hover:text-gray-300"
         >
           <span class="sr-only">GitHub</span>
@@ -629,6 +686,7 @@
         <a
           href="https://discord.gg/EzJDBT6uRv"
           target="_blank"
+          rel="noreferrer"
           class="hover:text-gray-300"
         >
           <span class="sr-only">Discord</span>
