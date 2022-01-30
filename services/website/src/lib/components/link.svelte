@@ -8,7 +8,7 @@
   href="{href}"
   target="_blank"
   rel="noreferrer"
-  class="underline underline-offset-4 text-lg font-semibold leading-10 tracking-wide hover:decoration-orange-500 {clazz}"
+  class="text-lg font-semibold leading-10 tracking-wide underline underline-offset-4 hover:decoration-orange-500 {clazz}"
 >
   <slot />
 </a>

@@ -20,6 +20,6 @@
   height="80px"
   width="80px"
   class:cursor-pointer="{!readOnly}"
-  class="w-20 h-20"
+  class="h-20 w-20"
   on:click="{() => !readOnly && ($curriculumSelections[layer] = name)}"
 />

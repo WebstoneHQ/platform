@@ -35,13 +35,13 @@
 </svelte:head>
 
 <div
-  class="antialiased bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200"
+  class="bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-200"
 >
   <main>
     <!-- Hero section -->
-    <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
+    <div class="overflow-hidden pt-8 sm:pt-12 lg:relative lg:py-48">
       <div
-        class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24"
+        class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-24 lg:px-8"
       >
         <div>
           <!-- <div>
@@ -63,7 +63,7 @@
             </div> -->
             <div class="mt-6 sm:max-w-xl">
               <h1
-                class="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-orange-500 dark:to-white dark:from-orange-500 sm:text-5xl"
+                class="bg-gradient-to-br from-slate-900 to-orange-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent dark:from-orange-500 dark:to-white sm:text-5xl"
               >
                 Learn full-stack web development
               </h1>
@@ -80,21 +80,21 @@
               }}"
               class="mt-12"
             >
-              <div class="sm:max-w-lg sm:w-full sm:flex">
+              <div class="sm:flex sm:w-full sm:max-w-lg">
                 <div class="min-w-0 flex-1">
                   <label for="hero-email" class="sr-only">Email address</label>
                   <input
                     id="hero-email"
                     type="email"
                     name="email"
-                    class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
+                    class="block w-full rounded-md border border-gray-300 px-5 py-3 text-base placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
                     placeholder="Enter your email"
                   />
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-3">
                   <button
                     type="submit"
-                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-orange-500 text-base font-medium text-slate-900 shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                    class="block w-full rounded-md border border-transparent bg-orange-500 px-5 py-3 text-base font-medium text-slate-900 shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
                     >Notify me</button
                   >
                 </div>
@@ -167,9 +167,9 @@
 
       <div class="mt-32">
         <div
-          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
+          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
         >
-          <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+          <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-24">
             <div>
               <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
                 Build your own curriculum
@@ -203,12 +203,12 @@
 
       <div class="mt-32">
         <div
-          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
+          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
             One application, many course modules
           </h2>
-          <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+          <div class="lg:grid lg:grid-cols-2 lg:items-center lg:gap-24">
             <div>
               <p class="mt-6 max-w-3xl text-lg leading-7">
                 You develop a single full-stack web application, end-to-end!
@@ -233,7 +233,7 @@
       <!-- Testimonial/stats section -->
       <div class="relative mt-20">
         <div
-          class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start"
+          class="lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:items-start lg:gap-24 lg:px-8"
         >
           <div class="relative sm:py-16 lg:py-0">
             <div
@@ -275,11 +275,11 @@
             </svg> -->
             </div>
             <div
-              class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20"
+              class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-none lg:px-0 lg:py-20"
             >
               <!-- Testimonial card-->
               <div
-                class="relative pt-64 pb-10 rounded-2xl shadow-xl overflow-hidden"
+                class="relative overflow-hidden rounded-2xl pt-64 pb-10 shadow-xl"
               >
                 <img
                   class="absolute inset-0 h-full w-full object-cover"
@@ -301,7 +301,7 @@
                       class="relative text-lg font-medium text-white md:flex-grow"
                     >
                       <svg
-                        class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-orange-400"
+                        class="absolute top-0 left-0 h-8 w-8 -translate-x-3 -translate-y-2 transform text-orange-400"
                         fill="currentColor"
                         viewBox="0 0 32 32"
                         aria-hidden="true"
@@ -503,7 +503,7 @@
           class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <div
-            class="relative rounded-2xl px-6 py-10 bg-orange-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"
+            class="relative overflow-hidden rounded-2xl bg-orange-500 px-6 py-10 shadow-xl sm:px-12 sm:py-20"
           >
             <div
               aria-hidden="true"
@@ -531,11 +531,11 @@
             <div class="relative">
               <div class="sm:text-center">
                 <h2
-                  class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl"
+                  class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl"
                 >
                   Get notified when we&rsquo;re launching.
                 </h2>
-                <p class="mt-6 mx-auto max-w-2xl text-lg text-rose-100">
+                <p class="mx-auto mt-6 max-w-2xl text-lg text-rose-100">
                   Follow us on Twitter <a
                     href="https://twitter.com/webstonehq"
                     target="_blank"
@@ -552,27 +552,27 @@
                 }}"
                 class="mt-12"
               >
-                <div class="sm:mx-auto sm:max-w-lg sm:flex">
+                <div class="sm:mx-auto sm:flex sm:max-w-lg">
                   <div class="min-w-0 flex-1">
                     <label for="cta-email" class="sr-only">Email address</label>
                     <input
                       id="cta-email"
                       type="email"
                       name="email"
-                      class="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
+                      class="block w-full rounded-md border border-transparent px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
                       placeholder="Enter your email"
                     />
                   </div>
                   <div class="mt-4 sm:mt-0 sm:ml-3">
                     <button
                       type="submit"
-                      class="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
+                      class="block w-full rounded-md border border-transparent bg-gray-900 px-5 py-3 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
                       >Notify me</button
                     >
                   </div>
                 </div>
                 <div
-                  class="mt-4 text-white text-center"
+                  class="mt-4 text-center text-white"
                   style="visibility: var(--success);"
                 >
                   <p>Thank you, we will send you updates.</p>
@@ -588,7 +588,7 @@
   <!-- Footer section -->
   <footer class="mt-24 sm:mt-12">
     <div
-      class="mx-auto max-w-md py-12 px-4 overflow-hidden sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
+      class="mx-auto max-w-md overflow-hidden py-12 px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
     >
       <!-- <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
         <div class="px-5 py-2">
