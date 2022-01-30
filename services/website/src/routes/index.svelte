@@ -586,9 +586,7 @@
   </main>
 
   <!-- Footer section -->
-  <footer
-    class="mt-24 bg-slate-900 dark:bg-white text-slate-200 dark:text-slate-900 sm:mt-12"
-  >
+  <footer class="mt-24 sm:mt-12">
     <div
       class="mx-auto max-w-md py-12 px-4 overflow-hidden sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
     >
