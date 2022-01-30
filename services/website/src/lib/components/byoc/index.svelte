@@ -558,10 +558,8 @@
 
   {#if sectionToShow === "completed"}
     <div class="pt-2">
-      <p class="max-w-3xl text-lg font-semibold leading-7 text-gray-500">
-        🎉 That's it
-      </p>
-      <p class="mt-4 max-w-3xl text-lg leading-7 text-gray-500">
+      <p class="max-w-3xl text-lg font-semibold leading-7">🎉 That's it</p>
+      <p class="mt-4 max-w-3xl text-lg leading-7">
         Thank you. Please provide your email address to qualify for the <strong
           >early adopter pricing</strong
         > and to get notified when your course is available.
@@ -582,19 +580,19 @@
               id="hero-email"
               type="email"
               name="email"
-              class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
+              class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
               placeholder="Enter your email"
             />
           </div>
           <div class="mt-4 sm:mt-0 sm:ml-3">
             <button
               type="submit"
-              class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-black shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+              class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
               >Notify me</button
             >
           </div>
         </div>
-        <div class="mt-4 text-gray-900" style="visibility: var(--success);">
+        <div class="mt-4" style="visibility: var(--success);">
           <p>Thank you, we will send you updates.</p>
         </div>
       </form>
@@ -604,9 +602,7 @@
 
 <div class="min-h-[8rem]">
   {#if $curriculumSelections.web}
-    <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
-      Your curriculum
-    </p>
+    <p class="mt-6 max-w-3xl text-lg leading-7">Your curriculum</p>
     <div class="flex flex-wrap space-x-2">
       <!-- {"web":"react","styles":"nodejs","apitype":"rest"} -->
       {#each Object.entries($curriculumSelections) as [layer, name]}

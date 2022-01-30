@@ -1,6 +1,7 @@
 <script lang="ts">
   import { enhance } from "$lib/actions/form";
   import Byoc from "$lib/components/byoc/index.svelte";
+  import Link from "$lib/components/link.svelte";
 
   const signUpSuccessful = async (_, form: HTMLFormElement) => {
     form.reset();
@@ -33,7 +34,9 @@
   <meta property="og:image" content="https://webstone.app/og-image.png" />
 </svelte:head>
 
-<div class="bg-white">
+<div
+  class="antialiased bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-200"
+>
   <main>
     <!-- Hero section -->
     <div class="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
@@ -60,12 +63,13 @@
             </div> -->
             <div class="mt-6 sm:max-w-xl">
               <h1
-                class="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl"
+                class="text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-slate-900 to-orange-500 dark:to-white dark:from-orange-500 sm:text-5xl"
               >
                 Learn full-stack web development
               </h1>
-              <p class="mt-6 text-xl text-gray-500">
-                One application, end-to-end, build your own curriculum.
+              <p class="mt-6 text-xl">
+                The only comprehensive full-stack learning environment, from
+                HTML to databases and anything in-between.
               </p>
             </div>
             <form
@@ -83,22 +87,19 @@
                     id="hero-email"
                     type="email"
                     name="email"
-                    class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
+                    class="block w-full border border-gray-300 rounded-md px-5 py-3 text-base placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
                     placeholder="Enter your email"
                   />
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-3">
                   <button
                     type="submit"
-                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-rose-500 text-base font-medium text-black shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-orange-500 text-base font-medium text-slate-900 shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
                     >Notify me</button
                   >
                 </div>
               </div>
-              <div
-                class="mt-4 text-gray-900"
-                style="visibility: var(--success);"
-              >
+              <div class="mt-4" style="visibility: var(--success);">
                 <p>Thank you, we will send you updates.</p>
               </div>
             </form>
@@ -118,7 +119,7 @@
         </div>
       </div>
 
-      <div class="hidden sm:block sm:mx-auto sm:max-w-3xl sm:px-6">
+      <!-- <div class="hidden sm:block sm:mx-auto sm:max-w-3xl sm:px-6">
         <div
           class="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2"
         >
@@ -157,64 +158,92 @@
                 fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
             </svg>
           </div>
-          <!-- <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pl-12">
+          <div class="relative pl-4 -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:max-w-none lg:h-full lg:pl-12">
             <img class="w-full rounded-md shadow-xl ring-1 ring-black ring-opacity-5 lg:h-full lg:w-auto lg:max-w-none" src="https://tailwindui.com/img/component-images/task-app-rose.jpg" alt="">
-          </div> -->
-        </div>
-      </div>
-    </div>
-
-    <div class="mt-32">
-      <div
-        class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
-      >
-        <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
-          <div>
-            <h2
-              class="text-3xl font-extrabold text-gray-900 tracking-tight sm:text-4xl"
-            >
-              Build your own curriculum
-            </h2>
-            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
-              Select your preferred technologies and we will create a
-              personalised course for you.
-            </p>
-            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
-              With Webstone, you are in control of your full-stack web
-              development learning journey.
-            </p>
-            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
-              Learn exactly what is valuable to you. You can come back at any
-              time and configure a new curriculum. When you do so, the new
-              lessons will be added to your existing student repository.
-            </p>
-            <p class="mt-6 max-w-3xl text-lg leading-7 text-gray-500">
-              Until we launch Webstone Education, you become automatically
-              eligible for the <strong>early adopter pricing</strong>
-              if you build your curriculum now.
-            </p>
-          </div>
-          <div class="mt-12 lg:mt-0">
-            <Byoc />
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- Testimonial/stats section -->
-    <div class="relative mt-20">
-      <div
-        class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start"
-      >
-        <div class="relative sm:py-16 lg:py-0">
-          <div
-            aria-hidden="true"
-            class="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen"
-          >
+      <div class="mt-32">
+        <div
+          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
+        >
+          <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+            <div>
+              <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                Build your own curriculum
+              </h2>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Select your preferred technologies and we will create a
+                personalised course for you.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                With Webstone, you are in control of your full-stack web
+                development learning journey.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Learn exactly what is valuable to you. You can come back at any
+                time and configure a new curriculum. When you do so, the new
+                lessons will be added to your existing student repository.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Until we launch Webstone Education, you become automatically
+                eligible for the <strong>early adopter pricing</strong>
+                if you build your curriculum now and provide your email address at
+                the end.
+              </p>
+            </div>
+            <div class="mt-12 lg:mt-0">
+              <Byoc />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-32">
+        <div
+          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl"
+        >
+          <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            One application, many course modules
+          </h2>
+          <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
+            <div>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                You develop a single full-stack web application, end-to-end!
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Instead of a Tetris game, a weather widget and a Todo app, you
+                focus on individual lessons that are part of one real-world
+                application.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                The best part: You, and you alone decide which modules you want
+                to learn about and which technology stack interests you most.
+              </p>
+              <p class="mt-6 max-w-3xl text-lg leading-7">
+                Read on and configure your personal curriculum 👇️.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonial/stats section -->
+      <div class="relative mt-20">
+        <div
+          class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-24 lg:items-start"
+        >
+          <div class="relative sm:py-16 lg:py-0">
             <div
+              aria-hidden="true"
+              class="hidden sm:block lg:absolute lg:inset-y-0 lg:right-0 lg:w-screen"
+            >
+              <!-- <div
               class="absolute inset-y-0 right-1/2 w-full bg-gray-50 rounded-r-3xl lg:right-72"
-            ></div>
-            <svg
+            ></div> -->
+              <!-- <svg
               class="absolute top-8 left-1/2 -ml-3 lg:-right-8 lg:left-auto lg:top-12"
               width="404"
               height="392"
@@ -243,101 +272,119 @@
                 width="404"
                 height="392"
                 fill="url(#02f20b47-fd69-4224-a62a-4c9de5c763f7)"></rect>
-            </svg>
-          </div>
-          <div
-            class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20"
-          >
-            <!-- Testimonial card-->
+            </svg> -->
+            </div>
             <div
-              class="relative pt-64 pb-10 rounded-2xl shadow-xl overflow-hidden"
+              class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20"
             >
-              <img
-                class="absolute inset-0 h-full w-full object-cover"
-                src="https://images.unsplash.com/photo-1521510895919-46920266ddb3?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&fp-x=0.5&fp-y=0.6&fp-z=3&width=1440&height=1440&sat=-100"
-                alt=""
-              />
+              <!-- Testimonial card-->
               <div
-                class="absolute inset-0 bg-rose-500 mix-blend-multiply"
-              ></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-rose-600 via-rose-600 opacity-90"
-              ></div>
-              <div class="relative px-8">
-                <!-- <div>
+                class="relative pt-64 pb-10 rounded-2xl shadow-xl overflow-hidden"
+              >
+                <img
+                  class="absolute inset-0 h-full w-full object-cover"
+                  src="mike-profile.jpg"
+                  alt="A headshot of Mike Nikles"
+                />
+                <div
+                  class="absolute inset-0 bg-orange-500 mix-blend-multiply"
+                ></div>
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-orange-600 via-orange-600 opacity-0"
+                ></div>
+                <div class="relative px-8">
+                  <!-- <div>
                   <img class="h-12" src="https://tailwindui.com/img/logos/workcation.svg?color=white" alt="Workcation">
                 </div> -->
-                <blockquote class="mt-8">
-                  <div
-                    class="relative text-lg font-medium text-white md:flex-grow"
-                  >
-                    <svg
-                      class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-rose-400"
-                      fill="currentColor"
-                      viewBox="0 0 32 32"
-                      aria-hidden="true"
+                  <blockquote class="mt-8">
+                    <div
+                      class="relative text-lg font-medium text-white md:flex-grow"
                     >
-                      <path
-                        d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"
-                      ></path>
-                    </svg>
-                    <p class="relative">
-                      Webstone Education combines the best of two decades as a
-                      software engineer, educator and author.
-                    </p>
-                  </div>
+                      <svg
+                        class="absolute top-0 left-0 transform -translate-x-3 -translate-y-2 h-8 w-8 text-orange-400"
+                        fill="currentColor"
+                        viewBox="0 0 32 32"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z"
+                        ></path>
+                      </svg>
+                      <p class="relative">
+                        Webstone Education combines the best of two decades as a
+                        software engineer, educator and author.
+                      </p>
+                    </div>
 
-                  <footer class="mt-4">
-                    <p class="text-base font-semibold text-rose-200">
-                      Mike Nikles, Founder at Webstone
-                    </p>
-                  </footer>
-                </blockquote>
+                    <footer class="mt-4">
+                      <p class="text-base font-semibold text-orange-200">
+                        Mike Nikles, Founder at Webstone
+                      </p>
+                    </footer>
+                  </blockquote>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div
-          class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0"
-        >
-          <!-- Content area -->
-          <div class="pt-12 sm:pt-16 lg:pt-20">
-            <h2
-              class="text-3xl text-gray-900 font-extrabold tracking-tight sm:text-4xl"
-            >
-              On a mission to simplify full-stack web development education
-            </h2>
-            <div class="mt-6 text-gray-500 space-y-6">
-              <p class="text-lg">
-                Learning how to develop software is broken. Tens of thousands of
-                videos, tutorials, blog posts, articles, etc. are readily
-                available yet how do you know what is worth your time? How do
-                you know the content is correct, up-to-date, or scales to more
-                than ten users in a real-world scenario? Most importantly, it is
-                nearly impossible to develop a real-world full-stack web
-                application based on individual tutorials.
-              </p>
-              <p class="text-base leading-7">
-                The <strong>Webstone Education Platform</strong> changes how we educate
-                people in software development. Courses are based on a real-world
-                application that contains the features needed in most web applications!
-                Everything a student learns happens in the context of this application.
-                At all times, students are aware of the application architecture
-                and where their current lesson fits in.
-              </p>
-              <p class="text-base leading-7">
-                Each lesson is <strong>interactive</strong> and contains a
-                <strong
-                  >mix of text, short videos, code samples, hands-on exercises</strong
-                >
-                and <strong>quizzes</strong> to reinforce learning.
-              </p>
+          <div
+            class="relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0"
+          >
+            <!-- Content area -->
+            <div class="pt-12 sm:pt-16 lg:pt-20">
+              <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                On a mission to simplify full-stack web development education
+              </h2>
+              <div class="mt-6 space-y-6">
+                <p class="text-lg">
+                  Learning how to develop software is broken. Tens of thousands
+                  of videos, tutorials, blog posts, articles, etc. are readily
+                  available, yet how do you know what is worth your time?
+                </p>
+                <p class="text-lg leading-7">
+                  The <strong>Webstone Education Platform</strong> changes how
+                  we educate full-stack web developers. Each lesson is
+                  <strong>interactive</strong> and contains a
+                  <strong
+                    >mix of text, short videos, code samples, hands-on exercises</strong
+                  >
+                  and <strong>quizzes</strong> to reinforce learning.
+                </p>
+                <p class="text-lg leading-7">
+                  Mike has been a full-stack web developer for 20+ years. He is
+                  also the author and creator of the following books & courses:
+                </p>
+                <ul>
+                  <li>
+                    <Link
+                      href="https://www.mikenikles.com/cloud-native-web-development"
+                      >📚️ Cloud Native Web Development</Link
+                    >
+                  </li>
+                  <li>
+                    <Link
+                      href="https://mikenikles.gumroad.com/l/a-smart-guide-for-your-career-as-a-software-engineer"
+                      >📚️ A Smart Guide for Your Career as a Software Engineer</Link
+                    >
+                  </li>
+                  <li>
+                    <Link
+                      href="https://www.educative.io/courses/cloud-native-development"
+                      >🧑‍🎓 Cloud Native Development with Tailwind, Google
+                      Cloud and Firebase</Link
+                    >
+                  </li>
+                  <li>
+                    <Link href="https://www.youtube.com/watch?v=OUzaUJ3gEug"
+                      >🧑‍🎓 Full Stack Web Development in the Cloud</Link
+                    >
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
 
-          <!-- Stats section -->
-          <!-- <div class="mt-10">
+            <!-- Stats section -->
+            <!-- <div class="mt-10">
             <dl class="grid grid-cols-2 gap-x-4 gap-y-8">
               <div class="border-t-2 border-gray-100 pt-6">
                 <dt class="text-base font-medium text-gray-500">Founded</dt>
@@ -365,12 +412,12 @@
               </a>
             </div>
           </div> -->
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- Logo cloud section -->
-    <!-- <div class="mt-32">
+      <!-- Logo cloud section -->
+      <!-- <div class="mt-32">
       <div class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl">
         <div class="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
           <div>
@@ -415,10 +462,10 @@
       </div>
     </div> -->
 
-    <!-- CTA section -->
-    <div class="relative mt-24 sm:mt-32 sm:py-16">
-      <div aria-hidden="true" class="hidden sm:block">
-        <div
+      <!-- CTA section -->
+      <div class="relative mt-24 sm:mt-32 sm:py-16">
+        <div aria-hidden="true" class="hidden sm:block">
+          <!-- <div
           class="absolute inset-y-0 left-0 w-1/2 bg-gray-50 rounded-r-3xl"
         ></div>
         <svg
@@ -450,86 +497,88 @@
             width="404"
             height="392"
             fill="url(#8228f071-bcee-4ec8-905a-2a059a2cc4fb)"></rect>
-        </svg>
-      </div>
-      <div
-        class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
-      >
+        </svg> -->
+        </div>
         <div
-          class="relative rounded-2xl px-6 py-10 bg-rose-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"
+          class="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
         >
           <div
-            aria-hidden="true"
-            class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0"
+            class="relative rounded-2xl px-6 py-10 bg-orange-500 overflow-hidden shadow-xl sm:px-12 sm:py-20"
           >
-            <svg
-              class="absolute inset-0 h-full w-full"
-              preserveAspectRatio="xMidYMid slice"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 1463 360"
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 -mt-72 sm:-mt-32 md:mt-0"
             >
-              <path
-                class="text-rose-400 text-opacity-40"
-                fill="currentColor"
-                d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"
-              ></path>
-              <path
-                class="text-rose-600 text-opacity-40"
-                fill="currentColor"
-                d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"
-              ></path>
-            </svg>
-          </div>
-          <div class="relative">
-            <div class="sm:text-center">
-              <h2
-                class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl"
+              <svg
+                class="absolute inset-0 h-full w-full"
+                preserveAspectRatio="xMidYMid slice"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 1463 360"
               >
-                Get notified when we&rsquo;re launching.
-              </h2>
-              <p class="mt-6 mx-auto max-w-2xl text-lg text-rose-100">
-                Follow us on Twitter <a
-                  href="https://twitter.com/webstonehq"
-                  target="_blank">@webstonehq</a
-                > or provide your email address below for updates and early bird
-                pricing.
-              </p>
+                <path
+                  class="text-rose-400 text-opacity-40"
+                  fill="currentColor"
+                  d="M-82.673 72l1761.849 472.086-134.327 501.315-1761.85-472.086z"
+                ></path>
+                <path
+                  class="text-rose-600 text-opacity-40"
+                  fill="currentColor"
+                  d="M-217.088 544.086L1544.761 72l134.327 501.316-1761.849 472.086z"
+                ></path>
+              </svg>
             </div>
-            <form
-              action="/api/sign-up.json"
-              method="post"
-              use:enhance="{{
-                result: signUpSuccessful,
-              }}"
-              class="mt-12"
-            >
-              <div class="sm:mx-auto sm:max-w-lg sm:flex">
-                <div class="min-w-0 flex-1">
-                  <label for="cta-email" class="sr-only">Email address</label>
-                  <input
-                    id="cta-email"
-                    type="email"
-                    name="email"
-                    class="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div class="mt-4 sm:mt-0 sm:ml-3">
-                  <button
-                    type="submit"
-                    class="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
-                    >Notify me</button
-                  >
-                </div>
+            <div class="relative">
+              <div class="sm:text-center">
+                <h2
+                  class="text-3xl font-extrabold text-white tracking-tight sm:text-4xl"
+                >
+                  Get notified when we&rsquo;re launching.
+                </h2>
+                <p class="mt-6 mx-auto max-w-2xl text-lg text-rose-100">
+                  Follow us on Twitter <a
+                    href="https://twitter.com/webstonehq"
+                    target="_blank"
+                    rel="noreferrer">@webstonehq</a
+                  > or provide your email address below for updates and early bird
+                  pricing.
+                </p>
               </div>
-              <div
-                class="mt-4 text-white text-center"
-                style="visibility: var(--success);"
+              <form
+                action="/api/sign-up.json"
+                method="post"
+                use:enhance="{{
+                  result: signUpSuccessful,
+                }}"
+                class="mt-12"
               >
-                <p>Thank you, we will send you updates.</p>
-              </div>
-            </form>
+                <div class="sm:mx-auto sm:max-w-lg sm:flex">
+                  <div class="min-w-0 flex-1">
+                    <label for="cta-email" class="sr-only">Email address</label>
+                    <input
+                      id="cta-email"
+                      type="email"
+                      name="email"
+                      class="block w-full border border-transparent rounded-md px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+                  <div class="mt-4 sm:mt-0 sm:ml-3">
+                    <button
+                      type="submit"
+                      class="block w-full rounded-md border border-transparent px-5 py-3 bg-gray-900 text-base font-medium text-white shadow hover:bg-black focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500 sm:px-10"
+                      >Notify me</button
+                    >
+                  </div>
+                </div>
+                <div
+                  class="mt-4 text-white text-center"
+                  style="visibility: var(--success);"
+                >
+                  <p>Thank you, we will send you updates.</p>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
@@ -537,7 +586,7 @@
   </main>
 
   <!-- Footer section -->
-  <footer class="mt-24 bg-gray-900 sm:mt-12">
+  <footer class="mt-24 sm:mt-12">
     <div
       class="mx-auto max-w-md py-12 px-4 overflow-hidden sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8"
     >
@@ -596,7 +645,8 @@
         <a
           href="https://twitter.com/webstonehq"
           target="_blank"
-          class="text-gray-400 hover:text-gray-300"
+          rel="noreferrer"
+          class="hover:text-gray-300"
         >
           <span class="sr-only">Twitter</span>
           <svg
@@ -614,7 +664,8 @@
         <a
           href="https://github.com/WebstoneHQ/platform"
           target="_blank"
-          class="text-gray-400 hover:text-gray-300"
+          rel="noreferrer"
+          class="hover:text-gray-300"
         >
           <span class="sr-only">GitHub</span>
           <svg
@@ -633,7 +684,8 @@
         <a
           href="https://discord.gg/EzJDBT6uRv"
           target="_blank"
-          class="text-gray-400 hover:text-gray-300"
+          rel="noreferrer"
+          class="hover:text-gray-300"
         >
           <span class="sr-only">Discord</span>
           <svg
@@ -656,7 +708,7 @@
           </svg>
         </a>
       </div>
-      <p class="mt-8 text-center text-base text-gray-400">
+      <p class="mt-8 text-center text-base">
         &copy; {new Date().getFullYear()} Webstone Technologies, Inc. All rights
         reserved.
       </p>
