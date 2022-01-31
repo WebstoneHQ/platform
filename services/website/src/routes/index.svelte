@@ -89,6 +89,7 @@
                     name="email"
                     class="block w-full rounded-md border border-gray-300 px-5 py-3 text-base placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
                     placeholder="Enter your email"
+                    required
                   />
                 </div>
                 <div class="mt-4 sm:mt-0 sm:ml-3">
@@ -561,6 +562,7 @@
                       name="email"
                       class="block w-full rounded-md border border-transparent px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-transparent focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-rose-500"
                       placeholder="Enter your email"
+                      required
                     />
                   </div>
                   <div class="mt-4 sm:mt-0 sm:ml-3">
