@@ -533,7 +533,7 @@
   {/if}
 
   {#if sectionToShow === "apitype"}
-    <Section title="2. Select a type of styling">
+    <Section title="3. Select a type of API">
       {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype) as name}
         <Module layer="apitype" name="{name}" />
       {/each}
