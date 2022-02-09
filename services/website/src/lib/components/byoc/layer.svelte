@@ -27,7 +27,8 @@
 </script>
 
 <div
-  class="flex flex-col items-center rounded bg-slate-100 py-4 px-6 dark:bg-slate-800"
+  class="flex cursor-pointer flex-col items-center rounded bg-slate-100 py-4 px-6 dark:bg-slate-800"
+  on:click="{() => ($layerToChange = layer)}"
 >
   <h2 class="font-medium">
     {layer.title}
@@ -49,8 +50,7 @@
     title=""
     height="80px"
     width="80px"
-    class="h-20 w-20 cursor-pointer"
-    on:click="{() => ($layerToChange = layer)}"
+    class="h-20 w-20"
   />
   <span>{selectedModule.name}</span>
 </div>

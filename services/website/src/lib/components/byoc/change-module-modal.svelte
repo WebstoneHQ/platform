@@ -57,7 +57,7 @@
       >
 
       <div
-        class="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-[85vw] sm:p-6 sm:align-middle"
+        class="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-slate-900 sm:my-8 sm:w-full sm:max-w-[85vw] sm:p-6 sm:align-middle"
       >
         <div>
           <p>Select a {$layerToChange.title}</p>
