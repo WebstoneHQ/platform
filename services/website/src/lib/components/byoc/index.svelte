@@ -1,614 +1,131 @@
 <script lang="ts" context="module">
   export type CurriculumSelections = {
-    web?: string;
-    styles?: string;
-    apitype?: string;
-    api?: string;
-    database?: string;
+    web: string;
+    styles: string;
+    apitype: string;
+    api: string;
+    database: string;
   };
 </script>
 
 <script lang="ts">
   import { setContext } from "svelte";
   import { writable, Writable } from "svelte/store";
-  import { enhance } from "$lib/actions/form";
-  import { contextKeyCurriculum } from "$lib/context-keys";
+  import {
+    contextKeyCurriculum,
+    contextKeyCurriculumChangeModuleModal,
+  } from "$lib/context-keys";
+  import LayerComponent, { Layer } from "./layer.svelte";
+  import ChangeModuleModal from "./change-module-modal.svelte";
 
-  import Module from "$lib/components/byoc/module.svelte";
-  import Section from "$lib/components/byoc/section.svelte";
-
-  const signUpSuccessful = async (_: Response, form: HTMLFormElement) => {
-    form.reset();
-    form.style.setProperty("--success", "visible");
+  type Layers = {
+    web: Layer;
+    styles: Layer;
+    apitype: Layer;
+    api: Layer;
+    database: Layer;
   };
 
-  const curriculumSelections: Writable<CurriculumSelections> = writable({});
-  setContext(contextKeyCurriculum, curriculumSelections);
-
-  let sectionToShow:
-    | "web"
-    | "styles"
-    | "apitype"
-    | "api"
-    | "database"
-    | "completed";
-  $: sectionToShow = !$curriculumSelections.web
-    ? "web"
-    : !$curriculumSelections.styles
-    ? "styles"
-    : !$curriculumSelections.apitype
-    ? "apitype"
-    : !$curriculumSelections.api
-    ? "api"
-    : !$curriculumSelections.database
-    ? "database"
-    : "completed";
-
-  let curriculumId: string;
-  let isCurriculumSubmitted = false;
-  $: if (sectionToShow === "completed" && !isCurriculumSubmitted) {
-    isCurriculumSubmitted = true;
-    fetch("/api/curriculum", {
-      body: JSON.stringify($curriculumSelections),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((body) => {
-        curriculumId = body.curriculumId;
-      });
-  }
-
-  const curriculumConfiguration = {
-    /* TODO: Generate this based on the available course modules in the private https://github.com/WebstoneHQ/courses repo */
+  const layers: Layers = {
     web: {
-      angular: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
+      id: "web",
+      title: "Web framework",
+      modules: [
+        {
+          description: "TODO: SvelteKit description.",
+          icon: "sveltekit",
+          name: "SvelteKit",
         },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
+        {
+          description: "TODO: React description.",
+          icon: "react",
+          name: "React",
         },
-      },
-      nextjs: {
-        styles: {
-          bootstrap: {},
-          chakraui: {},
-          css: {},
-          styledcomponents: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
+        {
+          description: "TODO: Angular description",
+          icon: "angular",
+          name: "Angular",
         },
-        apitype: {
-          graphql: {
-            api: {
-              nextjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              nextjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
+        {
+          description: "TODO: NextJS description",
+          icon: "nextjs",
+          name: "NextJS",
         },
-      },
-      nuxtjs: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
+      ],
+    },
+    styles: {
+      id: "styles",
+      title: "Styling",
+      modules: [
+        {
+          description: "TODO: Tailwind CSS description.",
+          icon: "tailwind",
+          name: "Tailwind CSS",
         },
-        apitype: {
-          graphql: {
-            api: {
-              nuxtjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              nextjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
+      ],
+    },
+    apitype: {
+      id: "apitype",
+      title: "API type",
+      modules: [
+        {
+          description: "TODO: REST API description",
+          icon: "rest",
+          name: "REST API",
         },
-      },
-      react: {
-        styles: {
-          bootstrap: {},
-          chakraui: {},
-          css: {},
-          styledcomponents: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
+      ],
+    },
+    api: {
+      id: "api",
+      title: "API framework",
+      modules: [
+        {
+          description: "TODO: SvelteKit description",
+          icon: "sveltekit",
+          name: "SvelteKit",
         },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
+      ],
+    },
+    database: {
+      id: "database",
+      title: "Database",
+      modules: [
+        {
+          description: "TODO: PostgreSQL description",
+          icon: "postgresql",
+          name: "PostgreSQL",
         },
-      },
-      svelte: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      sveltekit: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              sveltekit: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              sveltekit: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      vue: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
+      ],
     },
   };
+
+  const curriculumSelection: Writable<CurriculumSelections> = writable({
+    web: "sveltekit",
+    styles: "tailwind",
+    apitype: "rest",
+    api: "sveltekit",
+    database: "postgresql",
+  });
+  setContext(contextKeyCurriculum, curriculumSelection);
+  setContext(contextKeyCurriculumChangeModuleModal, writable());
 </script>
 
-<style>
-  form {
-    --success: hidden;
-  }
-</style>
-
-<div class="min-h-[15rem]">
-  {#if sectionToShow === "web"}
-    <Section title="1. Select a web framework">
-      {#each Object.keys(curriculumConfiguration.web) as name}
-        <Module layer="web" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "styles"}
-    <Section title="2. Select a type of styling">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].styles) as name}
-        <Module layer="styles" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "apitype"}
-    <Section title="3. Select a type of API">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype) as name}
-        <Module layer="apitype" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "api"}
-    <Section title="4. Select an API framework">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype[$curriculumSelections.apitype].api) as name}
-        <Module layer="api" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "database"}
-    <Section title="5. Select a database">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype[$curriculumSelections.apitype].api[$curriculumSelections.api].database) as name}
-        <Module layer="database" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "completed"}
-    <div class="pt-2">
-      <p class="max-w-3xl text-lg font-semibold leading-7">🎉 That's it</p>
-      <p class="mt-4 max-w-3xl text-lg leading-7">
-        Thank you. Please provide your email address to qualify for the <strong
-          >early adopter pricing</strong
-        > and to get notified when your course is available.
-      </p>
-      <form
-        action="/api/sign-up.json"
-        method="post"
-        use:enhance="{{
-          result: signUpSuccessful,
-        }}"
-        class="mt-12"
-      >
-        <div class="sm:flex sm:w-full sm:max-w-lg">
-          <div class="min-w-0 flex-1">
-            <input type="hidden" name="curriculumId" value="{curriculumId}" />
-            <label for="hero-email" class="sr-only">Email address</label>
-            <input
-              id="hero-email"
-              type="email"
-              name="email"
-              class="block w-full rounded-md border border-gray-300 px-5 py-3 text-base placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          <div class="mt-4 sm:mt-0 sm:ml-3">
-            <button
-              type="submit"
-              class="block w-full rounded-md border border-transparent bg-rose-500 px-5 py-3 text-base font-medium shadow hover:bg-rose-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
-              >Notify me</button
-            >
-          </div>
-        </div>
-        <div class="mt-4" style="visibility: var(--success);">
-          <p>Thank you, we will send you updates.</p>
-        </div>
-      </form>
-    </div>
-  {/if}
+<div class="flex justify-around">
+  {#each Object.entries(layers) as [layerName, layer]}
+    <LayerComponent
+      layer="{layer}"
+      layerName="{layerName}"
+      selectedModule="{layers[layerName].modules.find(
+        (module) => module.icon === $curriculumSelection[layerName]
+      )}"
+    />
+  {/each}
 </div>
 
-<div class="min-h-[8rem]">
-  {#if $curriculumSelections.web}
-    <p class="mt-6 max-w-3xl text-lg leading-7">Your curriculum</p>
-    <div class="flex flex-wrap space-x-2">
-      <!-- {"web":"react","styles":"nodejs","apitype":"rest"} -->
-      {#each Object.entries($curriculumSelections) as [layer, name]}
-        <Module layer="{layer}" name="{name}" readOnly />
-      {/each}
-    </div>
-  {/if}
+<div class="mt-20 flex justify-center">
+  <button class="rounded-3xl bg-violet-600 py-3 px-4 text-white"
+    >Start this curriculum</button
+  >
 </div>
+
+<ChangeModuleModal />

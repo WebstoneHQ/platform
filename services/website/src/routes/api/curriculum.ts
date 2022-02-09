@@ -7,7 +7,7 @@ export const post: RequestHandler = async ({ request }) => {
   const payload = {
     ...body,
     id: curriculumId,
-  }
+  };
 
   await fetch(process.env.WEBHOOK_ENDPOINT_SUBMIT_CURRICULUM, {
     body: JSON.stringify(payload),

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
-  import type { CurriculumSelections } from "$lib/components/byoc/index.svelte";
+  import type { CurriculumSelections } from "./index.svelte";
 
   import { getContext } from "svelte";
   import { contextKeyCurriculum } from "$lib/context-keys";
