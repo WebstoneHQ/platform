@@ -17,7 +17,7 @@
   import Module from "$lib/components/byoc/module.svelte";
   import Section from "$lib/components/byoc/section.svelte";
 
-  const signUpSuccessful = async (_, form: HTMLFormElement) => {
+  const signUpSuccessful = async (_: Response, form: HTMLFormElement) => {
     form.reset();
     form.style.setProperty("--success", "visible");
   };

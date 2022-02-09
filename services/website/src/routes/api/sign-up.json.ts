@@ -5,12 +5,13 @@ type Payload = {
   curriculumId?: string;
 };
 
-export const post: RequestHandler<unknown, FormData> = async ({ body }) => {
+export const post: RequestHandler = async ({ request }) => {
+  const form = await request.formData();
   const payload: Payload = {
-    email: body.get("email"),
+    email: String(form.get("email")),
   };
-  if (body.get("curriculumId")) {
-    payload.curriculumId = body.get("curriculumId");
+  if (form.get("curriculumId")) {
+    payload.curriculumId = String(form.get("curriculumId"));
   }
 
   await fetch(process.env.WEBHOOK_ENDPOINT_SIGN_UP, {
