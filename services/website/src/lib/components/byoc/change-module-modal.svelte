@@ -1,13 +1,14 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { CurriculumSelections } from "./index.svelte";
-  import type { Layer } from "./layer.svelte";
+  import type { Layer, Module } from "./layer.svelte";
 
   import { getContext } from "svelte";
   import {
     contextKeyCurriculum,
     contextKeyCurriculumChangeModuleModal,
   } from "$lib/context-keys";
+  import curriculumValidation from "$lib/curriculum-validation";
 
   const curriculumSelection: Writable<CurriculumSelections> =
     getContext(contextKeyCurriculum);
@@ -22,7 +23,71 @@
     };
     $layerToChange = null;
   };
+
+  const isModuleInvalidGivenExistingCurriculum = (module: Module) => {
+    let isValid: boolean;
+    switch ($layerToChange.id) {
+      case "web":
+        isValid =
+          !!curriculumValidation.web[module.id]?.styles[
+            $curriculumSelection.styles
+          ] &&
+          !!curriculumValidation.web[module.id]?.apitype[
+            $curriculumSelection.apitype
+          ]?.api[$curriculumSelection.api]?.database[
+            $curriculumSelection.database
+          ];
+        break;
+      case "styles":
+        isValid =
+          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
+            module.id
+          ] &&
+          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
+            $curriculumSelection.apitype
+          ]?.api[$curriculumSelection.api]?.database[
+            $curriculumSelection.database
+          ];
+        break;
+      case "apitype":
+        isValid =
+          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
+            $curriculumSelection.styles
+          ] &&
+          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
+            module.id
+          ]?.api[$curriculumSelection.api]?.database[
+            $curriculumSelection.database
+          ];
+        break;
+      case "api":
+        isValid =
+          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
+            $curriculumSelection.styles
+          ] &&
+          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
+            $curriculumSelection.apitype
+          ]?.api[module.id]?.database[$curriculumSelection.database];
+        break;
+      case "database":
+        isValid =
+          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
+            $curriculumSelection.styles
+          ] &&
+          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
+            $curriculumSelection.apitype
+          ]?.api[$curriculumSelection.api]?.database[module.id];
+        break;
+    }
+    return !isValid;
+  };
 </script>
+
+<style>
+  .is-invalid {
+    @apply bg-gray-200;
+  }
+</style>
 
 {#if $layerToChange}
   <div
@@ -61,22 +126,42 @@
       >
         <div>
           <p>Select a {$layerToChange.title}</p>
-          <div class="flex flex-wrap">
+          <div class="flex flex-wrap gap-4">
             {#each $layerToChange.modules as module}
-              <div class="grid grid-flow-col grid-rows-3 gap-4">
-                <div class="row-span-3">
+              <div
+                on:click="{() =>
+                  !isModuleInvalidGivenExistingCurriculum(module) &&
+                  changeSelection(module.id)}"
+                class:is-invalid="{isModuleInvalidGivenExistingCurriculum(
+                  module
+                )}"
+                class="grid cursor-pointer grid-cols-3 gap-4 rounded-2xl border-4 border-solid border-transparent p-2 hover:border-black"
+              >
+                <div class="row-span-2">
                   <img
-                    src="/svg/byoc/{$layerToChange.id}/{module.icon}.svg"
+                    src="/svg/byoc/{$layerToChange.id}/{module.id}.svg"
                     alt="logo"
                     title=""
                     height="80px"
                     width="80px"
-                    class="h-20 w-20 cursor-pointer"
-                    on:click="{() => changeSelection(module.icon)}"
+                    class="h-20 w-20"
                   />
                 </div>
-                <div class="col-span-2">{module.name}</div>
-                <div class="col-span-2 row-span-2">{module.description}</div>
+                <div class="">{module.name}</div>
+                {#if isModuleInvalidGivenExistingCurriculum(module)}
+                  <div
+                    class="flex items-center justify-center bg-gray-200 text-xs"
+                  >
+                    Invalid option
+                  </div>
+                {:else if module.status}
+                  <div
+                    class="bg-gray-200 flex justify-center items-center text-xs"
+                  >
+                    {module.status}
+                  </div>
+                {/if}
+                <div class="col-span-2">{module.description}</div>
               </div>
             {/each}
           </div>

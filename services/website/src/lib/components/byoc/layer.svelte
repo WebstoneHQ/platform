@@ -1,12 +1,13 @@
 <script lang="ts" context="module">
-  type Module = {
+  export type Module = {
     description: string;
-    icon: string;
+    id: string;
     name: string;
+    status?: string;
   };
 
   export type Layer = {
-    id: string;
+    id: "web" | "styles" | "apitype" | "api" | "database";
     modules: Module[];
     title: string;
   };
@@ -45,7 +46,7 @@
     </svg>
   </h2>
   <img
-    src="/svg/byoc/{layerName}/{selectedModule.icon}.svg"
+    src="/svg/byoc/{layerName}/{selectedModule.id}.svg"
     alt="logo"
     title=""
     height="80px"
