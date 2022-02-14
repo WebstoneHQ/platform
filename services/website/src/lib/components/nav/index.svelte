@@ -1,10 +1,13 @@
 <script lang="ts">
   import { getContext } from "svelte";
+  import { beforeNavigate } from "$app/navigation";
   import { contextKeyUser } from "$lib/context-keys";
 
   const user: User = getContext(contextKeyUser);
 
   let isMobileMenuOpen = false;
+
+  beforeNavigate(() => isMobileMenuOpen = false);
 </script>
 
 <header class="relative">
@@ -45,15 +48,18 @@
             </button>
           </div>
         </div>
-        <!-- <div class="hidden space-x-8 md:flex md:ml-10">
-          <a href="#" class="text-base font-medium hover:text-gray-300">Product</a>
+        <div class="hidden space-x-8 md:flex md:ml-10">
+          {#if user}
+            <a href="/" class="text-base font-medium hover:text-gray-300">Home</a>
+            <a href="/dashboard" class="text-base font-medium hover:text-gray-300">Dashboard</a>
+          {/if}
 
-          <a href="#" class="text-base font-medium hover:text-gray-300">Features</a>
+          <!-- <a href="#" class="text-base font-medium hover:text-gray-300">Features</a>
 
           <a href="#" class="text-base font-medium hover:text-gray-300">Marketplace</a>
 
-          <a href="#" class="text-base font-medium hover:text-gray-300">Company</a>
-        </div> -->
+          <a href="#" class="text-base font-medium hover:text-gray-300">Company</a> -->
+        </div>
       </div>
       <div class="hidden md:flex md:items-center md:space-x-6 md:font-medium">
         {#if user}
@@ -116,15 +122,18 @@
         </div>
       </div>
       <div class="pt-5 pb-6">
-        <!-- <div class="px-2 space-y-1">
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Product</a>
+        <div class="px-2 space-y-1">
+          {#if user}
+            <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Home</a>
+            <a href="/dashboard" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Dashboard</a>
+          {/if}
 
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Features</a>
+          <!-- <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Features</a>
 
           <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Marketplace</a>
 
-          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Company</a>
-        </div> -->
+          <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Company</a> -->
+        </div>
         <!-- <div class="mt-6 px-5">
           <a href="#" class="block text-center w-full py-3 px-4 rounded-md shadow bg-orange-500 hover:bg-orange-600 text-slate-900">Start free trial</a>
         </div> -->

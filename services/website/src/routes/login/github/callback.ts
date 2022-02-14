@@ -92,7 +92,7 @@ export const get: RequestHandler = async ({ url }) => {
     status: 302,
     headers: {
       "set-cookie": [userCookie],
-      location: "/",
+      location: "/dashboard",
     },
   };
 };
