@@ -7,7 +7,7 @@
 
   let isMobileMenuOpen = false;
 
-  beforeNavigate(() => isMobileMenuOpen = false);
+  beforeNavigate(() => (isMobileMenuOpen = false));
 </script>
 
 <header class="relative">
@@ -48,10 +48,15 @@
             </button>
           </div>
         </div>
-        <div class="hidden space-x-8 md:flex md:ml-10">
+        <div class="hidden space-x-8 md:ml-10 md:flex">
           {#if user}
-            <a href="/" class="text-base font-medium hover:text-gray-300">Home</a>
-            <a href="/dashboard" class="text-base font-medium hover:text-gray-300">Dashboard</a>
+            <a href="/" class="text-base font-medium hover:text-gray-300"
+              >Home</a
+            >
+            <a
+              href="/dashboard"
+              class="text-base font-medium hover:text-gray-300">Dashboard</a
+            >
           {/if}
 
           <!-- <a href="#" class="text-base font-medium hover:text-gray-300">Features</a>
@@ -65,9 +70,7 @@
         {#if user}
           {user.name}
         {:else}
-          <a href="/login/github" rel="external" class="hover:text-gray-300">
-            Log in
-          </a>
+          <a href="/login" class="hover:text-gray-300"> Log in </a>
         {/if}
         <!-- <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md bg-orange-500 hover:bg-orange-600 text-slate-900"> Start free trial </a> -->
       </div>
@@ -122,10 +125,18 @@
         </div>
       </div>
       <div class="pt-5 pb-6">
-        <div class="px-2 space-y-1">
+        <div class="space-y-1 px-2">
           {#if user}
-            <a href="/" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Home</a>
-            <a href="/dashboard" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Dashboard</a>
+            <a
+              href="/"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+              >Home</a
+            >
+            <a
+              href="/dashboard"
+              class="block rounded-md px-3 py-2 text-base font-medium text-gray-900 hover:bg-gray-50"
+              >Dashboard</a
+            >
           {/if}
 
           <!-- <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:bg-gray-50">Features</a>
@@ -142,9 +153,7 @@
             {user.name}
           {:else}
             <p>
-              <a href="/login/github" rel="external" class="hover:underline"
-                >Login</a
-              >
+              <a href="/login" class="hover:underline">Login</a>
             </p>
           {/if}
         </div>
