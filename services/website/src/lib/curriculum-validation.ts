@@ -144,7 +144,7 @@ export default {
         },
         rest: {
           api: {
-            nextjs: {
+            nuxtjs: {
               database: {
                 mongodb: {},
                 mysql: {},
