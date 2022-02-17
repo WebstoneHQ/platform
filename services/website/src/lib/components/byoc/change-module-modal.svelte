@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { CurriculumSelections } from "./index.svelte";
-  import type { Layer, Module } from "./layer.svelte";
+  import type { Layer } from "./layer.svelte";
 
   import { getContext } from "svelte";
   import {
@@ -16,78 +16,186 @@
     contextKeyCurriculumChangeModuleModal
   );
 
-  const changeSelection = (moduleIcon) => {
+  const clearInvalidModules = (changedModuleId: string) => {
+    switch ($layerToChange.id) {
+      case "web":
+        // prettier-ignore
+        if (!curriculumValidation.web[changedModuleId]?.styles[$curriculumSelection.styles?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            styles: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[changedModuleId]?.apitype[$curriculumSelection.apitype?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            apitype: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[changedModuleId]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            api: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[changedModuleId]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]?.database[$curriculumSelection.database?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            database: undefined,
+          };
+        }
+        break;
+      case "styles":
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[changedModuleId]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            apitype: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            api: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]?.database[$curriculumSelection.database?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            database: undefined,
+          };
+        }
+        break;
+      case "apitype":
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[changedModuleId]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[$curriculumSelection.styles?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[changedModuleId]?.api[$curriculumSelection.api?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            api: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[changedModuleId]?.api[$curriculumSelection.api?.id]?.database[$curriculumSelection.database?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            database: undefined,
+          };
+        }
+        break;
+      case "api":
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[changedModuleId]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            apitype: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[changedModuleId]?.database[$curriculumSelection.database?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            database: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[$curriculumSelection.styles?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        break;
+      case "database":
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]?.database[changedModuleId]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            api: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            apitype: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        // prettier-ignore
+        if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[$curriculumSelection.styles?.id]) {
+          $curriculumSelection = {
+            ...$curriculumSelection,
+            web: undefined,
+          };
+        }
+        break;
+    }
+  };
+
+  const changeSelection = (module) => {
     $curriculumSelection = {
       ...$curriculumSelection,
-      [$layerToChange.id]: moduleIcon,
+      [$layerToChange?.id]: module,
     };
+    clearInvalidModules(module.id);
     $layerToChange = null;
   };
 
-  const isModuleInvalidGivenExistingCurriculum = (module: Module) => {
-    let isValid: boolean;
-    switch ($layerToChange.id) {
-      case "web":
-        isValid =
-          !!curriculumValidation.web[module.id]?.styles[
-            $curriculumSelection.styles
-          ] &&
-          !!curriculumValidation.web[module.id]?.apitype[
-            $curriculumSelection.apitype
-          ]?.api[$curriculumSelection.api]?.database[
-            $curriculumSelection.database
-          ];
-        break;
-      case "styles":
-        isValid =
-          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
-            module.id
-          ] &&
-          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
-            $curriculumSelection.apitype
-          ]?.api[$curriculumSelection.api]?.database[
-            $curriculumSelection.database
-          ];
-        break;
-      case "apitype":
-        isValid =
-          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
-            $curriculumSelection.styles
-          ] &&
-          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
-            module.id
-          ]?.api[$curriculumSelection.api]?.database[
-            $curriculumSelection.database
-          ];
-        break;
-      case "api":
-        isValid =
-          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
-            $curriculumSelection.styles
-          ] &&
-          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
-            $curriculumSelection.apitype
-          ]?.api[module.id]?.database[$curriculumSelection.database];
-        break;
-      case "database":
-        isValid =
-          !!curriculumValidation.web[$curriculumSelection.web]?.styles[
-            $curriculumSelection.styles
-          ] &&
-          !!curriculumValidation.web[$curriculumSelection.web]?.apitype[
-            $curriculumSelection.apitype
-          ]?.api[$curriculumSelection.api]?.database[module.id];
-        break;
-    }
-    return !isValid;
+  const getArticle = (noun: string) => {
+    return ["a", "e", "i", "o", "u"].includes(noun[0].toLowerCase())
+      ? "an"
+      : "a";
   };
-</script>
 
-<style>
-  .is-invalid {
-    @apply bg-gray-200;
-  }
-</style>
+  const capitalizeCorrectly = (words: string) => {
+    return words.includes("API") ? words : words.toLowerCase();
+  };
+
+  $: title =
+    $layerToChange &&
+    `Select ${getArticle($layerToChange.title)} ${capitalizeCorrectly(
+      $layerToChange.title
+    )}`;
+</script>
 
 {#if $layerToChange}
   <div
@@ -97,7 +205,7 @@
     aria-modal="true"
   >
     <div
-      class="flex min-h-screen items-end justify-center px-4 pt-4 pb-20 text-center sm:block sm:p-0"
+      class="sm:p-o flex min-h-screen items-end justify-center text-center sm:block md:px-4 md:pt-4 md:pb-20"
     >
       <!--
         Background overlay, show/hide based on modal state.
@@ -122,20 +230,30 @@
       >
 
       <div
-        class="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-slate-900 sm:my-8 sm:w-full sm:max-w-[85vw] sm:p-6 sm:align-middle"
+        class="inline-block transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left align-bottom shadow-xl transition-all dark:bg-slate-900 sm:my-8 sm:max-w-[85vw] sm:p-6 sm:align-middle"
       >
         <div>
-          <p>Select a {$layerToChange.title}</p>
+          <div class="flex justify-end">
+            <button on:click="{() => ($layerToChange = null)}">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14 1.41L12.59 0L7 5.59L1.41 0L0 1.41L5.59 7L0 12.59L1.41 14L7 8.41L12.59 14L14 12.59L8.41 7L14 1.41Z"
+                  fill="#6E6D7A"></path>
+              </svg>
+            </button>
+          </div>
+          <p class="mt-4 mb-12 text-2xl">{title}</p>
           <div class="flex flex-wrap gap-4">
             {#each $layerToChange.modules as module}
               <div
-                on:click="{() =>
-                  !isModuleInvalidGivenExistingCurriculum(module) &&
-                  changeSelection(module.id)}"
-                class:is-invalid="{isModuleInvalidGivenExistingCurriculum(
-                  module
-                )}"
-                class="grid cursor-pointer grid-cols-3 gap-4 rounded-2xl border-4 border-solid border-transparent p-2 hover:border-black"
+                on:click="{() => changeSelection(module)}"
+                class="grid max-w-sm cursor-pointer grid-cols-3 gap-4 rounded-2xl border-4 border-solid border-transparent p-2 hover:border-black"
               >
                 <div class="row-span-2">
                   <img
@@ -147,21 +265,15 @@
                     class="h-20 w-20"
                   />
                 </div>
-                <div class="">{module.name}</div>
-                {#if isModuleInvalidGivenExistingCurriculum(module)}
+                <div class="text-xl">{module.name}</div>
+                {#if module.status}
                   <div
-                    class="flex items-center justify-center bg-gray-200 text-xs"
-                  >
-                    Invalid option
-                  </div>
-                {:else if module.status}
-                  <div
-                    class="bg-gray-200 flex justify-center items-center text-xs"
+                    class="flex items-center justify-center rounded-full bg-slate-200 align-middle text-xs uppercase dark:bg-slate-700"
                   >
                     {module.status}
                   </div>
                 {/if}
-                <div class="col-span-2">{module.description}</div>
+                <div class="col-span-2 text-gray-500">{module.description}</div>
               </div>
             {/each}
           </div>

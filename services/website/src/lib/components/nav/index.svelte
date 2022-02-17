@@ -20,14 +20,13 @@
             <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-teal-200-cyan-400.svg" alt="">
           </a> -->
           <div class="-mr-2 flex items-center md:hidden">
-            <button
+            <!-- <button
               on:click="{() => (isMobileMenuOpen = true)}"
               type="button"
               class="focus-ring-inset inline-flex items-center justify-center rounded-md p-2 focus:outline-none focus:ring-2"
               aria-expanded="false"
             >
               <span class="sr-only">Open main menu</span>
-              <!-- Heroicon name: outline/menu -->
               <svg
                 class="h-6 w-6"
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +41,7 @@
                   stroke-width="2"
                   d="M4 6h16M4 12h16M4 18h16"></path>
               </svg>
-            </button>
+            </button> -->
           </div>
         </div>
         <!-- <div class="hidden space-x-8 md:flex md:ml-10">
@@ -58,10 +57,10 @@
       <div class="hidden md:flex md:items-center md:space-x-6 md:font-medium">
         {#if user}
           {user.name}
-        {:else}
+          <!-- {:else}
           <a href="/login/github" rel="external" class="hover:text-gray-300">
             Log in
-          </a>
+          </a> -->
         {/if}
         <!-- <a href="#" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md bg-orange-500 hover:bg-orange-600 text-slate-900"> Start free trial </a> -->
       </div>

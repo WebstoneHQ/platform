@@ -14,7 +14,7 @@
   import "../app.css";
   import { setContext } from "svelte";
   import { contextKeyUser } from "$lib/context-keys";
-  // import Nav from "$lib/components/nav/index.svelte";
+  import Nav from "$lib/components/nav/index.svelte";
 
   export let user: string;
   setContext(contextKeyUser, user);
@@ -40,8 +40,10 @@
 </svelte:head>
 
 <div
-  class="bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-200"
+  class="min-h-screen bg-white text-slate-900 antialiased dark:bg-[#272727] dark:text-[#FAFAFA]"
 >
-  <!-- <Nav /> -->
-  <slot />
+  <div class="mx-auto max-w-6xl px-1">
+    <Nav />
+    <slot />
+  </div>
 </div>
