@@ -1,3 +1,19 @@
+<script lang="ts" context="module">
+  import type { Load } from "@sveltejs/kit";
+
+  export const load: Load = ({ session }) => {
+    if (session.user) {
+      return {
+        status: 302,
+        redirect: "/dashboard",
+      };
+    }
+    return {
+      props: {},
+    };
+  };
+</script>
+
 <h1 class="text-4xl">Log in to Webstone Education</h1>
 <p>Please use your provider of choice below.</p>
 <p>

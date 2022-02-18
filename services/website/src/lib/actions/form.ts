@@ -16,7 +16,7 @@ export const enhance = (
     result: (res: Response, form: HTMLFormElement) => void;
   }
 ): { destroy: () => void } => {
-  const handle_submit = async (e: Event) => {
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
 
     const body = new FormData(form);
@@ -41,18 +41,22 @@ export const enhance = (
       }
     } catch (e) {
       if (error) {
-        error(null, e, form);
+        error(null, e as Error, form);
       } else {
         throw e;
       }
     }
   };
 
-  form.addEventListener("submit", handle_submit);
+  form.addEventListener("submit", () => {
+    Promise.all([handleSubmit]).catch(() => console.error());
+  });
 
   return {
     destroy() {
-      form.removeEventListener("submit", handle_submit);
+      form.removeEventListener("submit", () => {
+        Promise.all([handleSubmit]).catch(() => console.error());
+      });
     },
   };
 };

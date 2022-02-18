@@ -4,6 +4,10 @@ import { dev } from "$app/env";
 import cookie from "cookie";
 import { sign } from "cookie-signature";
 import jwt from "jsonwebtoken";
+import PrismaClient from "$lib/db/prisma";
+import { Prisma } from "@prisma/client";
+
+const db = new PrismaClient();
 
 const throwInProdIfNotSet = (devValue: string) => {
   if (dev) {
@@ -43,23 +47,31 @@ const getAccessToken = async (code: string) => {
       }),
     }
   );
-  const { access_token: accessToken } = await gitHubResponse.json();
+  const { access_token: accessToken } = (await gitHubResponse.json()) as {
+    access_token: string;
+  };
 
   return accessToken;
 };
 
-const getUser = async (accessToken: string) => {
+const getUser = async (accessToken: string): Promise<User> => {
   const gitHubResponse = await fetch("https://api.github.com/user", {
     headers: {
       Accept: "application/json",
       Authorization: `Token ${accessToken}`,
     },
   });
-  const { login, name } = await gitHubResponse.json();
+  const { login, id, name } = (await gitHubResponse.json()) as {
+    login: string;
+    id: string;
+    name: string;
+  };
 
   return {
-    login,
     name,
+    provider: "github",
+    providerId: `${id}`,
+    providerLogin: login,
   };
 };
 
@@ -67,7 +79,7 @@ const signJwtAndSerializeCookie = (
   payload: Record<string, unknown>
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, JWT_SECRET, (error, token) => {
+    jwt.sign(payload, JWT_SECRET, (error, token = "") => {
       if (error) {
         console.error(error);
         reject();
@@ -80,19 +92,65 @@ const signJwtAndSerializeCookie = (
 };
 
 export const get: RequestHandler = async ({ url }) => {
-  const code = url.searchParams.get("code");
+  const code = url.searchParams.get("code") || "";
   const accessToken = await getAccessToken(code);
   const user = await getUser(accessToken);
 
-  // TODO: Persist user in database
+  let persistedUser;
+  try {
+    persistedUser = await db.user.create({
+      data: {
+        name: user.name,
+        provider: user.provider,
+        provider_id: user.providerId,
+        provider_login: user.providerLogin,
+      },
+    });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      // https://www.prisma.io/docs/reference/api-reference/error-reference
+      if (error.code === "P2002") {
+        const tempDbUser = await db.user.findFirst({
+          where: {
+            provider: user.provider,
+            provider_id: user.providerId,
+          },
+        });
+        if (tempDbUser) {
+          persistedUser = await db.user.update({
+            where: {
+              id: tempDbUser.id,
+            },
+            data: {
+              last_login_at: new Date(),
+            },
+          });
+        }
+      }
+    } else {
+      console.error(
+        `Unexpected error when processing the GitHub callback get handler: ${String(
+          error
+        )}`
+      );
+    }
+  }
 
-  const userCookie = await signJwtAndSerializeCookie(user);
+  if (persistedUser) {
+    const userCookie = await signJwtAndSerializeCookie(persistedUser);
+    return {
+      status: 302,
+      headers: {
+        "set-cookie": [userCookie],
+        location: "/dashboard",
+      },
+    };
+  }
 
   return {
     status: 302,
     headers: {
-      "set-cookie": [userCookie],
-      location: "/dashboard",
+      location: "/login",
     },
   };
 };
