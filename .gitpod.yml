@@ -6,10 +6,12 @@ tasks:
   - before: npm i -g pnpm
     init: pnpm install
     command: |
+      gp sync-done pnpm-install
       pnpm dev
     env:
       DATABASE_URL: postgres://gitpod@localhost/webstone
   - command: |
+      gp sync-await pnpm-install
       cd services/website
       pnpx prisma studio
     env:
