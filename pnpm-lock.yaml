@@ -38,6 +38,7 @@ importers:
 
   services/website:
     specifiers:
+      "@prisma/client": ^3.9.2
       "@sveltejs/adapter-auto": 1.0.0-next.18
       "@sveltejs/kit": 1.0.0-next.260
       "@tailwindcss/forms": ^0.4.0
@@ -69,6 +70,7 @@ importers:
       typescript: ^4.5.5
       uuid: ^8.3.2
     dependencies:
+      "@prisma/client": 3.9.2_prisma@3.9.2
       cookie: 0.4.2
       cookie-parser: 1.4.6
       cookie-signature: 1.1.0
@@ -547,6 +549,30 @@ packages:
       "@nodelib/fs.scandir": 2.1.5
       fastq: 1.13.0
     dev: true
+
+  /@prisma/client/3.9.2_prisma@3.9.2:
+    resolution:
+      {
+        integrity: sha512-VlEIYVMyfFZHbVBOlunPl47gmP/Z0zzPjPj8I7uKEIaABqrUy50ru3XS0aZd8GFvevVwt7p91xxkUjNjrWhKAQ==,
+      }
+    engines: { node: ">=12.6" }
+    requiresBuild: true
+    peerDependencies:
+      prisma: "*"
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      "@prisma/engines-version": 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
+      prisma: 3.9.2
+    dev: false
+
+  /@prisma/engines-version/3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009:
+    resolution:
+      {
+        integrity: sha512-5Dh+qTDhpPR66w6NNAnPs+/W/Qt4r1DSd+qhfPFcDThUK4uxoZKGlPb2IYQn5LL+18aIGnmteDf7BnVMmvBNSQ==,
+      }
+    dev: false
 
   /@prisma/engines/3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009:
     resolution:
