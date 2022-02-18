@@ -61,15 +61,17 @@ const getUser = async (accessToken: string): Promise<User> => {
       Authorization: `Token ${accessToken}`,
     },
   });
-  const { login, id, name } = (await gitHubResponse.json()) as {
-    login: string;
+  const { id, email, login, name } = (await gitHubResponse.json()) as {
     id: string;
+    email: string;
+    login: string;
     name: string;
   };
 
   return {
     name,
     provider: "github",
+    providerEmail: email,
     providerId: `${id}`,
     providerLogin: login,
   };
@@ -102,6 +104,7 @@ export const get: RequestHandler = async ({ url }) => {
       data: {
         name: user.name,
         provider: user.provider,
+        provider_email: user.providerEmail,
         provider_id: user.providerId,
         provider_login: user.providerLogin,
       },
@@ -129,7 +132,7 @@ export const get: RequestHandler = async ({ url }) => {
       }
     } else {
       console.error(
-        `Unexpected error when processing the GitHub callback get handler: ${String(
+        `Unexpected error when processing the GitHub callback GET handler: ${String(
           error
         )}`
       );

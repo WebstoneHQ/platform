@@ -17,6 +17,7 @@ model User {
   last_login_at  DateTime @default(now())
   name           String
   provider       String
+  provider_email String?
   provider_id    String
   provider_login String
 

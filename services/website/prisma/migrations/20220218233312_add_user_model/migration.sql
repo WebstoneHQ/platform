@@ -5,6 +5,7 @@ CREATE TABLE "users" (
     "last_login_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "provider" TEXT NOT NULL,
+    "provider_email" TEXT,
     "provider_id" TEXT NOT NULL,
     "provider_login" TEXT NOT NULL,
 
