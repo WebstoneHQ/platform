@@ -2,10 +2,10 @@
 
 declare namespace App {
   interface Locals {
-    user: User;
+    user: Partial<User>;
   }
 
   interface Session {
-    user: User;
+    user: Partial<User>;
   }
 }
