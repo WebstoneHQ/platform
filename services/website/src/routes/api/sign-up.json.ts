@@ -1,26 +1,28 @@
 import type { RequestHandler } from "@sveltejs/kit";
 
-type Payload = {
-  email: string;
-  curriculumId?: string;
-};
+import PrismaClient from "$lib/db/prisma";
+
+const db = new PrismaClient();
 
 export const post: RequestHandler = async ({ request }) => {
   const form = await request.formData();
-  const payload: Payload = {
-    email: String(form.get("email")),
-  };
   if (form.get("curriculumId")) {
-    payload.curriculumId = String(form.get("curriculumId"));
+    const curriculumId = String(form.get("curriculumId"));
+    await db.curriculum.update({
+      where: {
+        id: curriculumId,
+      },
+      data: {
+        email: String(form.get("email")),
+      },
+    });
+  } else {
+    await db.curriculum.create({
+      data: {
+        email: String(form.get("email")),
+      },
+    });
   }
-
-  await fetch(process.env.WEBHOOK_ENDPOINT_SIGN_UP, {
-    body: JSON.stringify(payload),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-  });
 
   return {
     status: 301,

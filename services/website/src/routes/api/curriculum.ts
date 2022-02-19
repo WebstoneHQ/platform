@@ -1,24 +1,24 @@
 import type { RequestHandler } from "@sveltejs/kit";
-import { v4 as uuid } from "uuid";
+
+import PrismaClient from "$lib/db/prisma";
+
+const db = new PrismaClient();
 
 export const post: RequestHandler = async ({ request }) => {
   const body = (await request.json()) as Record<string, unknown>;
-  const curriculumId = uuid();
-  const payload = {
-    ...body,
-    id: curriculumId,
-  };
 
-  await fetch(process.env.WEBHOOK_ENDPOINT_SUBMIT_CURRICULUM || "", {
-    body: JSON.stringify(payload),
-    headers: {
-      "Content-Type": "application/json",
+  const persistedCurriculum = await db.curriculum.create({
+    data: {
+      web: body.web as string,
+      styles: body.styles as string,
+      apitype: body.apitype as string,
+      api: body.api as string,
+      database: body.database as string,
     },
-    method: "POST",
   });
 
   return {
-    body: { curriculumId },
+    body: { curriculumId: persistedCurriculum.id },
     status: 201,
   };
 };
