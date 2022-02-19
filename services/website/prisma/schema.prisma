@@ -11,6 +11,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Curriculum {
+  created_at DateTime @default(now())
+  id         String   @id @default(cuid())
+  email      String?
+  web        String?
+  styles     String?
+  apitype    String?
+  api        String?
+  database   String?
+
+  @@map("curriculums")
+}
+
 model User {
   created_at     DateTime @default(now())
   id             String   @id @default(cuid())
