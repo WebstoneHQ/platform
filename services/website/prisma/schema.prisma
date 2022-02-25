@@ -2,13 +2,39 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+model Billing {
+  created_at            DateTime @default(now())
+  customer_email        String
+  customer_name         String
+  event_time            DateTime
+  id                    String   @id @default(cuid())
+  marketing_consent     Boolean
+  p_country             String
+  p_coupon              String?
+  p_coupon_savings      Decimal
+  p_currency            String
+  p_earnings            Json
+  p_order_id            String
+  p_paddle_fee          Decimal
+  p_price               Decimal
+  p_product_id          Int
+  p_quantity            Int
+  p_sale_gross          Decimal
+  p_tax_amount          Decimal
+  p_used_price_override Boolean
+  passthrough           Json
+  transaction_id        String
+
+  @@map("billing")
 }
 
 model Curriculum {
@@ -34,6 +60,6 @@ model User {
   provider_id    String
   provider_login String
 
-  @@map("users")
   @@unique([provider, provider_id])
+  @@map("users")
 }
