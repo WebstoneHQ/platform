@@ -21,6 +21,7 @@ ports:
   - port: 3000
     description: Website
     onOpen: ignore
+    visibility: public
   - port: 5432
     description: PostgreSQL
     onOpen: ignore
