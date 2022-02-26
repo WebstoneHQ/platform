@@ -23,7 +23,7 @@
 
   const openCheckout = () => {
     let product, vendor;
-    if ($page.url.host === "webstone.app") {
+    if ($page.url.host === "www.webstone.app") {
       product = 756466;
       vendor = 139895;
     } else {
