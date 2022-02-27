@@ -30,9 +30,23 @@ export default defineConfig<DefaultThemeConfig>({
       //     selectLanguageAriaLabel: "Pick a language"
       //   },
       // },
+      remoteGitRepo: {
+        label: "Webstone on GitHub",
+        url: "WebstoneHQ/platform"
+      },
       sidebar: {
         categories: true,
         style: "docs",
+      },
+      socials: {
+        discord: {
+          label: "Webstone on Discord",
+          link: "https://discord.gg/dt583vtkeZ"
+        },
+        twitter: {
+          label: "Webstone on Twitter",
+          link: "https://twitter.com/webstonehq"
+        }
       }
     },
     title: 'Webstone Education',
