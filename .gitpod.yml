@@ -28,6 +28,9 @@ ports:
   - port: 5555
     description: Prisma Studio
     onOpen: ignore
+  - port: 8080
+    description: Docs Website
+    onOpen: ignore
 
 github:
   prebuilds:

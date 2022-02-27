@@ -25,9 +25,9 @@
 	},
 	"scripts": {
 		"changeset": "changeset && pnpm install",
-		"clean": "pnpm --recursive --parallel clean",
+		"clean": "pnpm --recursive --parallel clean && rm -fr ./node_modules",
 		"dev": "pnpm --recursive --parallel dev",
-		"lint": "eslint . --fix --ignore-path .gitignore --max-warnings 0",
+		"lint": "eslint . --fix --max-warnings 0",
 		"preinstall": "npx only-allow pnpm",
 		"prepare": "husky install",
 		"release": "changeset publish",
