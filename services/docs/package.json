@@ -1,0 +1,25 @@
+{
+	"name": "@webstone/docs",
+	"description": "",
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vitebook dev -p 8080",
+		"clean": "rm -rf .vitebook/.cache .vitebook/.temp ./node_modules",
+		"vitebook:build": "vitebook build",
+		"vitebook:preview": "vitebook preview"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^1.0.0-next.36",
+		"@vitebook/client": "^0.23.2",
+		"@vitebook/core": "^0.23.2",
+		"@vitebook/markdown-svelte": "^0.23.2",
+		"@vitebook/theme-default": "^0.23.2",
+		"autoprefixer": "^10.0.0",
+		"postcss": "^8.0.0",
+		"svelte": "^3.43.1",
+		"tailwindcss": "^3.0.0",
+		"typescript": "^4.4.0",
+		"vite": "^2.7.0"
+	}
+}
