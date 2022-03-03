@@ -39,10 +39,10 @@ importers:
   services/docs:
     specifiers:
       "@sveltejs/vite-plugin-svelte": ^1.0.0-next.36
-      "@vitebook/client": ^0.23.2
-      "@vitebook/core": ^0.23.2
-      "@vitebook/markdown-svelte": ^0.23.2
-      "@vitebook/theme-default": ^0.23.2
+      "@vitebook/client": ^0.23.4
+      "@vitebook/core": ^0.23.4
+      "@vitebook/markdown-svelte": ^0.23.4
+      "@vitebook/theme-default": ^0.23.4
       autoprefixer: ^10.0.0
       postcss: ^8.0.0
       svelte: ^3.43.1
@@ -51,10 +51,10 @@ importers:
       vite: ^2.7.0
     devDependencies:
       "@sveltejs/vite-plugin-svelte": 1.0.0-next.38_svelte@3.46.4+vite@2.7.10
-      "@vitebook/client": 0.23.2_35beef42c37cec4ae3f0f81552279b04
-      "@vitebook/core": 0.23.2
-      "@vitebook/markdown-svelte": 0.23.2_abaedc5a53d55227d5cacb79676bcc04
-      "@vitebook/theme-default": 0.23.2_abaedc5a53d55227d5cacb79676bcc04
+      "@vitebook/client": 0.23.4_5fa419fbb064a72fd865f10bcb81187f
+      "@vitebook/core": 0.23.4
+      "@vitebook/markdown-svelte": 0.23.4_411b7e73f4f614caa23c4e44532b913e
+      "@vitebook/theme-default": 0.23.4_411b7e73f4f614caa23c4e44532b913e
       autoprefixer: 10.4.2_postcss@8.4.6
       postcss: 8.4.6
       svelte: 3.46.4
@@ -1144,19 +1144,19 @@ packages:
       eslint-visitor-keys: 2.1.0
     dev: true
 
-  /@vitebook/client/0.23.2_35beef42c37cec4ae3f0f81552279b04:
+  /@vitebook/client/0.23.4_5fa419fbb064a72fd865f10bcb81187f:
     resolution:
       {
-        integrity: sha512-WUbcT4FMWcXiMh7e+LAN6BXLieGBwyIBSqiToTfgkq44VN6ltTdbbDTSpXJ8EzoJiNbtEuAB7eddZT61gyfYnw==,
+        integrity: sha512-FTmw8cc07QBKGv1c/rHaW6RUOHE+r4DnnYKxZoE+N0q5y53S3qAjm5Emu/QRu7sY1g+ZfhRogtIvZKSteTBtuw==,
       }
     requiresBuild: true
     peerDependencies:
-      "@vitebook/core": 0.23.2
+      "@vitebook/core": 0.23.4
       svelte: ^3.44.1
     dependencies:
       "@rollup/pluginutils": 4.1.2
       "@sveltejs/vite-plugin-svelte": 1.0.0-next.38_svelte@3.46.4+vite@2.7.10
-      "@vitebook/core": 0.23.2
+      "@vitebook/core": 0.23.4
       esbuild: 0.12.29
       just-debounce-it: 3.0.1
       just-throttle: 4.0.1
@@ -1169,10 +1169,10 @@ packages:
       - vite
     dev: true
 
-  /@vitebook/core/0.23.2:
+  /@vitebook/core/0.23.4:
     resolution:
       {
-        integrity: sha512-r791pqJXFe09bWRGA3BztKnInqcn5G7OmY2qvKw482FogySJ/zYt35d1Y/FUH69XYk3/SyWeWOIjq3ByTBYdgA==,
+        integrity: sha512-/finidk70ZJ5jZ3k5xfcs8fj0L+JYhwNw1tDAiUaYu4UnlPNUBkWeXo3rXGq6qnVX9/z0LwrG74vPcaMERHJsQ==,
       }
     engines: { node: ">=15" }
     hasBin: true
@@ -1197,41 +1197,41 @@ packages:
       - supports-color
     dev: true
 
-  /@vitebook/markdown-svelte/0.23.2_abaedc5a53d55227d5cacb79676bcc04:
+  /@vitebook/markdown-svelte/0.23.4_411b7e73f4f614caa23c4e44532b913e:
     resolution:
       {
-        integrity: sha512-e8eqswtejmMIumQJW9k3X51gPzYOhHHgjdU+j25hPTsyk5Es1flB+qMaEv+AXXsLlHOxjUXvDDOlSg226Tggkw==,
+        integrity: sha512-J+C0rQd5J7CgtdERe9uRij7I6vPwJ1PjOMSMpvslvTXTexmu9cm+h8hQBjG7hF9zyfTM4gj3EydqQpzlzNDbIQ==,
       }
     peerDependencies:
-      "@vitebook/client": 0.23.2
-      "@vitebook/core": 0.23.2
+      "@vitebook/client": 0.23.4
+      "@vitebook/core": 0.23.4
       svelte: ^3.44.1
     dependencies:
       "@rollup/pluginutils": 4.1.2
       "@types/lru-cache": 5.1.1
-      "@vitebook/client": 0.23.2_35beef42c37cec4ae3f0f81552279b04
-      "@vitebook/core": 0.23.2
-      "@vitebook/markdown": 0.23.2_fc6df10e6b401eecad6179f4f69ddf69
+      "@vitebook/client": 0.23.4_5fa419fbb064a72fd865f10bcb81187f
+      "@vitebook/core": 0.23.4
+      "@vitebook/markdown": 0.23.4_d59ac2443bd28ca105b82fccfb0be555
       kleur: 4.1.4
       lru-cache: 6.0.0
       magic-string: 0.25.7
       svelte: 3.46.4
     dev: true
 
-  /@vitebook/markdown/0.23.2_fc6df10e6b401eecad6179f4f69ddf69:
+  /@vitebook/markdown/0.23.4_d59ac2443bd28ca105b82fccfb0be555:
     resolution:
       {
-        integrity: sha512-gus7aDMTJ8XMICRyv/m9rNVRoiswJSPLClRwlsNz08h7RE2Du0p4mYFLsJ73Gq7NacTbj4q0IE/6925dVb9ztQ==,
+        integrity: sha512-41wZJU1/C1l43PV8orJ5uqyh+2msl2FmASjEhCZZAxS0BUeHOePHvz9H33zfg420MN53pToW/263rOr08krx0g==,
       }
     peerDependencies:
-      "@vitebook/client": 0.23.2
-      "@vitebook/core": 0.23.2
+      "@vitebook/client": 0.23.4
+      "@vitebook/core": 0.23.4
     dependencies:
       "@rollup/pluginutils": 4.1.2
       "@types/lru-cache": 5.1.1
       "@types/markdown-it": 12.2.3
-      "@vitebook/client": 0.23.2_35beef42c37cec4ae3f0f81552279b04
-      "@vitebook/core": 0.23.2
+      "@vitebook/client": 0.23.4_5fa419fbb064a72fd865f10bcb81187f
+      "@vitebook/core": 0.23.4
       gray-matter: 4.0.3
       lru-cache: 6.0.0
       markdown-it: 12.3.2
@@ -1242,18 +1242,18 @@ packages:
       toml: 3.0.0
     dev: true
 
-  /@vitebook/theme-default/0.23.2_abaedc5a53d55227d5cacb79676bcc04:
+  /@vitebook/theme-default/0.23.4_411b7e73f4f614caa23c4e44532b913e:
     resolution:
       {
-        integrity: sha512-n0YPWBKyZYhhfjbL8yicAG/kar+NRr+/yE1dRiU0n2ken98sHMr9NUA0BnD7MPfxOY9Pm4DYIJNETQB41ibb6Q==,
+        integrity: sha512-9+ZuZ+iE4FSXCD8ZgQe38r9tSv+bhY9TxMK0ZD5Ndh6JFjGHJYNafTSfSnbrF6nE+VzGFz3XHiL12ZJIr6nNIg==,
       }
     peerDependencies:
-      "@vitebook/client": 0.23.2
-      "@vitebook/core": 0.23.2
+      "@vitebook/client": 0.23.4
+      "@vitebook/core": 0.23.4
       svelte: ^3.44.1
     dependencies:
-      "@vitebook/client": 0.23.2_35beef42c37cec4ae3f0f81552279b04
-      "@vitebook/core": 0.23.2
+      "@vitebook/client": 0.23.4_5fa419fbb064a72fd865f10bcb81187f
+      "@vitebook/core": 0.23.4
       kleur: 4.1.4
       svelte: 3.46.4
     dev: true
