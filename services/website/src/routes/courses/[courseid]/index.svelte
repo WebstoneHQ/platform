@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = ({ params }) => {
+  export const load: Load = () => {
     // const { courseid } = params;
     // TODO: Fetch course information from database
 

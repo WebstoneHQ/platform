@@ -69,6 +69,7 @@ const getUser = async (accessToken: string): Promise<User> => {
   };
 
   return {
+    id: "ignored-but-needed-by-typescript-theres-probably-a-better-way",
     name,
     provider: "github",
     providerEmail: email,
