@@ -1,12 +1,18 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = ({ params }) => {
-    const { courseid } = params;
+  export const load: Load = () => {
+    // const { courseid } = params;
+    // return {
+    //   props: {
+    //     courseid,
+    //   },
+    // };
+
     return {
-      props: {
-        courseid,
-      },
+      // Nothing to see at /courses/* yet.
+      status: 301,
+      redirect: "/",
     };
   };
 </script>
