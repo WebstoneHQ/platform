@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { CurriculumSelections } from "./index.svelte";
-  import type { Layer } from "./layer.svelte";
+  import type { Layer, Module } from "./layer.svelte";
 
   import { getContext } from "svelte";
   import {
@@ -19,151 +19,191 @@
   const clearInvalidModules = (changedModuleId: string) => {
     switch ($layerToChange.id) {
       case "web":
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[changedModuleId]?.styles[$curriculumSelection.styles?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             styles: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[changedModuleId]?.apitype[$curriculumSelection.apitype?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             apitype: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[changedModuleId]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             api: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[changedModuleId]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]?.database[$curriculumSelection.database?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             database: undefined,
           };
         }
         break;
       case "styles":
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[changedModuleId]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             apitype: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             api: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]?.database[$curriculumSelection.database?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             database: undefined,
           };
         }
         break;
       case "apitype":
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[changedModuleId]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[$curriculumSelection.styles?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[changedModuleId]?.api[$curriculumSelection.api?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             api: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[changedModuleId]?.api[$curriculumSelection.api?.id]?.database[$curriculumSelection.database?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             database: undefined,
           };
         }
         break;
       case "api":
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[changedModuleId]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             apitype: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[changedModuleId]?.database[$curriculumSelection.database?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             database: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[$curriculumSelection.styles?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
         break;
       case "database":
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]?.database[changedModuleId]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             api: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]?.api[$curriculumSelection.api?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             apitype: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.apitype[$curriculumSelection.apitype?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
+        // @ts-ignore
         // prettier-ignore
         if (!curriculumValidation.web[$curriculumSelection.web?.id]?.styles[$curriculumSelection.styles?.id]) {
           $curriculumSelection = {
             ...$curriculumSelection,
+            // @ts-ignore
             web: undefined,
           };
         }
@@ -171,12 +211,13 @@
     }
   };
 
-  const changeSelection = (module) => {
+  const changeSelection = (module: Module) => {
     $curriculumSelection = {
       ...$curriculumSelection,
       [$layerToChange?.id]: module,
     };
     clearInvalidModules(module.id);
+    // @ts-ignore
     $layerToChange = null;
   };
 
@@ -188,6 +229,11 @@
 
   const capitalizeCorrectly = (words: string) => {
     return words.includes("API") ? words : words.toLowerCase();
+  };
+
+  const closeModal = () => {
+    // @ts-ignore
+    $layerToChange = null;
   };
 
   $: title =
@@ -218,7 +264,7 @@
           To: "opacity-0"
       -->
       <div
-        on:click="{() => ($layerToChange = null)}"
+        on:click="{closeModal}"
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         aria-hidden="true"
       ></div>
@@ -234,7 +280,7 @@
       >
         <div>
           <div class="flex justify-end">
-            <button on:click="{() => ($layerToChange = null)}">
+            <button on:click="{closeModal}">
               <svg
                 width="14"
                 height="14"

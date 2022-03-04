@@ -1,6 +1,37 @@
 <script lang="ts" context="module">
   import type { Module } from "./layer.svelte";
 
+  export type CurriculumConfigurationWebOptions =
+    | "angular"
+    | "nextjs"
+    | "nuxtjs"
+    | "react"
+    | "svelte"
+    | "sveltekit"
+    | "vue";
+  export type CurriculumConfigurationStylesOptions =
+    | "bootstrap"
+    | "chakraui"
+    | "css"
+    | "styledcomponents"
+    | "tailwind"
+    | "unocss"
+    | "windicss";
+  export type CurriculumConfigurationApiTypeOptions = "graphql" | "rest";
+  export type CurriculumConfigurationApiOptions =
+    | "go"
+    | "java"
+    | "nextjs"
+    | "nodejs"
+    | "nuxtjs"
+    | "rust"
+    | "sveltekit";
+  export type CurriculumConfigurationDatabaseOptions =
+    | "mongodb"
+    | "mysql"
+    | "planetscale"
+    | "postgresql";
+
   export type CurriculumSelections = {
     web: Module;
     styles: Module;
@@ -252,13 +283,13 @@
   };
 
   const curriculumSelection: Writable<CurriculumSelections> = writable({
-    web: layers.web.modules.find((module) => module.id === "sveltekit"),
-    styles: layers.styles.modules.find((module) => module.id === "tailwind"),
-    apitype: layers.apitype.modules.find((module) => module.id === "rest"),
-    api: layers.api.modules.find((module) => module.id === "sveltekit"),
+    web: layers.web.modules.find((module) => module.id === "sveltekit") as Module,
+    styles: layers.styles.modules.find((module) => module.id === "tailwind") as Module,
+    apitype: layers.apitype.modules.find((module) => module.id === "rest") as Module,
+    api: layers.api.modules.find((module) => module.id === "sveltekit") as Module,
     database: layers.database.modules.find(
       (module) => module.id === "postgresql"
-    ),
+    ) as Module,
   });
   setContext(contextKeyCurriculum, curriculumSelection);
   setContext(contextKeyCurriculumChangeModuleModal, writable());
@@ -269,6 +300,8 @@
   $: isCurriculumAvailable = Object.values($curriculumSelection).every(
     (module) => module && !module.status
   );
+
+  $: layerEntries = Object.entries(layers) as [keyof Layers, Layer][]
 </script>
 
 <style>
@@ -278,7 +311,7 @@
 </style>
 
 <div class="space-y-5 px-4 md:flex md:justify-between md:space-y-0">
-  {#each Object.entries(layers) as [layerName, layer]}
+  {#each layerEntries as [layerName, layer]}
     <LayerComponent
       layer="{layer}"
       layerName="{layerName}"

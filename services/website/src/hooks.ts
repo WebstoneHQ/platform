@@ -25,8 +25,9 @@ const handleUser: Handle = async ({ event, resolve }) => {
     const jwtToken = cookieParser.signedCookie(cookies.jwt, [COOKIE_SECRET]);
     const user = jwtToken ? (jwt.verify(jwtToken, JWT_SECRET) as User) : null;
     event.locals.user = {
-      login: user?.login,
-      name: user?.name,
+      // Extend this with other necessary properties, but beware this is available publicly
+      name: user?.name || "",
+      id: user?.id,
     };
   }
   const response = await resolve(event);

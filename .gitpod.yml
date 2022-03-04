@@ -1,13 +1,35 @@
+---
 # Learn more about this file at https://www.gitpod.io/docs/references/gitpod-yml
+image: gitpod/workspace-postgres
+
 tasks:
   - before: npm i -g pnpm
     init: pnpm install
     command: |
-      export HMR_HOST=`gp url 3000`
+      gp sync-done pnpm-install
       pnpm dev
+    env:
+      DATABASE_URL: postgres://gitpod@localhost/webstone
+  - command: |
+      gp sync-await pnpm-install
+      cd services/website
+      pnpx prisma studio
+    env:
+      DATABASE_URL: postgres://gitpod@localhost/webstone
 
 ports:
   - port: 3000
+    description: Website
+    onOpen: ignore
+    visibility: public
+  - port: 5432
+    description: PostgreSQL
+    onOpen: ignore
+  - port: 5555
+    description: Prisma Studio
+    onOpen: ignore
+  - port: 8080
+    description: Docs Website
     onOpen: ignore
 
 github:
@@ -18,5 +40,7 @@ github:
 vscode:
   extensions:
     - bradlc.vscode-tailwindcss
+    - dbaeumer.vscode-eslint
+    - prisma.prisma
     - svelte.svelte-vscode
     - yzhang.markdown-all-in-one

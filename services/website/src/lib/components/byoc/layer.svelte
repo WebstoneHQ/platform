@@ -25,7 +25,7 @@
 
   export let layer: Layer;
   export let layerName: string; // "web" | "styles" | "apitype" | "api" | "database";
-  export let selectedModule: Module = undefined;
+  export let selectedModule: Module | undefined = undefined;
 </script>
 
 {#if selectedModule}
