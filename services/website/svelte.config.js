@@ -9,6 +9,7 @@ const config = {
 
   kit: {
     adapter: adapter(),
+    trailingSlash: "always",
     vite: {
       server: {
         hmr: {

@@ -1,10 +1,41 @@
 <script lang="ts" context="module">
+  export type CurriculumConfigurationWebOptions =
+    | "angular"
+    | "nextjs"
+    | "nuxtjs"
+    | "react"
+    | "svelte"
+    | "sveltekit"
+    | "vue";
+  export type CurriculumConfigurationStylesOptions =
+    | "bootstrap"
+    | "chakraui"
+    | "css"
+    | "styledcomponents"
+    | "tailwind"
+    | "unocss"
+    | "windicss";
+  export type CurriculumConfigurationApiTypeOptions = "graphql" | "rest";
+  export type CurriculumConfigurationApiOptions =
+    | "go"
+    | "java"
+    | "nextjs"
+    | "nodejs"
+    | "nuxtjs"
+    | "rust"
+    | "sveltekit";
+  export type CurriculumConfigurationDatabaseOptions =
+    | "mongodb"
+    | "mysql"
+    | "planetscale"
+    | "postgresql";
+
   export type CurriculumSelections = {
-    web?: string;
-    styles?: string;
-    apitype?: string;
-    api?: string;
-    database?: string;
+    web?: CurriculumConfigurationWebOptions;
+    styles?: CurriculumConfigurationStylesOptions;
+    apitype?: CurriculumConfigurationApiTypeOptions;
+    api?: CurriculumConfigurationApiOptions;
+    database?: CurriculumConfigurationDatabaseOptions;
   };
 </script>
 
@@ -60,6 +91,40 @@
         curriculumId = body.curriculumId;
       });
   }
+
+  // https://docs.microsoft.com/en-us/javascript/api/@azure/keyvault-certificates/requireatleastone?view=azure-node-latest
+  // type RequireAtLeastOne<T> = { [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>; }[keyof T]
+
+  // type CurriculumConfigurationStyles = {
+  //   [key in CurriculumConfigurationStylesOptions]: {}
+  // }
+
+  // type CurriculumConfigurationDatabase = {
+  //   [key in CurriculumConfigurationDatabaseOptions]: {}
+  // };
+
+  // type CurriculumConfigurationApi = {
+  //   [key in CurriculumConfigurationApiOptions]: {
+  //     database: CurriculumConfigurationDatabase
+  //   }
+  // };
+
+  // type CurriculumConfigurationApiType = {
+  //   [key in CurriculumConfigurationApiTypeOptions]: {
+  //     api: RequireAtLeastOne<CurriculumConfigurationApi>
+  //   }
+  // }
+
+  // type CurriculumConfigurationWeb = {
+  //   [key in CurriculumConfigurationWebOptions]: {
+  //     styles: Partial<CurriculumConfigurationStyles>;
+  //     apitype: CurriculumConfigurationApiType;
+  //   };
+  // };
+
+  // type CurriculumConfiguration = {
+  //   web: CurriculumConfigurationWeb
+  // };
 
   const curriculumConfiguration = {
     /* TODO: Generate this based on the available course modules in the private https://github.com/WebstoneHQ/courses repo */
@@ -507,6 +572,73 @@
       },
     },
   };
+
+  const getAvailableWebFrameworks = (): CurriculumConfigurationWebOptions[] => {
+    return Object.keys(
+      // @ts-ignore
+      curriculumConfiguration.web
+    ) as CurriculumConfigurationWebOptions[];
+  };
+
+  const getAvailableStyles = (): CurriculumConfigurationStylesOptions[] => {
+    if ($curriculumSelections.web) {
+      return Object.keys(
+        // @ts-ignore
+        curriculumConfiguration.web[$curriculumSelections.web].styles
+      ) as CurriculumConfigurationStylesOptions[];
+    }
+    return [];
+  };
+
+  const getAvailableApiTypes = (): CurriculumConfigurationApiTypeOptions[] => {
+    if ($curriculumSelections.web) {
+      return Object.keys(
+        // @ts-ignore
+        curriculumConfiguration.web[$curriculumSelections.web].apitype
+      ) as CurriculumConfigurationApiTypeOptions[];
+    }
+    return [];
+  };
+
+  const getAvailableApis = (): CurriculumConfigurationApiOptions[] => {
+    if ($curriculumSelections.web && $curriculumSelections.apitype) {
+      return Object.keys(
+        // @ts-ignore
+        curriculumConfiguration.web[$curriculumSelections.web].apitype[
+          $curriculumSelections.apitype
+        ].api
+      ) as CurriculumConfigurationApiOptions[];
+    }
+    return [];
+  };
+
+  const getAvailableDatabases =
+    (): CurriculumConfigurationDatabaseOptions[] => {
+      if (
+        $curriculumSelections.web &&
+        $curriculumSelections.apitype &&
+        $curriculumSelections.api
+      ) {
+        return Object.keys(
+          // @ts-ignore
+          curriculumConfiguration.web[$curriculumSelections.web].apitype[
+            $curriculumSelections.apitype
+          ].api[$curriculumSelections.api].database
+        ) as CurriculumConfigurationDatabaseOptions[];
+      }
+      return [];
+    };
+
+  $: currentCurriculumSelections = Object.entries($curriculumSelections) as [
+    keyof CurriculumSelections,
+    (
+      | CurriculumConfigurationWebOptions
+      | CurriculumConfigurationStylesOptions
+      | CurriculumConfigurationApiTypeOptions
+      | CurriculumConfigurationApiOptions
+      | CurriculumConfigurationDatabaseOptions
+    )
+  ][];
 </script>
 
 <style>
@@ -518,7 +650,7 @@
 <div class="min-h-[15rem]">
   {#if sectionToShow === "web"}
     <Section title="1. Select a web framework">
-      {#each Object.keys(curriculumConfiguration.web) as name}
+      {#each getAvailableWebFrameworks() as name}
         <Module layer="web" name="{name}" />
       {/each}
     </Section>
@@ -526,7 +658,7 @@
 
   {#if sectionToShow === "styles"}
     <Section title="2. Select a type of styling">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].styles) as name}
+      {#each getAvailableStyles() as name}
         <Module layer="styles" name="{name}" />
       {/each}
     </Section>
@@ -534,7 +666,7 @@
 
   {#if sectionToShow === "apitype"}
     <Section title="3. Select a type of API">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype) as name}
+      {#each getAvailableApiTypes() as name}
         <Module layer="apitype" name="{name}" />
       {/each}
     </Section>
@@ -542,7 +674,7 @@
 
   {#if sectionToShow === "api"}
     <Section title="4. Select an API framework">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype[$curriculumSelections.apitype].api) as name}
+      {#each getAvailableApis() as name}
         <Module layer="api" name="{name}" />
       {/each}
     </Section>
@@ -550,7 +682,7 @@
 
   {#if sectionToShow === "database"}
     <Section title="5. Select a database">
-      {#each Object.keys(curriculumConfiguration.web[$curriculumSelections.web].apitype[$curriculumSelections.apitype].api[$curriculumSelections.api].database) as name}
+      {#each getAvailableDatabases() as name}
         <Module layer="database" name="{name}" />
       {/each}
     </Section>
@@ -605,8 +737,7 @@
   {#if $curriculumSelections.web}
     <p class="mt-6 max-w-3xl text-lg leading-7">Your curriculum</p>
     <div class="flex flex-wrap space-x-2">
-      <!-- {"web":"react","styles":"nodejs","apitype":"rest"} -->
-      {#each Object.entries($curriculumSelections) as [layer, name]}
+      {#each currentCurriculumSelections as [layer, name]}
         <Module layer="{layer}" name="{name}" readOnly />
       {/each}
     </div>
