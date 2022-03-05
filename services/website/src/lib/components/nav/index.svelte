@@ -10,12 +10,9 @@
   beforeNavigate(() => (isMobileMenuOpen = false));
 </script>
 
-<header class="relative">
+<header class="relative mx-auto max-w-5xl">
   <div class="pt-6">
-    <nav
-      class="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6"
-      aria-label="Global"
-    >
+    <nav class="relative flex" aria-label="Global">
       <div class="flex flex-1 items-center">
         <div class="flex w-full items-center justify-end md:w-auto">
           <!-- <a href="#">
@@ -47,7 +44,7 @@
             </button> -->
           </div>
         </div>
-        <div class="hidden space-x-8 md:ml-10 md:flex">
+        <div class="hidden space-x-8 md:flex">
           {#if user}
             <a href="/" class="text-base font-medium hover:text-gray-300"
               >Home</a

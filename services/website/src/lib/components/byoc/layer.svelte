@@ -18,6 +18,7 @@
   import { getContext } from "svelte";
   import { contextKeyCurriculumChangeModuleModal } from "$lib/context-keys";
   import Tooltip from "$lib/components/tooltip.svelte";
+  import ModuleIcon from "$lib/components/byoc/module-icon.svelte";
 
   const layerToChange: Writable<Layer> = getContext(
     contextKeyCurriculumChangeModuleModal
@@ -29,13 +30,17 @@
 </script>
 
 {#if selectedModule}
-  <div
+  <!-- Uncomment the next div and remove the subsequent one, plus the svg below, to enable the interactive BYOC -->
+  <!-- div
     class="flex cursor-pointer flex-col items-center rounded-3xl border bg-[#FBFBFB] py-4 px-6 dark:bg-slate-800 md:w-48"
     on:click="{() => ($layerToChange = layer)}"
+  -->
+  <div
+    class="flex flex-col items-center rounded-3xl border bg-[#FBFBFB] py-4 px-6 dark:bg-slate-800 md:w-48"
   >
     <h2 class="flex items-center font-semibold">
       <span>{layer.title}</span>
-      <svg
+      <!-- svg
         class="ml-1"
         width="13"
         height="8"
@@ -46,16 +51,9 @@
         <path
           d="M12.5 2.00009L11.09 0.590088L6.5 5.17009L1.91 0.590087L0.5 2.00009L6.5 8.00009L12.5 2.00009Z"
           fill="#503CFF"></path>
-      </svg>
+      </svg -->
     </h2>
-    <img
-      src="/svg/byoc/{layerName}/{selectedModule.id}.svg"
-      alt="logo"
-      title=""
-      height="80px"
-      width="80px"
-      class="mt-4 h-20 w-20"
-    />
+    <ModuleIcon layerId="{layerName}" moduleId="{selectedModule.id}" />
     <span class="mt-3 text-gray-400">{selectedModule.name}</span>
   </div>
 {:else}

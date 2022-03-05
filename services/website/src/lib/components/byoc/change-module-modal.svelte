@@ -9,6 +9,7 @@
     contextKeyCurriculumChangeModuleModal,
   } from "$lib/context-keys";
   import curriculumValidation from "$lib/curriculum-validation";
+  import ModuleIcon from "./module-icon.svelte";
 
   const curriculumSelection: Writable<CurriculumSelections> =
     getContext(contextKeyCurriculum);
@@ -302,13 +303,9 @@
                 class="grid max-w-sm cursor-pointer grid-cols-3 gap-4 rounded-2xl border-4 border-solid border-transparent p-2 hover:border-black"
               >
                 <div class="row-span-2">
-                  <img
-                    src="/svg/byoc/{$layerToChange.id}/{module.id}.svg"
-                    alt="logo"
-                    title=""
-                    height="80px"
-                    width="80px"
-                    class="h-20 w-20"
+                  <ModuleIcon
+                    layerId="{$layerToChange.id}"
+                    moduleId="{module.id}"
                   />
                 </div>
                 <div class="text-xl">{module.name}</div>

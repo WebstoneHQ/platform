@@ -51,6 +51,7 @@
   import { enhance } from "$lib/actions/form";
   import LayerComponent, { Layer } from "./layer.svelte";
   import ChangeModuleModal from "./change-module-modal.svelte";
+  import PreorderButton from "./preorder-button.svelte";
 
   type Layers = {
     web: Layer;
@@ -283,10 +284,18 @@
   };
 
   const curriculumSelection: Writable<CurriculumSelections> = writable({
-    web: layers.web.modules.find((module) => module.id === "sveltekit") as Module,
-    styles: layers.styles.modules.find((module) => module.id === "tailwind") as Module,
-    apitype: layers.apitype.modules.find((module) => module.id === "rest") as Module,
-    api: layers.api.modules.find((module) => module.id === "sveltekit") as Module,
+    web: layers.web.modules.find(
+      (module) => module.id === "sveltekit"
+    ) as Module,
+    styles: layers.styles.modules.find(
+      (module) => module.id === "tailwind"
+    ) as Module,
+    apitype: layers.apitype.modules.find(
+      (module) => module.id === "rest"
+    ) as Module,
+    api: layers.api.modules.find(
+      (module) => module.id === "sveltekit"
+    ) as Module,
     database: layers.database.modules.find(
       (module) => module.id === "postgresql"
     ) as Module,
@@ -301,7 +310,7 @@
     (module) => module && !module.status
   );
 
-  $: layerEntries = Object.entries(layers) as [keyof Layers, Layer][]
+  $: layerEntries = Object.entries(layers) as [keyof Layers, Layer][];
 </script>
 
 <style>
@@ -310,7 +319,7 @@
   }
 </style>
 
-<div class="space-y-5 px-4 md:flex md:justify-between md:space-y-0">
+<div class="space-y-5 md:flex md:justify-between md:space-y-0">
   {#each layerEntries as [layerName, layer]}
     <LayerComponent
       layer="{layer}"
@@ -322,21 +331,13 @@
   {/each}
 </div>
 {#if isCurriculumAvailable}
-  <div class="sticky bottom-12 mt-8 flex justify-center">
-    <button
-      on:click="{() =>
-        alert('This is not quite ready, but thank you for your interest!')}"
-      class="rounded-full bg-[#503CFF] py-4 px-14 text-white"
+  <div class="mt-20">
+    <p
+      class="text-center text-2xl font-semibold text-[#1d1d1f] dark:text-white"
     >
-      <span class="block text-base font-semibold">Preorder today</span>
-      <span class="block text-gray-300">$249 for a limited time</span>
-    </button>
-  </div>
-  <div class="mt-6">
-    <p class="text-center text-2xl font-semibold">
       Preorder now and access all future modules
     </p>
-    <ul class="mx-auto table">
+    <ul class="mx-auto table space-y-2 text-[#6e6d7a] dark:text-white">
       <li class="mt-4 flex items-center space-x-2">
         <svg
           width="18"
@@ -349,7 +350,23 @@
             d="M5.99997 11.1711L1.82997 7.00106L0.409973 8.41106L5.99997 14.0011L18 2.00106L16.59 0.591064L5.99997 11.1711Z"
             fill="#6E6D7A"></path>
         </svg>
-        <span>Lifetime access to all modules</span>
+        <span
+          ><span class="font-bold">70% discount</span> on the final price</span
+        >
+      </li>
+      <li class="mt-4 flex items-center space-x-2">
+        <svg
+          width="18"
+          height="14"
+          viewBox="0 0 18 14"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.99997 11.1711L1.82997 7.00106L0.409973 8.41106L5.99997 14.0011L18 2.00106L16.59 0.591064L5.99997 11.1711Z"
+            fill="#6E6D7A"></path>
+        </svg>
+        <span>Access to all modules</span>
       </li>
       <li class="flex items-center space-x-2">
         <svg
@@ -381,6 +398,7 @@
       </li>
     </ul>
   </div>
+  <PreorderButton />
 {:else if isCurriculumSelectionComplete}
   <div class="mt-6 flex flex-col items-center">
     <p class="text-center text-2xl font-semibold">
@@ -418,5 +436,13 @@
     </form>
   </div>
 {/if}
+<div class="mx-auto mt-7 text-center">
+  <a
+    href="https://forms.zohopublic.com/webstonetechnologies/form/WebstoneEducationCustomCurriculum/formperma/g1Eig2cKU-DbEDaC6IHrE_CgBnGUgNtt3x-KLlAqC9Q"
+    target="_blank"
+    class="font-bold text-[#1d1d1f] dark:text-white"
+    >Request a custom curriculum ></a
+  >
+</div>
 
 <ChangeModuleModal />
