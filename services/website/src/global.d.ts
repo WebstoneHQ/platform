@@ -2,12 +2,19 @@
 
 type PaddleCheckoutOpen = {
   allowQuantity: boolean;
+  country?: string;
   disableLogout: boolean;
+  email?: string;
+  frameInitialHeight: number;
+  frameStyle: string;
+  frameTarget: string;
   passthrough: string;
+  postcode?: string;
   product: number;
 };
 
 type PaddleSetup = {
+  eventCallback: (event: Record<string, unknown>) => void;
   vendor: number;
 };
 
@@ -30,4 +37,12 @@ interface User {
   providerEmail: string;
   providerId: string;
   providerLogin: string;
+}
+
+interface PurchaseInfo {
+  country?: string;
+  email?: string;
+  postcode?: string;
+  tax: string;
+  total: string;
 }

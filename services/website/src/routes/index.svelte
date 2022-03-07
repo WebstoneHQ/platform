@@ -25,9 +25,9 @@
 </script>
 
 <div class="">
-  <div class="mx-auto max-w-5xl md:mt-36">
+  <div class="mx-auto max-w-5xl md:pt-36">
     <h1
-      class="mt-12 text-center text-6xl font-bold text-[#1d1d1f] dark:text-white md:text-8xl md:font-extrabold"
+      class="pt-12 text-center text-6xl font-bold text-[#1d1d1f] dark:text-white md:text-8xl md:font-extrabold"
     >
       Learn with context.
     </h1>

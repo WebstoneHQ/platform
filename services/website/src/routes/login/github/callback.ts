@@ -113,7 +113,7 @@ export const get: RequestHandler = async ({ url }) => {
   } catch (error) {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       // https://www.prisma.io/docs/reference/api-reference/error-reference
-      if ((error as Prisma.PrismaClientKnownRequestError).code === "P2002") {
+      if (error.code === "P2002") {
         const tempDbUser = await db.user.findFirst({
           where: {
             provider: user.provider,
