@@ -34,7 +34,7 @@
     <p class="mt-4 text-center text-3xl text-[#6e6d7a]">
       Develop full-stack web applications, end-to-end
     </p>
-    <div class="mt-16 px-4 md:px-0">
+    <div class="mt-4 px-4 md:mt-16 md:px-0">
       <Byoc />
     </div>
   </div>

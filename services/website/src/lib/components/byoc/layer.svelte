@@ -36,10 +36,10 @@
     on:click="{() => ($layerToChange = layer)}"
   -->
   <div
-    class="flex flex-col items-center rounded-3xl border bg-[#FBFBFB] py-4 px-6 dark:bg-slate-800 md:w-48"
+    class="grid grid-cols-2 grid-rows-2 rounded-3xl bg-[#FBFBFB] py-3 px-4 dark:bg-slate-800 md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
   >
-    <h2 class="flex items-center font-semibold">
-      <span>{layer.title}</span>
+    <h2 class="order-2 flex items-center font-semibold md:order-1">
+      <span>{selectedModule.name}</span>
       <!-- svg
         class="ml-1"
         width="13"
@@ -53,12 +53,14 @@
           fill="#503CFF"></path>
       </svg -->
     </h2>
-    <ModuleIcon layerId="{layerName}" moduleId="{selectedModule.id}" />
-    <span class="mt-3 text-gray-400">{selectedModule.name}</span>
+    <div class="order-1 row-span-2 md:order-2 md:mt-3">
+      <ModuleIcon layerId="{layerName}" moduleId="{selectedModule.id}" />
+    </div>
+    <span class="order-3 text-gray-400 md:mt-3">{layer.title}</span>
   </div>
 {:else}
   <div
-    class="min-h-[160px] flex items-center justify-center rounded-3xl border-2 border-black border-dashed bg-[#FBFBFB] py-4 px-6 dark:bg-slate-800 md:w-48"
+    class="min-h-[160px] flex items-center justify-center border-2 border-black border-dashed bg-[#FBFBFB] dark:bg-slate-800 md:w-48 rounded-3xl"
   >
     <div class="flex flex-col items-center">
       <button

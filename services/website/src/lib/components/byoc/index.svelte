@@ -64,7 +64,7 @@
   const layers: Layers = {
     web: {
       id: "web",
-      title: "Web framework",
+      title: "Web & API framework",
       modules: [
         {
           description:
@@ -310,7 +310,7 @@
     (module) => module && !module.status
   );
 
-  $: layerEntries = Object.entries(layers) as [keyof Layers, Layer][];
+  // $: layerEntries = Object.entries(layers) as [keyof Layers, Layer][];
 </script>
 
 <style>
@@ -319,8 +319,38 @@
   }
 </style>
 
-<div class="space-y-5 md:flex md:justify-between md:space-y-0">
-  {#each layerEntries as [layerName, layer]}
+<div class="rounded-3xl border md:flex">
+  <!-- Hard-coded until we need the interactive BYOC -->
+  <LayerComponent
+    layer="{layers.web}"
+    layerName="web"
+    selectedModule="{layers.web.modules.find(
+      (module) => module.id === 'sveltekit'
+    )}"
+  />
+  <LayerComponent
+    layer="{layers.styles}"
+    layerName="styles"
+    selectedModule="{layers.styles.modules.find(
+      (module) => module.id === 'tailwind'
+    )}"
+  />
+  <LayerComponent
+    layer="{layers.apitype}"
+    layerName="apitype"
+    selectedModule="{layers.apitype.modules.find(
+      (module) => module.id === 'rest'
+    )}"
+  />
+  <LayerComponent
+    layer="{layers.database}"
+    layerName="database"
+    selectedModule="{layers.database.modules.find(
+      (module) => module.id === 'postgresql'
+    )}"
+  />
+
+  <!-- {#each layerEntries as [layerName, layer]}
     <LayerComponent
       layer="{layer}"
       layerName="{layerName}"
@@ -328,10 +358,10 @@
         (module) => module.id === $curriculumSelection[layerName]?.id
       )}"
     />
-  {/each}
+  {/each} -->
 </div>
 {#if isCurriculumAvailable}
-  <div class="mt-20">
+  <div class="mt-8 md:mt-10">
     <p
       class="text-center text-2xl font-semibold text-[#1d1d1f] dark:text-white"
     >
