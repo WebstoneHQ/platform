@@ -36,7 +36,7 @@
     on:click="{() => ($layerToChange = layer)}"
   -->
   <div
-    class="grid grid-cols-2 grid-rows-2 rounded-3xl bg-[#FBFBFB] py-3 px-4 dark:bg-slate-800 md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
+    class="grid grid-cols-2 grid-rows-2 bg-[#FBFBFB] py-3 px-4 dark:bg-[#333333] md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
   >
     <h2 class="order-2 flex items-center font-semibold md:order-1">
       <span>{selectedModule.name}</span>

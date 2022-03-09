@@ -319,7 +319,7 @@
   }
 </style>
 
-<div class="rounded-3xl border md:flex">
+<div class="overflow-hidden rounded-3xl drop-shadow-md md:flex">
   <!-- Hard-coded until we need the interactive BYOC -->
   <LayerComponent
     layer="{layers.web}"
@@ -361,6 +361,7 @@
   {/each} -->
 </div>
 {#if isCurriculumAvailable}
+  <PreorderButton />
   <div class="mt-8 md:mt-10">
     <p
       class="text-center text-2xl font-semibold text-[#1d1d1f] dark:text-white"
@@ -428,7 +429,6 @@
       </li>
     </ul>
   </div>
-  <PreorderButton />
 {:else if isCurriculumSelectionComplete}
   <div class="mt-6 flex flex-col items-center">
     <p class="text-center text-2xl font-semibold">

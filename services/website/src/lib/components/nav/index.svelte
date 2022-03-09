@@ -10,15 +10,22 @@
   beforeNavigate(() => (isMobileMenuOpen = false));
 </script>
 
-<header class="relative mx-auto max-w-5xl">
-  <div class="pt-6">
+<header class="relative mx-auto max-w-5xl px-4 md:px-0">
+  <div class="pt-16 md:pt-24">
     <nav class="relative flex" aria-label="Global">
       <div class="flex flex-1 items-center">
-        <div class="flex w-full items-center justify-end md:w-auto">
-          <!-- <a href="#">
-            <span class="sr-only">Workflow</span>
-            <img class="h-8 w-auto sm:h-10" src="https://tailwindui.com/img/logos/workflow-mark-teal-200-cyan-400.svg" alt="">
-          </a> -->
+        <div class="flex w-full md:w-auto">
+          <a href="/">
+            <span class="sr-only">Webstone</span>
+            <img
+              src="/svg/webstone-logo.svg"
+              alt="logo"
+              title=""
+              height="24px"
+              width="148px"
+              class="h-5 dark:invert md:h-6"
+            />
+          </a>
           <div class="-mr-2 flex items-center md:hidden">
             <!-- <button
               on:click="{() => (isMobileMenuOpen = true)}"

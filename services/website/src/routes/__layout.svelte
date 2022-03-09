@@ -14,7 +14,7 @@
   import "../app.css";
   import { setContext } from "svelte";
   import { contextKeyUser } from "$lib/context-keys";
-  // import Nav from "$lib/components/nav/index.svelte";
+  import Nav from "$lib/components/nav/index.svelte";
 
   export let user: string;
   setContext(contextKeyUser, user);
@@ -40,10 +40,10 @@
 </svelte:head>
 
 <div
-  class="min-h-screen bg-white text-black antialiased dark:bg-[#2A2840] dark:text-[#FAFAFA]"
+  class="min-h-screen bg-white text-black antialiased dark:bg-[#272727] dark:text-[#FAFAFA]"
 >
   <div class="">
-    <!-- <Nav /> -->
+    <Nav />
     <slot />
     <footer class="mx-auto mt-32 max-w-5xl pb-20">
       &copy; 2022 Webstone Technologies Inc. All rights reserved.

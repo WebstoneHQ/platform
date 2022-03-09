@@ -25,9 +25,9 @@
 </script>
 
 <div class="">
-  <div class="mx-auto max-w-5xl md:pt-36">
+  <div class="mx-auto mt-14 max-w-5xl md:pt-32">
     <h1
-      class="pt-12 text-center text-6xl font-bold text-[#1d1d1f] dark:text-white md:text-8xl md:font-extrabold"
+      class="text-center text-6xl font-bold text-[#1d1d1f] dark:text-white md:text-8xl md:font-extrabold"
     >
       Learn with context.
     </h1>
@@ -46,35 +46,41 @@
     </p>
   </div>
 
-  <div
-    class="mx-auto mt-20 bg-[#272727] py-44 text-[#fafafa] dark:bg-white dark:text-slate-900"
-  >
+  <div class="mx-auto mt-20 bg-[#2A2840] py-44 text-white">
     <div class="mx-auto max-w-5xl">
       <div class="px-4 md:grid md:grid-cols-2 md:gap-20 md:px-0">
         <div>
           <h2 class="text-4xl font-bold">
             Learning how to develop software is broken
           </h2>
-          <p class="mt-5 text-[#d6d1ff] dark:text-[#6e6d7a]">
+          <p class="mt-5">
             Tens of thousands of videos, tutorials, blog posts, articles, etc.
             are readily available, yet how do you know what is worth your time?
           </p>
-          <p class="mt-5 text-[#d6d1ff] dark:text-[#6e6d7a]">
+          <p class="mt-5">
             Webstone changes how we educate full-stack web developers. Each
             lesson is interactive and contains a mix of text, short videos, code
             samples, hands-on exercises and quizzes to reinforce learning.
           </p>
         </div>
         <div>
-          <h3 class="mt-5 font-bold md:mt-0">
-            A curriculum that changes with you
-          </h3>
-          <p class="mt-1 text-[#d6d1ff] dark:text-[#6e6d7a]">
+          <img
+            src="/svg/icon-hex.svg"
+            class="mt-10 md:mt-0"
+            alt="Two overlapping hexagons"
+          />
+          <h3 class="mt-5 font-bold">A curriculum that changes with you</h3>
+          <p class="mt-1">
             We're always adding more modules, which means that an investment in
             Webstone is an investment in continuous learning.
           </p>
+          <img
+            src="/svg/icon-dev.svg"
+            class="mt-10"
+            alt="Two overlapping hexagons"
+          />
           <h3 class="mt-5 font-bold">Build a web application end-to-end</h3>
-          <p class="mt-1 text-[#d6d1ff] dark:text-[#6e6d7a]">
+          <p class="mt-1">
             Instead of a Tetris game, a weather widget and a Todo app, you focus
             on individual lessons that are part of one real-world application.
           </p>
