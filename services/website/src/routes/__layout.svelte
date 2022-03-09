@@ -45,8 +45,8 @@
   <div class="">
     <Nav />
     <slot />
-    <footer class="mx-auto mt-32 max-w-5xl pb-20">
-      &copy; 2022 Webstone Technologies Inc. All rights reserved.
+    <footer class="mx-auto mt-32 max-w-5xl px-4 pb-20 md:px-0">
+      &copy; {new Date().getFullYear()} Webstone Technologies Inc. All rights reserved.
     </footer>
   </div>
 </div>

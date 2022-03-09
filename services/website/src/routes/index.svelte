@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { enhance } from "$lib/actions/form";
   import Byoc from "$lib/components/byoc/index.svelte";
   import Faq from "$lib/components/faq.svelte";
   import ModulesMarquee from "$lib/components/modules-marquee.svelte";
@@ -22,7 +23,18 @@
       a: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil accusantium eum praesentium commodi eos, voluptate similique, nulla ad vel unde, recusandae iste minima quibusdam! Velit, quos. Quod earum maiores aliquam.",
     },
   ];
+
+  const signUpSuccessful = async (_: Response, form: HTMLFormElement) => {
+    form.reset();
+    form.style.setProperty("--success", "visible");
+  };
 </script>
+
+<style>
+  form {
+    --success: hidden;
+  }
+</style>
 
 <div class="">
   <div class="mx-auto mt-14 max-w-5xl md:pt-32">
@@ -32,7 +44,7 @@
       Learn with context.
     </h1>
     <p class="mt-4 text-center text-3xl text-[#6e6d7a]">
-      Develop full-stack web applications, end-to-end
+      Simplify your web dev education
     </p>
     <div class="mt-4 px-4 md:mt-16 md:px-0">
       <Byoc />
@@ -41,8 +53,8 @@
 
   <div class="mx-auto mt-12 max-w-5xl grayscale">
     <ModulesMarquee />
-    <p class="text-center text-3xl text-[#6e6d7a]">
-      We regularly release new modules
+    <p class="text-center text-2xl text-[#6e6d7a]">
+      New modules added constantly
     </p>
   </div>
 
@@ -149,24 +161,35 @@
         product news.
       </p>
       <div class="mt-4 md:mt-0">
-        <div class="flex justify-center">
-          <div class="relative">
-            <input
-              type="email"
-              required
-              name="email"
-              class="w-80 rounded-3xl bg-transparent py-4 focus:shadow focus:outline-none md:w-[32rem] md:py-6 md:text-lg"
-              placeholder="Enter your email"
-            />
-            <div class="absolute top-2 right-2">
-              <button
-                type="submit"
-                class="rounded-3xl bg-[#503CFF] py-2 px-5 font-semibold text-white md:py-4 md:px-10 md:text-lg"
-                >Subscribe</button
-              >
+        <form
+          action="/api/sign-up.json"
+          method="post"
+          use:enhance="{{
+            result: signUpSuccessful,
+          }}"
+        >
+          <div class="flex justify-center">
+            <div class="relative w-full">
+              <input
+                type="email"
+                required
+                name="email"
+                class="w-full rounded-3xl bg-transparent py-4 focus:shadow focus:outline-none md:py-6 md:text-lg"
+                placeholder="Enter your email"
+              />
+              <div class="absolute top-2 right-2">
+                <button
+                  type="submit"
+                  class="rounded-3xl bg-[#503CFF] py-2 px-5 font-semibold text-white md:py-4 md:px-10 md:text-lg"
+                  >Subscribe</button
+                >
+              </div>
             </div>
           </div>
-        </div>
+          <div class="mt-4" style="visibility: var(--success);">
+            <p>Thank you, we will send you updates.</p>
+          </div>
+        </form>
       </div>
     </div>
   </div>
