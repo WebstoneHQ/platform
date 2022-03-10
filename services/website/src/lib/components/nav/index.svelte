@@ -10,7 +10,7 @@
   beforeNavigate(() => (isMobileMenuOpen = false));
 </script>
 
-<header class="relative mx-auto max-w-5xl px-4 md:px-0">
+<header class="relative mx-auto max-w-5xl">
   <div class="pt-16 md:pt-24">
     <nav class="relative flex" aria-label="Global">
       <div class="flex flex-1 items-center">

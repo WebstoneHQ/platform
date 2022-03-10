@@ -40,13 +40,13 @@
 </svelte:head>
 
 <div
-  class="min-h-screen bg-white text-black antialiased dark:bg-[#272727] dark:text-[#FAFAFA]"
+  class="flex min-h-screen flex-col bg-white text-black antialiased dark:bg-[#272727] dark:text-[#FAFAFA]"
 >
-  <div class="">
+  <div class="flex-grow">
     <Nav />
     <slot />
-    <footer class="mx-auto mt-32 max-w-5xl px-4 pb-20 md:px-0">
-      &copy; {new Date().getFullYear()} Webstone Technologies Inc. All rights reserved.
-    </footer>
   </div>
+  <footer class="mx-auto mt-32 max-w-5xl flex-shrink-0 px-4 pb-10 md:px-0">
+    &copy; {new Date().getFullYear()} Webstone Technologies Inc. All rights reserved.
+  </footer>
 </div>

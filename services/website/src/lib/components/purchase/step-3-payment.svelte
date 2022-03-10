@@ -75,5 +75,5 @@
     src="https://cdn.paddle.com/paddle/paddle.js"></script>
 </svelte:head>
 
-<h2>Payment</h2>
+<h2 class="text-2xl font-bold">Payment</h2>
 <div class="checkout-container"></div>

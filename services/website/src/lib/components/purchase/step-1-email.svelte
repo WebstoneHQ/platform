@@ -18,18 +18,16 @@
   };
 </script>
 
-<h2>Complete your purchase</h2>
-<p>
+<h2 class="text-2xl font-bold">Complete your purchase</h2>
+<p class="mt-4">
   To get started, please enter your email address. It will be used to create
   your account on the Webstone Education platform.
 </p>
 
 <form on:submit|preventDefault="{submitForm}">
-  <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:pt-5">
-    <label for="email" class="block text-sm font-medium sm:mt-px sm:pt-2">
-      Email
-    </label>
-    <div class="mt-1 sm:col-span-2 sm:mt-0">
+  <div class="mt-4 flex items-center">
+    <label for="email" class="block"> Email </label>
+    <div class="flex-1 pl-2 pr-1">
       <input
         type="email"
         bind:value="{$purchaseInfo.email}"
@@ -39,9 +37,13 @@
         name="email"
         id="email"
         autocomplete="email"
-        class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:max-w-xs sm:text-sm"
+        class="w-full rounded-3xl text-black focus:shadow focus:outline-none"
       />
     </div>
   </div>
-  <button type="submit">Continue »</button>
+  <button
+    type="submit"
+    class="mt-10 w-full rounded-full bg-[#503CFF] py-4 font-semibold text-white md:px-14"
+    >Continue »</button
+  >
 </form>
