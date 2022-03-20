@@ -1,6 +1,6 @@
 ---
 # Learn more about this file at https://www.gitpod.io/docs/references/gitpod-yml
-image: gitpod/workspace-postgres
+image: gitpod/workspace-postgresql:2022-03-18-14-35-52
 
 tasks:
   - before: npm i -g pnpm
