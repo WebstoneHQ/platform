@@ -25,7 +25,7 @@
   );
 </script>
 
-<div class="hidden md:block">
+<div class="hidden p-4 md:block">
   <nav class="flex" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-4">
       <li>
@@ -123,6 +123,6 @@
   </nav>
 </div>
 
-<div>
+<div class="p-4">
   <svelte:component this="{stepToComponentMap[$activeStep]}" />
 </div>
