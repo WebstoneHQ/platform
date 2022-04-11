@@ -1,25 +1,39 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = ({ params }) => {
-    const { courseid, lessonid } = params;
+  export const load: Load = async ({ fetch, params, stuff }) => {
+    const { lessonid } = params;
 
     // TODO: Check if the authenticated student has purchased this course. If not, redirect to ../ (course page) and display a message to purchase the course
+    if (stuff.course) {
+      const response = await fetch(`/api/courses/${params.courseid}/lessons/${params.lessonid}/__data.json`);
+      if (!response.ok) {
+        return {
+          error: new Error("Lesson not found"),
+          status: 404,
+        }
+      }
+
+      return {
+        props: {
+          lessonContent: await response.text(),
+        }
+      }
+    }
 
     return {
-      props: {
-        courseid,
-        lessonid,
-      },
-    };
+      error: new Error("Course not found"),
+      status: 404,
+    }
+
   };
 </script>
 
 <script lang="ts">
-  export let courseid: string;
-  export let lessonid: string;
+  import {marked} from "marked";
+  export let lessonContent: string;
 </script>
 
-<p>
-  TODO: Render lesson Markdown content for course {courseid} and lesson {lessonid}
-</p>
+<article class="prose lg:prose-xl dark:prose-invert">
+  {@html marked.parse(lessonContent)}
+</article>

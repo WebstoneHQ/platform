@@ -1,5 +1,9 @@
 export const contextKeyCurriculum = {};
 export const contextKeyCurriculumChangeModuleModal = {};
 export const contextKeyUser = {};
+export const contextKeyPurchaseGumroadInfo = {};
+export const contextKeyPurchaseGumroadWizardActiveStep = {};
 export const contextKeyPurchaseInfo = {};
 export const contextKeyPurchaseWizardActiveStep = {};
+export const contextKeyCoursesIsOffCanvasMenuOpen = {};
+export const contextKeyCourse = {};

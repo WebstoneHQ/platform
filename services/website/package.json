@@ -20,10 +20,12 @@
     "@sveltejs/adapter-auto": "1.0.0-next.18",
     "@sveltejs/kit": "1.0.0-next.260",
     "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.2",
     "@types/cookie": "^0.4.1",
     "@types/cookie-parser": "^1.4.2",
     "@types/cookie-signature": "^1.0.4",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/marked": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "autoprefixer": "^10.4.2",
@@ -34,7 +36,7 @@
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.6.0",
     "prettier-plugin-tailwindcss": "^0.1.5",
-    "prisma": "^3.9.2",
+    "prisma": "^3.11.1",
     "svelte": "^3.46.4",
     "svelte-check": "^2.4.2",
     "svelte-preprocess": "^4.10.2",
@@ -49,6 +51,9 @@
     "cookie-parser": "^1.4.6",
     "cookie-signature": "^1.1.0",
     "jsonwebtoken": "^8.5.1",
-    "php-serialize": "^4.0.2"
+    "marked": "^4.0.12",
+    "octokit": "^1.7.1",
+    "php-serialize": "^4.0.2",
+    "yaml": "^2.0.0-10"
   }
 }

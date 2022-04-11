@@ -37,6 +37,20 @@
   }
 </style>
 
+<div class="mx-auto max-w-5xl pt-16 md:pt-24">
+  <a href="/">
+    <span class="sr-only">Webstone</span>
+    <img
+    src="/svg/webstone-logo.svg"
+    alt="logo"
+    title=""
+    height="24px"
+    width="148px"
+    class="h-5 dark:invert md:h-6"
+    />
+  </a>
+</div>
+
 <Container class="mt-14 md:pt-32">
   <h1
     class="text-center text-6xl font-bold text-[#1d1d1f] dark:text-white md:text-8xl md:font-extrabold"
@@ -54,7 +68,7 @@
 <div class="mx-auto mt-12 max-w-5xl grayscale">
   <ModulesMarquee />
   <p class="text-center text-2xl text-[#6e6d7a]">
-    New modules added constantly
+    New modules added frequently
   </p>
 </div>
 

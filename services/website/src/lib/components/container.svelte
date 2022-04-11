@@ -3,8 +3,6 @@
 
   let clazz = "";
   export { clazz as class };
-
-  console.log(isFullWidth);
 </script>
 
 <div class="mx-auto {!isFullWidth && 'max-w-5xl px-4 md:px-0'} {clazz}">

@@ -1,20 +1,6 @@
-<script lang="ts" context="module">
-  export type Module = {
-    description: string;
-    id: string;
-    name: string;
-    status?: string;
-  };
-
-  export type Layer = {
-    id: "web" | "styles" | "apitype" | "api" | "database";
-    modules: Module[];
-    title: string;
-  };
-</script>
-
 <script lang="ts">
   import type { Writable } from "svelte/store";
+  import type { Layer, Module } from "$lib/byoc-layers";
   import { getContext } from "svelte";
   import { contextKeyCurriculumChangeModuleModal } from "$lib/context-keys";
   import Tooltip from "$lib/components/tooltip.svelte";

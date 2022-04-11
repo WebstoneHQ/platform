@@ -14,7 +14,7 @@
   import "../app.css";
   import { setContext } from "svelte";
   import { contextKeyUser } from "$lib/context-keys";
-  import Nav from "$lib/components/nav/index.svelte";
+  // import Nav from "$lib/components/nav/index.svelte";
 
   export let user: string;
   setContext(contextKeyUser, user);
@@ -43,7 +43,7 @@
   class="flex min-h-screen flex-col bg-white text-black antialiased dark:bg-[#272727] dark:text-[#FAFAFA]"
 >
   <div class="flex-grow">
-    <Nav />
+    <!-- <Nav /> -->
     <slot />
   </div>
   <footer class="mx-auto mt-32 max-w-5xl flex-shrink-0 px-4 pb-10 md:px-0">

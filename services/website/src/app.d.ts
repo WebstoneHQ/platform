@@ -8,4 +8,8 @@ declare namespace App {
   interface Session {
     user: Partial<User>;
   }
+
+  interface Stuff {
+    course: Course;
+  }
 }

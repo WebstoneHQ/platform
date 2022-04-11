@@ -1,53 +1,59 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = () => {
-    // const { courseid } = params;
-    // TODO: Fetch course information from database
+  export const load: Load = async ({session, stuff}) => {
+    if (stuff.course) {
+      return {
+        props: {
+          course: stuff.course,
+          user: session.user,
+        }
+      }
+    }
 
     return {
-      props: {},
-    };
+      error: new Error("Course not found"),
+      status: 404,
+    }
   };
 </script>
 
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-  incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-  eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-  in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-<div class="flex justify-around text-center text-black">
-  <div
-    class="flex h-40 w-40 items-center justify-center  rounded-xl border bg-slate-100"
-  >
-    Web<br /><br />SvelteKit
+<script lang="ts">
+  import { getContext } from "svelte";
+  import { contextKeyCourse } from "$lib/context-keys";
+  import { layers } from "$lib/byoc-layers";
+  import Stack from "$lib/components/byoc/stack.svelte";
+  import PreorderButton from "$lib/components/preorder-button.svelte";
+  import PreorderButtonGumroad from "$lib/components/preorder-button-gumroad.svelte";
+  import PreorderBenefits from "$lib/components/preorder-benefits.svelte";
+
+  export let user: User;
+
+  const course = getContext<Course>(contextKeyCourse);
+</script>
+
+<div class="py-6">
+  <div class="px-4 sm:px-6 md:px-0">
+    <h1 class="text-2xl font-semibold">{course.name}</h1>
   </div>
-  <div
-    class="flex h-40 w-40 items-center justify-center  rounded-xl border bg-slate-100"
-  >
-    Styling<br /><br />Tailwind CSS
+  <div class="px-4 sm:px-6 md:px-0">
+    <p>{course.description}</p>
+    <div class="mt-4 px-4 md:mt-16 md:px-0">
+      <Stack {layers} />
+    </div>
+    
+    {#if user}
+      <div class="mt-8 flex justify-center text-center">
+        <a
+          href="lessons/{course.lessons[0].id}"
+          class="rounded-full bg-[#503CFF] py-4 md:px-14 text-white w-full md:w-auto"
+          >
+          <span class="block text-base font-semibold">Start learning</span>
+        </a>
+      </div>
+    {:else}
+      <PreorderButtonGumroad />
+      <PreorderBenefits />
+    {/if}
   </div>
-  <div
-    class="flex h-40 w-40 items-center justify-center  rounded-xl border bg-slate-100"
-  >
-    API Type<br /><br />REST
-  </div>
-  <div
-    class="flex h-40 w-40 items-center justify-center  rounded-xl border bg-slate-100"
-  >
-    API<br /><br />SvelteKit
-  </div>
-  <div
-    class="flex h-40 w-40 items-center justify-center  rounded-xl border bg-slate-100"
-  >
-    Database<br /><br />PostgreSQL
-  </div>
-</div>
-<div class="mt-20 flex justify-center">
-  <a href="lessons/1" class="rounded-lg bg-green-200 p-6 text-black"
-    >Enroll now<br />(Start learning)</a
-  >
 </div>

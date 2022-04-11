@@ -1,5 +1,3 @@
-const forms = require("@tailwindcss/forms");
-
 const config = {
   content: ["./src/**/*.{html,js,svelte,ts}"],
 
@@ -17,7 +15,7 @@ const config = {
     },
   },
 
-  plugins: [forms],
+  plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
 };
 
 module.exports = config;

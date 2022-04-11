@@ -1,5 +1,26 @@
 /// <reference types="@sveltejs/kit" />
 
+interface Lesson {
+  id: string;
+  name: string;
+}
+
+interface Stack {
+  web: string;
+  styles: string;
+  apitype: string;
+  api: string;
+  database: string;
+}
+
+interface Course {
+  description: string;
+  id: string;
+  lessons: Lesson[]
+  name: string;
+  stack: Stack
+}
+
 type PaddleCheckoutOpen = {
   allowQuantity: boolean;
   country?: string;
@@ -45,4 +66,8 @@ interface PurchaseInfo {
   postcode?: string;
   tax: string;
   total: string;
+}
+
+interface PurchaseInfoGumroad {
+  licenseKey: string;
 }

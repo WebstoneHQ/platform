@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import type { CurriculumSelections } from "./index.svelte";
-  import type { Layer, Module } from "./layer.svelte";
+  import type { Layer, Module } from "$lib/byoc-layers";
 
   import { getContext } from "svelte";
   import {
