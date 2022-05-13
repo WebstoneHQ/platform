@@ -2,9 +2,9 @@ import type { GetSession, Handle } from "@sveltejs/kit";
 
 import { dev } from "$app/env";
 import { sequence } from "@sveltejs/kit/hooks";
-import { parse } from "cookie";
-import { signedCookie } from "cookie-parser";
-import { verify } from "jsonwebtoken";
+import * as cookie from "cookie";
+import * as cookieParser from "cookie-parser";
+import * as jwt from "jsonwebtoken";
 
 const throwInProdIfNotSet = (devValue: string) => {
   if (dev) {
@@ -19,11 +19,11 @@ const {
 } = process.env;
 
 const handleUser: Handle = async ({ event, resolve }) => {
-  const cookies = parse(event.request.headers.get("cookie") || "");
+  const cookies = cookie.parse(event.request.headers.get("cookie") || "");
 
   if (cookies.jwt) {
-    const jwtToken = signedCookie(cookies.jwt, [COOKIE_SECRET]);
-    const user = jwtToken ? (verify(jwtToken, JWT_SECRET) as User) : null;
+    const jwtToken = cookieParser.signedCookie(cookies.jwt, [COOKIE_SECRET]);
+    const user = jwtToken ? (jwt.verify(jwtToken, JWT_SECRET) as User) : null;
     event.locals.user = {
       // Extend this with other necessary properties, but beware this is available publicly
       name: user?.name || "",
