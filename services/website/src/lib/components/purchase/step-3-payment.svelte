@@ -38,7 +38,7 @@
     }
 
     isCheckoutInitialized = true;
-    let product, vendor;
+    let product: number, vendor: number;
     if ($page.url.host === "www.webstone.app") {
       product = 758738;
       vendor = 139895;

@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import type { Writable } from "svelte/store";
   import { getContext } from "svelte";
   import {
@@ -12,16 +12,20 @@
   const activeStep = getContext<Writable<"verifyLicense" | "createAccount">>(
     contextKeyPurchaseGumroadWizardActiveStep
   );
-
-</script>
+</script> -->
 
 <h2 class="text-2xl font-bold">Create Webstone Education account</h2>
 <p class="mt-4">
-  Please sign up with GitHub below. When you start a course, we will create a GitHub repository for you with the necessary course content.
+  Please sign up with GitHub below. When you start a course, we will create a
+  GitHub repository for you with the necessary course content.
 </p>
 
-<p class="text-center mt-8">
-  <a href="/login/github" rel="external" class="border border-black p-4 rounded-xl dark:border-white">
+<p class="mt-8 text-center">
+  <a
+    href="/login/github"
+    rel="external"
+    class="rounded-xl border border-black p-4 dark:border-white"
+  >
     Continue with GItHub
   </a>
 </p>

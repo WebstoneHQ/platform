@@ -6,23 +6,30 @@
   const course = getContext<Course>(contextKeyCourse);
 </script>
 
-<div class="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-  <!-- Sidebar component, swap this element with another sidebar if you like -->
-  <div class="border-r border-[#503CFF] pt-5 flex flex-col flex-grow overflow-y-auto">
-    <div class="flex-shrink-0 px-4 flex items-center">
+<div class="hidden md:fixed md:inset-y-0 md:flex md:w-64 md:flex-col">
+  <div
+    class="flex flex-grow flex-col overflow-y-auto border-r border-[#503CFF] pt-5"
+  >
+    <div class="flex flex-shrink-0 items-center px-4">
       <a href="/">
-        <img class="h-5 dark:invert md:h-6 w-auto" src="/svg/webstone-logo.svg" alt="Webstone logo" />
+        <img
+          class="h-5 w-auto dark:invert md:h-6"
+          src="/svg/webstone-logo.svg"
+          alt="Webstone logo"
+        />
       </a>
     </div>
     {#if course}
-      <div class="flex-grow mt-5 flex flex-col">
+      <div class="mt-5 flex flex-grow flex-col">
         <h2 class="px-4 pb-6 font-semibold">
           <a href="/courses/{course.id}">{course.name}</a>
         </h2>
         <h2 class="px-4 pb-6 font-semibold">Lessons</h2>
-        <nav class="flex-1 px-2 pb-4 space-y-1">
+        <nav class="flex-1 space-y-1 px-2 pb-4">
           {#each course.lessons as lesson}
-            <Item href="/courses/{course.id}/lessons/{lesson.id}">{lesson.name}</Item>
+            <Item href="/courses/{course.id}/lessons/{lesson.id}"
+              >{lesson.name}</Item
+            >
           {/each}
         </nav>
       </div>

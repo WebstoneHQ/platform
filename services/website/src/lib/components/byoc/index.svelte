@@ -43,7 +43,7 @@
 
 <script lang="ts">
   import { setContext } from "svelte";
-  import { writable, Writable } from "svelte/store";
+  import { writable, type Writable } from "svelte/store";
   import {
     contextKeyCurriculum,
     contextKeyCurriculumChangeModuleModal,
@@ -95,14 +95,14 @@
   }
 </style>
 
-<Stack {layers} />
+<Stack layers="{layers}" />
 
 {#if isCurriculumAvailable}
   <div class="sticky bottom-12 mt-8 flex justify-center text-center">
     <a
       href="/courses/sveltekit-css-rest-postgresql"
-      class="rounded-full bg-[#503CFF] py-4 md:px-14 text-white w-full md:w-auto"
-      >
+      class="w-full rounded-full bg-[#503CFF] py-4 text-white md:w-auto md:px-14"
+    >
       <span class="block text-base font-semibold">Learn Now</span>
     </a>
   </div>

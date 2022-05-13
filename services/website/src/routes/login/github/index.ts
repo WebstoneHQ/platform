@@ -16,7 +16,7 @@ export const get: RequestHandler = () => {
   return {
     status: 302,
     headers: {
-      location: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}`,
+      location: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&scope=user:email%20repo`,
     },
   };
 };

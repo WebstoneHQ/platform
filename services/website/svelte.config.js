@@ -8,6 +8,7 @@ const config = {
   preprocess: [preprocess({})],
 
   kit: {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call
     adapter: adapter(),
     trailingSlash: "always",
     vite: {

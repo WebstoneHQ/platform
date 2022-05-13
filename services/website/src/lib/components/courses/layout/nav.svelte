@@ -2,27 +2,50 @@
   import type { Writable } from "svelte/store";
   import { getContext } from "svelte";
   import { beforeNavigate } from "$app/navigation";
-  import { contextKeyCoursesIsOffCanvasMenuOpen } from "$lib/context-keys";
+  import {
+    contextKeyCoursesIsOffCanvasMenuOpen,
+    contextKeyUser,
+  } from "$lib/context-keys";
 
-  const isOffCanvasMenuOpen = getContext<Writable<boolean>>(contextKeyCoursesIsOffCanvasMenuOpen);
+  const isOffCanvasMenuOpen = getContext<Writable<boolean>>(
+    contextKeyCoursesIsOffCanvasMenuOpen
+  );
+  const user = getContext<User>(contextKeyUser);
 
   let isUserMenuOpen = false;
 
   beforeNavigate(() => {
-    isUserMenuOpen = false
+    isUserMenuOpen = false;
   });
 </script>
 
-<div class="sticky top-0 z-10 flex-shrink-0 h-16 flex bg-white dark:bg-[#272727]">
-  <button on:click="{() => $isOffCanvasMenuOpen = !$isOffCanvasMenuOpen}" type="button" class="px-4 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#503CFF] md:hidden">
+<div
+  class="sticky top-0 z-10 flex h-16 flex-shrink-0 bg-white dark:bg-[#272727]"
+>
+  <button
+    on:click="{() => ($isOffCanvasMenuOpen = !$isOffCanvasMenuOpen)}"
+    type="button"
+    class="px-4 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#503CFF] md:hidden"
+  >
     <span class="sr-only">Open sidebar</span>
     <!-- Heroicon name: outline/menu-alt-2 -->
-    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+    <svg
+      class="h-6 w-6"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h7"></path>
     </svg>
   </button>
-  <div class="flex-1 flex justify-between px-4 md:px-0">
-    <div class="flex-1 flex">
+  <div class="flex flex-1 justify-between px-4 md:px-0">
+    <div class="flex flex-1">
       <!-- <form class="w-full flex md:ml-0" action="#" method="GET">
         <label for="search-field" class="sr-only">Search</label>
         <div class="relative w-full text-gray-400 focus-within:text-gray-600">
@@ -44,13 +67,23 @@
       </button> -->
 
       <!-- Profile dropdown -->
-      <div class="ml-3 relative">
-        <div>
-          <button on:click="{() => isUserMenuOpen = !isUserMenuOpen}" type="button" class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-            <span class="sr-only">Open user menu</span>
-            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          </button>
-        </div>
+      <div class="relative ml-3">
+        {#if user}
+          <div>
+            <button
+              on:click="{() => (isUserMenuOpen = !isUserMenuOpen)}"
+              type="button"
+              class="flex max-w-xs items-center rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              id="user-menu-button"
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              <span class="sr-only">Open user menu</span>
+              {user.name}
+              <!-- <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt=""> -->
+            </button>
+          </div>
+        {/if}
 
         <!--
           Dropdown menu, show/hide based on menu state.
@@ -63,13 +96,24 @@
             To: "transform opacity-0 scale-95"
         -->
         {#if isUserMenuOpen}
-          <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-[#272727] ring-1 ring-black ring-opacity-5 py-1 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+          <div
+            class="absolute right-0 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#272727]"
+            role="menu"
+            aria-orientation="vertical"
+            aria-labelledby="user-menu-button"
+            tabindex="-1"
+          >
             <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block py-2 px-4 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-
-            <a href="#" class="block py-2 px-4 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-
-            <a href="#" class="block py-2 px-4 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+            <!-- <a href="#" class="block py-2 px-4 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+            <a href="#" class="block py-2 px-4 text-sm" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a> -->
+            <a
+              href="/login/logout"
+              rel="external"
+              class="block py-2 px-4 text-sm"
+              role="menuitem"
+              tabindex="-1"
+              id="user-menu-item-2">Sign out</a
+            >
           </div>
         {/if}
       </div>

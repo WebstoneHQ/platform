@@ -1,16 +1,15 @@
-import type { Prisma } from "@prisma/client";
+// import type { Prisma } from "@prisma/client";
 import type { RequestHandler } from "@sveltejs/kit";
 
-import PrismaClient from "$lib/db/prisma";
+// import PrismaClient from "$lib/db/prisma";
 
-const db = new PrismaClient();
+// const db = new PrismaClient();
 
 export const post: RequestHandler = async ({ request }) => {
   console.time("process-webhook-billing-preorder-gumroad");
   try {
-
     const body = await request.text();
-    console.log({body})
+    console.log({ body });
 
     // const bodyFormData = await request.formData();
     // if (!isValidateWebhook(bodyFormData)) {

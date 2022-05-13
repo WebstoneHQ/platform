@@ -1,14 +1,20 @@
 import { dev } from "$app/env";
-import cookie from "cookie";
-import { sign } from "cookie-signature";
-import jwt from "jsonwebtoken";
-import { Octokit } from "octokit";
+import {
+  serialize as serializeCookie,
+  type CookieSerializeOptions,
+} from "cookie";
+import { sign as signCookie } from "cookie-signature";
+import { sign as signJwt } from "jsonwebtoken";
+import { Octokit } from "@octokit/core";
+import { createOAuthUserAuth } from "@octokit/auth-oauth-user";
 import PrismaClient from "$lib/db/prisma";
-import { Prisma } from "@prisma/client";
-import { cloneTemplateRepositoryMutation } from "$lib/github-graphql-queries";
+import { Prisma, type User as PrismaUser } from "@prisma/client";
+import {
+  cloneTemplateRepositoryMutation,
+  queryRepository,
+} from "$lib/github-graphql-queries";
 
 const db = new PrismaClient();
-const octokit = new Octokit({ auth: "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" });
 
 const throwInProdIfNotSet = (devValue: string) => {
   if (dev) {
@@ -17,7 +23,7 @@ const throwInProdIfNotSet = (devValue: string) => {
   throw new Error(`Environment variable not set. Dev value: ${devValue}`);
 };
 
-const cookieConfig: cookie.CookieSerializeOptions = {
+const cookieConfig: CookieSerializeOptions = {
   path: "/",
   maxAge: 1000 * 60 * 60 * 24 * 7,
   httpOnly: true,
@@ -32,12 +38,15 @@ const {
   JWT_SECRET = throwInProdIfNotSet("jwt-dev-secret"),
 } = process.env;
 
-export const cloneTemplateRepository = async (gitHubUserId: string) => {
-  await cloneTemplateRepositoryMutation(octokit, gitHubUserId);
-}
+export const cloneTemplateRepository = async (
+  userOctokit: Octokit,
+  gitHubUserId: string
+): Promise<void> => {
+  await cloneTemplateRepositoryMutation(userOctokit, gitHubUserId);
+};
 
-export const createUser = async (user: User) => {
-  let persistedUser;
+export const createUser = async (user: User): Promise<PrismaUser> => {
+  let persistedUser: PrismaUser;
   try {
     persistedUser = await db.user.create({
       data: {
@@ -80,48 +89,43 @@ export const createUser = async (user: User) => {
   return persistedUser;
 };
 
-export const getAccessToken = async (code: string) => {
-  const gitHubResponse = await fetch(
-    `https://github.com/login/oauth/access_token`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify({
-        client_id: GITHUB_CLIENT_ID,
-        client_secret: GITHUB_CLIENT_SECRET,
-        code,
-      }),
-    }
-  );
-  const { access_token: accessToken } = (await gitHubResponse.json()) as {
-    access_token: string;
-  };
-
-  return accessToken;
-};
-
-export const getUser = async (accessToken: string): Promise<User> => {
-  const gitHubResponse = await fetch("https://api.github.com/user", {
-    headers: {
-      Accept: "application/json",
-      Authorization: `Token ${accessToken}`,
+export const getUserOctokit = async (code: string): Promise<Octokit> => {
+  const webflowOctokit = new Octokit({
+    authStrategy: createOAuthUserAuth,
+    auth: {
+      clientId: GITHUB_CLIENT_ID,
+      clientSecret: GITHUB_CLIENT_SECRET,
+      code,
     },
   });
-  const response = (await gitHubResponse.json()) as {
-    id: string,
-    node_id: string;
-    email: string;
-    login: string;
-    name: string;
-  };
-  console.log({response})
-  const { id, node_id, email, login, name } = response;
 
+  const auth = (await webflowOctokit.auth()) as { token: string };
+  return new Octokit({
+    auth: auth.token,
+  });
+};
+
+export const getGitHubUser = async (userOctokit: Octokit): Promise<User> => {
+  const result: {
+    viewer: {
+      id: string;
+      email: string;
+      login: string;
+      name: string;
+    };
+  } = await userOctokit.graphql(`query {
+    viewer {
+      databaseId
+      email
+      id
+      login
+      name
+    }
+  }`);
+
+  const { email, id, login, name } = result.viewer;
   return {
-    id: node_id,
+    id,
     name,
     provider: "github",
     providerEmail: email,
@@ -130,17 +134,30 @@ export const getUser = async (accessToken: string): Promise<User> => {
   };
 };
 
+export const doesRepositoryExist = async (
+  userOctokit: Octokit,
+  owner: string,
+  name: string
+): Promise<boolean> => {
+  try {
+    await queryRepository(userOctokit, owner, name);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const signJwtAndSerializeCookie = (
   payload: Record<string, unknown>
 ): Promise<string> => {
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, JWT_SECRET, (error, token = "") => {
+    signJwt(payload, JWT_SECRET, (error, token = "") => {
       if (error) {
         console.error(error);
         reject();
       }
-      const value = `s:${sign(token, COOKIE_SECRET)}`;
-      const serializedCookie = cookie.serialize("jwt", value, cookieConfig);
+      const value = `s:${signCookie(token, COOKIE_SECRET)}`;
+      const serializedCookie = serializeCookie("jwt", value, cookieConfig);
       resolve(serializedCookie);
     });
   });

@@ -1,14 +1,29 @@
 import type { RequestHandler } from "@sveltejs/kit";
 
-import { cloneTemplateRepository, createUser, getAccessToken, getUser as getGitHubUser, signJwtAndSerializeCookie } from "./_helpers";
+import {
+  cloneTemplateRepository,
+  createUser,
+  doesRepositoryExist,
+  getUserOctokit,
+  getGitHubUser,
+  signJwtAndSerializeCookie,
+} from "./_helpers";
 
 export const get: RequestHandler = async ({ url }) => {
   const code = url.searchParams.get("code") || "";
-  const accessToken = await getAccessToken(code);
-  const gitHubUser = await getGitHubUser(accessToken);
+  const userOctokit = await getUserOctokit(code);
+  const gitHubUser = await getGitHubUser(userOctokit);
   const persistedUser = await createUser(gitHubUser);
 
-  await cloneTemplateRepository(gitHubUser.id);
+  if (
+    !(await doesRepositoryExist(
+      userOctokit,
+      gitHubUser.providerLogin,
+      "webstone-education"
+    ))
+  ) {
+    await cloneTemplateRepository(userOctokit, gitHubUser.id);
+  }
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
