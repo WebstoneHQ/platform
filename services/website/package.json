@@ -11,7 +11,7 @@
     "lint:eslint": "eslint --ignore-path .gitignore .",
     "lint:svelte": "svelte-check --tsconfig ./tsconfig.json",
     "package": "svelte-kit package",
-    "postbuild": "cp prisma/schema.prisma .vercel_build_output/functions/node/render/ && cp node_modules/@prisma/engines/*query* .vercel_build_output/functions/node/render/",
+    "postbuild": "cp prisma/schema.prisma .vercel_build_output/functions/node/render/",
     "predev": "prisma migrate dev",
     "preview": "svelte-kit preview",
     "vercel-build": "prisma migrate deploy && pnpm build"
