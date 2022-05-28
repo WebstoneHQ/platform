@@ -22,7 +22,7 @@
     on:click="{() => ($layerToChange = layer)}"
   -->
   <div
-    class="grid grid-cols-2 grid-rows-2 bg-[#FBFBFB] py-3 px-4 dark:bg-[#333333] md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
+    class="grid grid-cols-2 grid-rows-2 bg-[#FBFBFB] py-3 px-4 text-center dark:bg-[#333333] md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
   >
     <h2 class="order-2 flex items-center font-semibold md:order-1">
       <span>{selectedModule.name}</span>
@@ -46,12 +46,12 @@
   </div>
 {:else}
   <div
-    class="min-h-[160px] flex items-center justify-center border-2 border-black border-dashed bg-[#FBFBFB] dark:bg-slate-800 md:w-48 rounded-3xl"
+    class="flex min-h-[160px] items-center justify-center rounded-3xl border-2 border-dashed border-black bg-[#FBFBFB] dark:bg-slate-800 md:w-48"
   >
     <div class="flex flex-col items-center">
       <button
         on:click="{() => ($layerToChange = layer)}"
-        class="underline text-[#503CFF] font-medium"
+        class="font-medium text-[#503CFF] underline"
         >Select another {layerName} framework</button
       >
       <Tooltip />

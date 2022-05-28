@@ -84,7 +84,6 @@
               type="email"
               name="email"
               id="email"
-              value="mikenikles@gmail.com"
               autocomplete="email"
               required
               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:text-black sm:max-w-xs sm:text-sm"
@@ -109,7 +108,6 @@
               type="text"
               name="githubusername"
               id="githubusername"
-              value="mikenikles"
               required
               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:text-black sm:max-w-xs sm:text-sm"
             />
@@ -133,7 +131,6 @@
               type="text"
               name="licensekey"
               id="licensekey"
-              value="3348EAF7-AE9B46F3-BFE076D4-8D8FF294"
               required
               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:text-black sm:max-w-xs sm:text-sm"
             />
@@ -157,7 +154,6 @@
               type="text"
               name="discordusername"
               id="discordusername"
-              value="mikenikles#4098"
               class="block w-full max-w-lg rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 dark:text-black sm:max-w-xs sm:text-sm"
             />
             <p class="mt-2 text-sm">

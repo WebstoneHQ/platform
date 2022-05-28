@@ -38,6 +38,84 @@ const {
   JWT_SECRET = throwInProdIfNotSet("jwt-dev-secret"),
 } = process.env;
 
+export const acceptRepositoryInvitation = async (
+  octokit: Octokit,
+  invitationId: number
+): Promise<void> => {
+  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  await octokit.request("PATCH /user/repository_invitations/{invitation_id}", {
+    invitation_id: invitationId,
+  });
+};
+
+export const addRepositoryCollaborator = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  username: string
+): Promise<number> => {
+  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  const {
+    data: { id },
+  } = await octokit.request(
+    "PUT /repos/{owner}/{repo}/collaborators/{username}",
+    {
+      owner,
+      repo,
+      username,
+    }
+  );
+  return id;
+};
+
+export const isRepositoryCollaborator = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  username: string
+): Promise<boolean> => {
+  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  const { status } = await octokit.request(
+    "GET /repos/{owner}/{repo}/collaborators/{username}",
+    {
+      owner,
+      repo,
+      username,
+    }
+  );
+  return status === 204;
+};
+
+export const forkRepository = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  organization?: string
+): Promise<string> => {
+  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  const {
+    data: { name },
+  } = await octokit.request("POST /repos/{owner}/{repo}/forks", {
+    owner,
+    repo,
+    organization,
+  });
+  return name;
+};
+
+export const renameRepository = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  newName: string
+) => {
+  await octokit.request("PATCH /repos/{owner}/{repo}", {
+    owner,
+    repo,
+    name: newName,
+  });
+};
+
 export const cloneTemplateRepository = async (
   userOctokit: Octokit,
   gitHubUserId: string
@@ -50,7 +128,7 @@ export const createUser = async (user: User): Promise<PrismaUser> => {
   try {
     persistedUser = await db.user.create({
       data: {
-        name: user.name,
+        name: user.name || "",
         provider: user.provider,
         provider_email: user.providerEmail,
         provider_id: user.providerId,
@@ -77,6 +155,12 @@ export const createUser = async (user: User): Promise<PrismaUser> => {
             },
           });
         }
+      } else {
+        console.error(
+          `Unexpected error when processing the GitHub callback GET handler: ${String(
+            error
+          )}`
+        );
       }
     } else {
       console.error(
@@ -104,6 +188,11 @@ export const getUserOctokit = async (code: string): Promise<Octokit> => {
     auth: auth.token,
   });
 };
+
+export const getSystemOctokit = () =>
+  new Octokit({
+    auth: process.env.GITHUB_TOKEN,
+  });
 
 export const getGitHubUser = async (userOctokit: Octokit): Promise<User> => {
   const result: {

@@ -205,7 +205,8 @@ export const readLessonConfigFiles = async (
           entry.object.entries.find((entry) => entry.name === "config.yaml")
             ?.object.text || ""
         ) as LessonConfig
-    );
+    )
+    .sort((a, b) => a.id.localeCompare(b.id));
 };
 
 export const queryRepository = async (

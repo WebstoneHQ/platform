@@ -26,12 +26,13 @@ export const get: RequestHandler = async ({ params }) => {
 
   const courseConfig = await readFileYaml<CourseConfig>(
     octokit,
-    `framework/${params.courseid}/config.yaml`
+    `courses/todo-app/framework/${params.courseid}/config.yaml`
   );
   const courseLessonConfigFiles = await readLessonConfigFiles(
     octokit,
-    `framework/${params.courseid}/lessons`
+    `courses/todo-app/framework/${params.courseid}/lessons`
   );
+  console.log({ courseLessonConfigFiles });
 
   const course: Course = {
     description: courseConfig.description,
