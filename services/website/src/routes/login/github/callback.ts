@@ -29,7 +29,13 @@ export const get: RequestHandler = async ({ url }) => {
       "webstone-education"
     ))
   ) {
+    console.log(
+      `Cloning template repo for GitHub user: ${gitHubUser.providerLogin}`
+    );
     await cloneTemplateRepository(userOctokit, gitHubUser.id);
+    console.log(
+      `Cloned template repo for GitHub user: ${gitHubUser.providerLogin}`
+    );
   }
 
   if (
@@ -40,27 +46,43 @@ export const get: RequestHandler = async ({ url }) => {
       "mikenikles"
     ))
   ) {
+    console.log(
+      `Inviting "mikenikles" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
+    );
     const invitationId = await addRepositoryCollaborator(
       userOctokit,
       gitHubUser.providerLogin,
       "webstone-education",
       "mikenikles"
     );
+    console.log(
+      `Invited "mikenikles" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
+    );
+    console.log(
+      `Accepting "mikenikles" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
+    );
     await acceptRepositoryInvitation(systemOctokit, invitationId);
+    console.log(
+      `Accepted "mikenikles" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
+    );
   }
 
+  console.log(`Forking repo for GitHub user: ${gitHubUser.providerLogin}`);
   const forkedRepoName = await forkRepository(
     systemOctokit,
     gitHubUser.providerLogin,
     "webstone-education",
     "webstonehq-student-repos"
   );
+  console.log(`Forked repo for GitHub user: ${gitHubUser.providerLogin}`);
+  console.log(`Renaming repo for GitHub user: ${gitHubUser.providerLogin}`);
   await renameRepository(
     systemOctokit,
     "webstonehq-student-repos",
     forkedRepoName,
     `webstone-education-${gitHubUser.providerLogin}`
   );
+  console.log(`Renamed repo for GitHub user: ${gitHubUser.providerLogin}`);
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
