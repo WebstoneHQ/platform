@@ -1,3 +1,4 @@
+import type { Octokit } from "@octokit/core";
 import type { RequestHandler } from "@sveltejs/kit";
 
 import {
@@ -11,17 +12,13 @@ import {
   getUserOctokit,
   getGitHubUser,
   getSystemOctokit,
-  isRepositoryCollaborator,
   signJwtAndSerializeCookie,
 } from "./_helpers";
 
-export const get: RequestHandler = async ({ url }) => {
-  const code = url.searchParams.get("code") || "";
-  const userOctokit = await getUserOctokit(code);
-  const gitHubUser = await getGitHubUser(userOctokit);
-  const persistedUser = await createUser(gitHubUser);
-  const systemOctokit = getSystemOctokit();
-
+const _cloneTemplateRepository = async (
+  userOctokit: Octokit,
+  gitHubUser: User
+) => {
   if (
     !(await doesRepositoryExist(
       userOctokit,
@@ -37,18 +34,14 @@ export const get: RequestHandler = async ({ url }) => {
       `Cloned template repo for GitHub user: ${gitHubUser.providerLogin}`
     );
   }
+};
 
-  console.log(
-    `Checking if "mikenikles" is as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
-  );
-  if (
-    !(await isRepositoryCollaborator(
-      userOctokit,
-      gitHubUser.providerLogin,
-      "webstone-education",
-      "mikenikles"
-    ))
-  ) {
+const _addSystemUserAsRepoCollaborator = async (
+  systemOctokit: Octokit,
+  userOctokit: Octokit,
+  gitHubUser: User
+) => {
+  try {
     console.log(
       `Inviting "mikenikles" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
     );
@@ -68,8 +61,15 @@ export const get: RequestHandler = async ({ url }) => {
     console.log(
       `Accepted "mikenikles" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
     );
+  } catch (error: unknown) {
+    console.log(`"mikenikles" is already a collaborator.`);
   }
+};
 
+const _forkUserRepoToWebstoneStudentsOrg = async (
+  systemOctokit: Octokit,
+  gitHubUser: User
+) => {
   console.log(`Forking repo for GitHub user: ${gitHubUser.providerLogin}`);
   const forkedRepoName = await forkRepository(
     systemOctokit,
@@ -86,10 +86,25 @@ export const get: RequestHandler = async ({ url }) => {
     `webstone-education-${gitHubUser.providerLogin}`
   );
   console.log(`Renamed repo for GitHub user: ${gitHubUser.providerLogin}`);
+};
+
+export const get: RequestHandler = async ({ url }) => {
+  const code = url.searchParams.get("code") || "";
+  const userOctokit = await getUserOctokit(code);
+  const gitHubUser = await getGitHubUser(userOctokit);
+  const persistedUser = await createUser(gitHubUser);
+  const systemOctokit = getSystemOctokit();
+
+  await _cloneTemplateRepository(userOctokit, gitHubUser);
+  await _addSystemUserAsRepoCollaborator(
+    systemOctokit,
+    userOctokit,
+    gitHubUser
+  );
+  await _forkUserRepoToWebstoneStudentsOrg(systemOctokit, gitHubUser);
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
-    console.log("AAA");
     return {
       status: 302,
       headers: {

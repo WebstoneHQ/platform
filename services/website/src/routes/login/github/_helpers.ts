@@ -55,9 +55,7 @@ export const addRepositoryCollaborator = async (
   username: string
 ): Promise<number> => {
   // May 22, 2022: REST API because the GraphQL API does not provide this feature
-  const {
-    data: { id },
-  } = await octokit.request(
+  const { data } = await octokit.request(
     "PUT /repos/{owner}/{repo}/collaborators/{username}",
     {
       owner,
@@ -65,25 +63,10 @@ export const addRepositoryCollaborator = async (
       username,
     }
   );
-  return id;
-};
-
-export const isRepositoryCollaborator = async (
-  octokit: Octokit,
-  owner: string,
-  repo: string,
-  username: string
-): Promise<boolean> => {
-  // May 22, 2022: REST API because the GraphQL API does not provide this feature
-  const { status } = await octokit.request(
-    "GET /repos/{owner}/{repo}/collaborators/{username}",
-    {
-      owner,
-      repo,
-      username,
-    }
-  );
-  return status === 204;
+  if (!data) {
+    throw new Error("User is already a collaborator");
+  }
+  return data.id;
 };
 
 export const forkRepository = async (
