@@ -38,6 +38,9 @@ export const get: RequestHandler = async ({ url }) => {
     );
   }
 
+  console.log(
+    `Checking if "mikenikles" is as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
+  );
   if (
     !(await isRepositoryCollaborator(
       userOctokit,

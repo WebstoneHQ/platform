@@ -42,7 +42,7 @@ export const acceptRepositoryInvitation = async (
   octokit: Octokit,
   invitationId: number
 ): Promise<void> => {
-  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  // May 22, 2022: REST API because the GraphQL API does not provide this feature
   await octokit.request("PATCH /user/repository_invitations/{invitation_id}", {
     invitation_id: invitationId,
   });
@@ -54,7 +54,7 @@ export const addRepositoryCollaborator = async (
   repo: string,
   username: string
 ): Promise<number> => {
-  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  // May 22, 2022: REST API because the GraphQL API does not provide this feature
   const {
     data: { id },
   } = await octokit.request(
@@ -74,7 +74,7 @@ export const isRepositoryCollaborator = async (
   repo: string,
   username: string
 ): Promise<boolean> => {
-  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  // May 22, 2022: REST API because the GraphQL API does not provide this feature
   const { status } = await octokit.request(
     "GET /repos/{owner}/{repo}/collaborators/{username}",
     {
@@ -92,7 +92,7 @@ export const forkRepository = async (
   repo: string,
   organization?: string
 ): Promise<string> => {
-  // May 22, 2022: REST API because the GraphQL API does not provide a mutation
+  // May 22, 2022: REST API because the GraphQL API does not provide this feature
   const {
     data: { name },
   } = await octokit.request("POST /repos/{owner}/{repo}/forks", {

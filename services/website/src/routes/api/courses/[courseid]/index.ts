@@ -32,7 +32,6 @@ export const get: RequestHandler = async ({ params }) => {
     octokit,
     `courses/todo-app/framework/${params.courseid}/lessons`
   );
-  console.log({ courseLessonConfigFiles });
 
   const course: Course = {
     description: courseConfig.description,
