@@ -2,18 +2,23 @@ import type { Octokit } from "@octokit/core";
 import type { RequestHandler } from "@sveltejs/kit";
 
 import {
-  acceptRepositoryInvitation,
-  addRepositoryCollaborator,
   cloneTemplateRepository,
   createUser,
   doesRepositoryExist,
-  forkRepository,
-  renameRepository,
-  getUserOctokit,
-  getGitHubUser,
   getSystemOctokit,
+  getUserOctokit,
+  hasPreordered,
   signJwtAndSerializeCookie,
 } from "./_helpers";
+
+import { getGitHubUser } from "$lib/github/graphql-api";
+
+import {
+  acceptRepositoryInvitation,
+  addRepositoryCollaborator,
+  forkRepository,
+  renameRepository,
+} from "$lib/github/rest-api";
 
 const _cloneTemplateRepository = async (
   userOctokit: Octokit,
@@ -90,11 +95,24 @@ const _forkUserRepoToWebstoneStudentsOrg = async (
 
 export const get: RequestHandler = async ({ url }) => {
   const code = url.searchParams.get("code") || "";
+  const state = url.searchParams.get("state") || "";
   const userOctokit = await getUserOctokit(code);
   const gitHubUser = await getGitHubUser(userOctokit);
+
+  if (!(await hasPreordered(state, gitHubUser.providerLogin))) {
+    console.error(
+      `GitHub user ${gitHubUser.providerLogin} tried to sign up with GitHub but has not pre-ordered. OAuth state provided: ${state}`
+    );
+    return {
+      status: 302,
+      headers: {
+        location: "/login",
+      },
+    };
+  }
+
   const persistedUser = await createUser(gitHubUser);
   const systemOctokit = getSystemOctokit();
-
   await _cloneTemplateRepository(userOctokit, gitHubUser);
   await _addSystemUserAsRepoCollaborator(
     systemOctokit,

@@ -80,6 +80,35 @@ export const cloneTemplateRepositoryMutation = async (
   );
 };
 
+export const getGitHubUser = async (userOctokit: Octokit): Promise<User> => {
+  const result: {
+    viewer: {
+      id: string;
+      email: string;
+      login: string;
+      name: string;
+    };
+  } = await userOctokit.graphql(`query {
+    viewer {
+      databaseId
+      email
+      id
+      login
+      name
+    }
+  }`);
+
+  const { email, id, login, name } = result.viewer;
+  return {
+    id,
+    name,
+    provider: "github",
+    providerEmail: email,
+    providerId: `${id}`,
+    providerLogin: login,
+  };
+};
+
 export const listDirectories = async (
   octokit: Octokit,
   path: string

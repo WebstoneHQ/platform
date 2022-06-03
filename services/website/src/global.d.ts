@@ -16,9 +16,9 @@ interface Stack {
 interface Course {
   description: string;
   id: string;
-  lessons: Lesson[]
+  lessons: Lesson[];
   name: string;
-  stack: Stack
+  stack: Stack;
 }
 
 type PaddleCheckoutOpen = {
@@ -69,5 +69,9 @@ interface PurchaseInfo {
 }
 
 interface PurchaseInfoGumroad {
-  licenseKey: string;
+  email?: string;
+  githubusername?: string;
+  licensekey?: string;
+  discordusername?: string;
+  preorderid?: string;
 }

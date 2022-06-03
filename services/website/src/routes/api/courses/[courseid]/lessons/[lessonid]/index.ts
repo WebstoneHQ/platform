@@ -2,7 +2,7 @@ import type { RequestHandler } from "@sveltejs/kit";
 
 import { Octokit } from "octokit";
 
-import { readFile /*, readFileYaml*/ } from "$lib/github-graphql-queries";
+import { readFile /*, readFileYaml*/ } from "$lib/github/graphql-api";
 
 // type LessonConfig = {
 //   description: string;

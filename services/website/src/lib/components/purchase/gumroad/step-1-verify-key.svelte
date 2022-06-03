@@ -3,18 +3,29 @@
   import { getContext } from "svelte";
   import {
     contextKeyPurchaseGumroadWizardActiveStep,
-    // contextKeyPurchaseGumroadInfo,
+    contextKeyPurchaseGumroadInfo,
   } from "$lib/context-keys";
   import { enhance } from "$lib/actions/form";
 
-  // const purchaseInfo = getContext<Writable<PurchaseInfo>>(
-  //   contextKeyPurchaseGumroadInfo
-  // );
+  const purchaseInfo = getContext<Writable<PurchaseInfoGumroad>>(
+    contextKeyPurchaseGumroadInfo
+  );
   const activeStep = getContext<Writable<"verifyLicense" | "createAccount">>(
     contextKeyPurchaseGumroadWizardActiveStep
   );
 
-  const licenseVerificationSuccessful = () => {
+  const licenseVerificationSuccessful = async (
+    response: Response,
+    form: HTMLFormElement
+  ) => {
+    const formValues = new FormData(form);
+    $purchaseInfo.email = formValues.get("email").toString();
+    $purchaseInfo.githubusername = formValues.get("githubusername").toString();
+    $purchaseInfo.licensekey = formValues.get("licensekey").toString();
+    $purchaseInfo.discordusername = formValues
+      .get("discordusername")
+      .toString();
+    $purchaseInfo.preorderid = (await response.json()).preorderId;
     $activeStep = "createAccount";
   };
 
@@ -32,30 +43,6 @@
 <p class="mt-4">
   Please fill in the form below to verify your Webstone Education license.
 </p>
-
-<!-- <form on:submit|preventDefault="{submitForm}">
-  <div class="mt-4 flex items-center">
-    <label for="email" class="block"> Email </label>
-    <div class="flex-1 pl-2 pr-1">
-      <input
-        type="email"
-        bind:value="{$purchaseInfo.email}"
-        placeholder="email@domain.com"
-        required
-        aria-required="true"
-        name="email"
-        id="email"
-        autocomplete="email"
-        class="w-full rounded-3xl text-black focus:shadow focus:outline-none"
-      />
-    </div>
-  </div>
-  <button
-    type="submit"
-    class="mt-10 w-full rounded-full bg-[#503CFF] py-4 font-semibold text-white md:px-14"
-    >Continue »</button
-  >
-</form> -->
 
 <form
   action="/api/gumroad-license-verification/"
