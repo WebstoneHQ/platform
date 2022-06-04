@@ -21,10 +21,9 @@
     </div>
     {#if course}
       <div class="mt-5 flex flex-grow flex-col">
-        <h2 class="px-4 pb-6 font-semibold">
+        <h2 class="px-4 pb-6 text-lg font-semibold">
           <a href="/courses/{course.id}">{course.name}</a>
         </h2>
-        <h2 class="px-4 pb-6 font-semibold">Lessons</h2>
         <nav class="flex-1 space-y-1 px-2 pb-4">
           {#each course.lessons as lesson}
             <Item href="/courses/{course.id}/lessons/{lesson.id}"

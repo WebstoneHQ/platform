@@ -164,6 +164,7 @@ export const readFile = async (
   );
 
   if (!result.repository.object?.text) {
+    console.log(result);
     throw new Error(
       `Cannot read file. Owner: ${REPO_OWNER}; name: ${REPO_NAME}; expression: ${REPO_BRANCH}:${path}`
     );

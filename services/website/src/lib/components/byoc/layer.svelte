@@ -42,7 +42,7 @@
     <div class="order-1 row-span-2 md:order-2 md:mt-3">
       <ModuleIcon layerId="{layerName}" moduleId="{selectedModule.id}" />
     </div>
-    <span class="order-3 text-gray-400 md:mt-3">{layer.title}</span>
+    <span class="order-3 text-left text-gray-400 md:mt-3">{layer.title}</span>
   </div>
 {:else}
   <div

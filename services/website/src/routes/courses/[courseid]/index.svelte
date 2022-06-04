@@ -24,6 +24,7 @@
   import { layers } from "$lib/byoc-layers";
   import Stack from "$lib/components/byoc/stack.svelte";
   // import PreorderButton from "$lib/components/preorder-button.svelte";
+  import HowToLearn from "$lib/components/how-to-learn.svelte";
   import PreorderButtonGumroad from "$lib/components/preorder-button-gumroad.svelte";
   import PreorderBenefits from "$lib/components/preorder-benefits.svelte";
 
@@ -43,14 +44,7 @@
     </div>
 
     {#if user}
-      <div class="mt-8 flex justify-center text-center">
-        <a
-          href="lessons/{course.lessons[0].id}"
-          class="w-full rounded-full bg-[#503CFF] py-4 text-white md:w-auto md:px-14"
-        >
-          <span class="block text-base font-semibold">Start learning</span>
-        </a>
-      </div>
+      <HowToLearn gitHubLogin="{user.providerLogin}" />
     {:else}
       <PreorderButtonGumroad />
       <PreorderBenefits />

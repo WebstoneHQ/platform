@@ -6,6 +6,12 @@ import * as cookie from "cookie";
 import * as cookieParser from "cookie-parser";
 import * as jwt from "jsonwebtoken";
 
+interface JwtUser {
+  id: string;
+  name: string;
+  provider_login: string;
+}
+
 const throwInProdIfNotSet = (devValue: string) => {
   if (dev) {
     return devValue;
@@ -23,11 +29,14 @@ const handleUser: Handle = async ({ event, resolve }) => {
 
   if (cookies.jwt) {
     const jwtToken = cookieParser.signedCookie(cookies.jwt, [COOKIE_SECRET]);
-    const user = jwtToken ? (jwt.verify(jwtToken, JWT_SECRET) as User) : null;
+    const user = jwtToken
+      ? (jwt.verify(jwtToken, JWT_SECRET) as JwtUser)
+      : null;
     event.locals.user = {
       // Extend this with other necessary properties, but beware this is available publicly
       name: user?.name || "",
       id: user?.id,
+      providerLogin: user?.provider_login,
     };
   }
   const response = await resolve(event);

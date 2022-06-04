@@ -23,9 +23,13 @@ export const get: RequestHandler = async ({ params }) => {
   }
 
   // const lessonConfig = await readFileYaml<LessonConfig>(octokit, `framework/${params.courseid}/lessons/${params.lessonid}/config.yaml`)
+  const idDigitsMatch = params.lessonid.match(/^(\d{2}).?(\d{2})/);
+  const lessonDirName = `[...${idDigitsMatch[1]}_${
+    idDigitsMatch[2]
+  }]${params.lessonid.substring("xx-xx-".length)}`;
   const lessonContent = await readFile(
     octokit,
-    `framework/${params.courseid}/lessons/${params.lessonid}/README.md`
+    `courses/todo-app/framework/${params.courseid}/lessons/${lessonDirName}/README.md`
   );
 
   // const course: Course = {

@@ -1,7 +1,5 @@
 <div class="mt-8 md:mt-10">
-  <p
-    class="text-center text-2xl font-semibold text-[#1d1d1f] dark:text-white"
-  >
+  <p class="text-center text-2xl font-semibold text-[#1d1d1f] dark:text-white">
     Preorder now and access all future modules
   </p>
   <ul class="mx-auto table space-y-2 text-[#6e6d7a] dark:text-white">
@@ -18,7 +16,7 @@
           fill="#6E6D7A"></path>
       </svg>
       <span
-        ><span class="font-bold">One payment</span> instead of a monthly subscription after launch</span
+        ><span class="font-bold">One payment</span>. No monthly subscription</span
       >
     </li>
     <li class="mt-4 flex items-center space-x-2">
