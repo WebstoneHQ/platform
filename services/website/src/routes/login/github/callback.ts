@@ -127,7 +127,8 @@ export const get: RequestHandler = async ({ url }) => {
       status: 302,
       headers: {
         "set-cookie": [userCookie],
-        location: "/courses/sveltekit-css-rest-postgresql",
+        location:
+          "/courses/sveltekit-css-rest-postgresql?refreshToLoadCookie=true",
       },
     };
   }
