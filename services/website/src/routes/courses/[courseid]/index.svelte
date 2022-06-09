@@ -2,7 +2,6 @@
   import type { Load } from "@sveltejs/kit";
 
   export const load: Load = async ({ session, stuff }) => {
-    console.log("Load...", session.user);
     if (stuff.course) {
       return {
         props: {

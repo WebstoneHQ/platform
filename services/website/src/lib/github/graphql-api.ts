@@ -63,7 +63,7 @@ export const cloneTemplateRepositoryMutation = async (
   await octokit.graphql(
     `mutation($ownerId: ID!) {
     cloneTemplateRepository(input: {
-      description: "Your Webstone Education courses."
+      description: "Your Webstone Education courses. Learn more at https://webstone.app."
       name: "webstone-education"
       ownerId: $ownerId
       repositoryId: "R_kgDOHFnt3g"
