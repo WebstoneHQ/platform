@@ -53,7 +53,7 @@
   <div class="md:pl-64">
     <div class="mx-auto flex max-w-4xl flex-col md:px-8 xl:px-0">
       <Nav />
-      <main class="flex-1">
+      <main class="flex-1 px-4 md:px-0">
         <slot />
       </main>
     </div>

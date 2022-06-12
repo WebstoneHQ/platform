@@ -158,7 +158,7 @@
       <button
         type="submit"
         class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >Create account</button
+        >Verify license</button
       >
     </div>
   </div>
@@ -167,7 +167,7 @@
 {#if isInvalidInfo}
   <div class="pt-5 text-red-600">
     <p>
-      The information you provided don't match. If you think that's a mistake,
+      The information you provided doesn't match. If you think that's a mistake,
       please contact us via DM on Twitter <a
         href="https://twitter.com/webstonehq">@webstonehq</a
       >.

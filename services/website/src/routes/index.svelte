@@ -12,16 +12,16 @@
       a: "Absolutely! If you cancel within the first 14 days, we will fully refund your purchase.",
     },
     {
-      q: "For how long will I benefit from the 70% preorder discount?",
-      a: "Forever - or until you cancel your subscription. You can always subscribe again, but will pay the full price at that time.",
+      q: "For how long will I benefit from the one-time pre-order price?",
+      a: "Forever.",
     },
     {
       q: "How is this different from Udemy, freeCodeCamp, Educative, etc.?",
-      a: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil accusantium eum praesentium commodi eos, voluptate similique, nulla ad vel unde, recusandae iste minima quibusdam! Velit, quos. Quod earum maiores aliquam.",
+      a: "Webstone Education continuously sends you pull requests as frameworks evolve, best practices change and new modules are added to a course.",
     },
     {
       q: "What level of experience is required?",
-      a: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nihil accusantium eum praesentium commodi eos, voluptate similique, nulla ad vel unde, recusandae iste minima quibusdam! Velit, quos. Quod earum maiores aliquam.",
+      a: "This depends on the course. Generally, basic understanding of Javascript is expected. What's a function? What's an array?",
     },
   ];
 
@@ -41,12 +41,12 @@
   <a href="/">
     <span class="sr-only">Webstone</span>
     <img
-    src="/svg/webstone-logo.svg"
-    alt="logo"
-    title=""
-    height="24px"
-    width="148px"
-    class="h-5 dark:invert md:h-6"
+      src="/svg/webstone-logo.svg"
+      alt="logo"
+      title=""
+      height="24px"
+      width="148px"
+      class="h-5 dark:invert md:h-6"
     />
   </a>
 </div>
@@ -83,9 +83,9 @@
         readily available, yet how do you know what is worth your time?
       </p>
       <p class="mt-5">
-        Webstone changes how we educate full-stack web developers. Each lesson
-        is interactive and contains a mix of text, short videos, code samples,
-        hands-on exercises and quizzes to reinforce learning.
+        Webstone Education changes how we educate full-stack web developers. You
+        work on your own project, from start to end. It's a true full-stack web
+        development experience where you learn how all the pieces fit together.
       </p>
     </div>
     <div>
@@ -106,8 +106,10 @@
       />
       <h3 class="mt-5 font-bold">Build a web application end-to-end</h3>
       <p class="mt-1">
-        Instead of a Tetris game, a weather widget and a Todo app, you focus on
-        individual lessons that are part of one real-world application.
+        Instead of a Tetris game, a weather widget and a blog, you focus on
+        individual lessons that are part of one real-world application. No more
+        guessing how the frontend may interact with the backend and the backend
+        may persist data in a database - it's all covered.
       </p>
     </div>
   </Container>
@@ -137,7 +139,7 @@
       Mike has been a full-stack web developer for 20+ years. He is also the
       author and creator of the following books & courses:
     </p>
-    <ul class="mt-5 space-y-2">
+    <ul class="mt-5 list-inside list-disc space-y-2">
       <li>
         <Link href="https://www.mikenikles.com/cloud-native-web-development"
           >Cloud Native Web Development</Link

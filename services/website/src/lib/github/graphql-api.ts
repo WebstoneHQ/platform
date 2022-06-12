@@ -4,7 +4,7 @@ import { parse as parseYaml } from "yaml";
 
 const REPO_OWNER = "webstonehq";
 const REPO_NAME = "courses";
-const REPO_BRANCH = "mikenikles/add-the-framework-sveltekit-10";
+const REPO_BRANCH = "main";
 
 type LessonConfig = {
   name: string;
