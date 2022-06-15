@@ -50,12 +50,12 @@
       <h1 class="text-4xl font-semibold md:text-6xl">{course.name}</h1>
     </div>
     <div class="my-6 px-4 sm:px-6 md:px-0">
-      <p class="prose dark:prose-invert lg:prose-xl">
-        {@html marked.parse(course.description)}
-      </p>
       <div class="mt-4 px-4 md:mt-16 md:px-0">
         <Stack layers="{layers}" />
       </div>
+      <article class="prose my-6 dark:prose-invert lg:prose-xl">
+        {@html marked.parse(course.description)}
+      </article>
 
       {#if user}
         <HowToLearn gitHubLogin="{user.providerLogin}" />
