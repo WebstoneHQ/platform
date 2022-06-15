@@ -18,6 +18,7 @@
     response: Response,
     form: HTMLFormElement
   ) => {
+    isVerificationInProgress = false;
     const formValues = new FormData(form);
     $purchaseInfo.email = formValues.get("email").toString();
     $purchaseInfo.githubusername = formValues.get("githubusername").toString();
@@ -29,12 +30,15 @@
     $activeStep = "createAccount";
   };
 
+  let isVerificationInProgress = false;
   let isInvalidInfo = false;
   const licenseVerificationError = () => {
+    isVerificationInProgress = false;
     isInvalidInfo = true;
   };
 
   const licenseVerificationPending = () => {
+    isVerificationInProgress = true;
     isInvalidInfo = false;
   };
 </script>
@@ -157,7 +161,8 @@
     <div class="flex justify-start">
       <button
         type="submit"
-        class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+        disabled="{isVerificationInProgress}"
+        class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:cursor-wait disabled:opacity-75 disabled:hover:bg-indigo-600"
         >Verify license</button
       >
     </div>

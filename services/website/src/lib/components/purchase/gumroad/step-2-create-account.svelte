@@ -29,12 +29,15 @@
   <li>Create your Webstone Education account</li>
 </ol>
 
-<p class="mt-8 text-center">
-  <a
-    href="/login/github?state={$purchaseInfo.preorderid}"
-    rel="external"
-    class="rounded-xl border border-black p-4 dark:border-white"
-  >
-    Continue with GitHub
-  </a>
-</p>
+<div class="text-center">
+  <p class="mt-8">
+    <a
+      href="/login/github?state={$purchaseInfo.preorderid}"
+      rel="external"
+      class="rounded-xl border border-black p-4 dark:border-white"
+    >
+      Continue with GitHub
+    </a>
+  </p>
+  <p class="mt-8 italic">This may take up to 5 seconds...</p>
+</div>
