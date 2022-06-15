@@ -48,26 +48,26 @@ const _addSystemUserAsRepoCollaborator = async (
 ) => {
   try {
     console.log(
-      `Inviting "mikenikles" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
+      `Inviting "webstone-education-bot" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
     );
     const invitationId = await addRepositoryCollaborator(
       userOctokit,
       gitHubUser.providerLogin,
       "webstone-education",
-      "mikenikles"
+      "webstone-education-bot"
     );
     console.log(
-      `Invited "mikenikles" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
+      `Invited "webstone-education-bot" as a collaborator for GitHub user: ${gitHubUser.providerLogin}`
     );
     console.log(
-      `Accepting "mikenikles" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
+      `Accepting "webstone-education-bot" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
     );
     await acceptRepositoryInvitation(systemOctokit, invitationId);
     console.log(
-      `Accepted "mikenikles" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
+      `Accepted "webstone-education-bot" collaborator invitation for GitHub user: ${gitHubUser.providerLogin}`
     );
   } catch (error: unknown) {
-    console.log(`"mikenikles" is already a collaborator.`);
+    console.log(`"webstone-education-bot" is already a collaborator.`);
   }
 };
 
