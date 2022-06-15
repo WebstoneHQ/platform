@@ -3,11 +3,11 @@
 </script>
 
 <div>
-  <h2 class="mt-16 text-xl font-semibold">
+  <h2 class="mt-16 text-xl font-semibold md:text-3xl">
     How to learn with Webstone Education
   </h2>
   <p class="mt-4">
-    We created a private <code>webstone-education</code> student repository in your
+    We created a private <code>webstone-education</code> learning repository in your
     GitHub account.
   </p>
   <p class="mt-4">
@@ -15,7 +15,7 @@
     to start learning.
   </p>
 </div>
-<div class="mt-8 flex justify-center text-center">
+<div class="sticky bottom-12 mt-8 flex justify-center text-center">
   <a
     href="https://www.github.com/{gitHubLogin}/webstone-education"
     target="_blank"
