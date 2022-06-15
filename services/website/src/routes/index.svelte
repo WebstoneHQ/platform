@@ -57,9 +57,9 @@
   >
     Learn with context.
   </h1>
-  <p class="mt-4 text-center text-3xl text-[#6e6d7a]">
+  <h2 class="mt-4 text-center text-3xl text-[#6e6d7a]">
     Simplify your web dev education
-  </p>
+  </h2>
   <div class="mt-4 px-4 md:mt-16 md:px-0">
     <Byoc />
   </div>
@@ -183,6 +183,7 @@
         <div class="flex justify-center">
           <div class="relative w-full">
             <input
+              aria-label="Enter your email"
               type="email"
               required
               name="email"
