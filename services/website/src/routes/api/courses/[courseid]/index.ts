@@ -78,6 +78,11 @@ export const get: RequestHandler = async ({ params }) => {
     };
   }
 
+  console.error({
+    courseReadmeResult: courseReadmeResult.status,
+    courseConfigResult: courseConfigResult.status,
+    courseLessonConfigFilesResult: courseLessonConfigFilesResult.status,
+  });
   return {
     status: 404,
   };
