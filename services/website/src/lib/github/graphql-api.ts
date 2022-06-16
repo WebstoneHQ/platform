@@ -231,10 +231,16 @@ export const readLessonConfigFiles = async (
     .filter((entry) => entry.type === "tree")
     .map(
       (entry) =>
-        parseYaml(
-          entry.object.entries.find((entry) => entry.name === "config.yaml")
-            ?.object.text || ""
-        ) as LessonConfig
+        ({
+          ...parseYaml(
+            entry.object.entries.find((entry) => entry.name === "config.yaml")
+              ?.object.text || ""
+          ),
+          id: `${entry.name
+            .replace("[...", "")
+            .replaceAll("_", "-")
+            .replace("]", "-")}`, // convert "[...01_00]course-introduction" to "01-00-course-introduction"
+        } as LessonConfig)
     )
     .sort((a, b) => a.id.localeCompare(b.id));
 };
