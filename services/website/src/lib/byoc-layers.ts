@@ -96,7 +96,7 @@ export const layers: Layers = {
         description:
           "TODO: Description text for this framework or technology to help provide context.",
         id: "css",
-        name: "Css",
+        name: "CSS",
       },
       {
         description:
@@ -116,7 +116,7 @@ export const layers: Layers = {
         description:
           "TODO: Description text for this framework or technology to help provide context.",
         id: "unocss",
-        name: "UnocSS",
+        name: "UnoCSS",
         status: "Coming soon",
       },
       {
