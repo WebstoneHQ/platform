@@ -4,7 +4,7 @@
   export const load: Load = async ({ fetch, params, session, stuff }) => {
     if (stuff.course) {
       const response = await fetch(
-        `/api/courses/${params.courseid}/lessons/${params.lessonid}/__data.json`
+        `/api/courses/${params.courseid}/${params.stackgroup}/${params.stack}/lessons/${params.lessonid}/__data.json`
       );
       if (!response.ok) {
         return {

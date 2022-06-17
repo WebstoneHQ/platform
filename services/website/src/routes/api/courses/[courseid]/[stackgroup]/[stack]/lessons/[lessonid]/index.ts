@@ -29,7 +29,7 @@ export const get: RequestHandler = async ({ params }) => {
   }]${params.lessonid.substring("xx-xx-".length)}`;
   const lessonContent = await readFile(
     octokit,
-    `courses/todo-app/framework/${params.courseid}/lessons/${lessonDirName}/README.md`
+    `courses/${params.courseid}/${params.stackgroup}/${params.stack}/lessons/${lessonDirName}/README.md`
   );
 
   // const course: Course = {

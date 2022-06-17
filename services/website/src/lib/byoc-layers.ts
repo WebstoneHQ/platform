@@ -97,7 +97,6 @@ export const layers: Layers = {
           "TODO: Description text for this framework or technology to help provide context.",
         id: "css",
         name: "Css",
-        status: "Coming soon",
       },
       {
         description:
@@ -111,6 +110,7 @@ export const layers: Layers = {
           "TODO: Description text for this framework or technology to help provide context.",
         id: "tailwind",
         name: "Tailwind CSS",
+        status: "Coming soon",
       },
       {
         description:

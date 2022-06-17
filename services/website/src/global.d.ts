@@ -18,7 +18,8 @@ interface Course {
   id: string;
   lessons: Lesson[];
   name: string;
-  stack: Stack;
+  stack: string;
+  stackgroup: string;
 }
 
 type PaddleCheckoutOpen = {

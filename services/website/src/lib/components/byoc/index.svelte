@@ -64,7 +64,7 @@
       (module) => module.id === "sveltekit"
     ) as Module,
     styles: layers.styles.modules.find(
-      (module) => module.id === "tailwind"
+      (module) => module.id === "css"
     ) as Module,
     apitype: layers.apitype.modules.find(
       (module) => module.id === "rest"
@@ -100,7 +100,7 @@
 {#if isCurriculumAvailable}
   <div class="sticky bottom-12 mt-8 flex justify-center text-center">
     <a
-      href="/courses/sveltekit-css-rest-postgresql"
+      href="/courses/todo-app/framework/sveltekit-css-rest-postgresql"
       class="w-full rounded-full bg-[#503CFF] py-4 text-white md:w-auto md:px-14"
     >
       <span class="block text-base font-semibold">Learn Now</span>
@@ -126,13 +126,13 @@
             type="email"
             required
             name="email"
-            class="md:text-lg w-80 md:w-[32rem] bg-transparent rounded-3xl focus:shadow focus:outline-none py-6"
+            class="w-80 rounded-3xl bg-transparent py-6 focus:shadow focus:outline-none md:w-[32rem] md:text-lg"
             placeholder="Enter your email"
           />
           <div class="absolute top-2 right-2">
             <button
               type="submit"
-              class="text-white rounded-3xl md:text-lg font-semibold bg-[#503CFF] py-4 px-10"
+              class="rounded-3xl bg-[#503CFF] py-4 px-10 font-semibold text-white md:text-lg"
               >Notify me</button
             >
           </div>

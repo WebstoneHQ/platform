@@ -26,7 +26,8 @@
         </h2>
         <nav class="flex-1 space-y-1 px-2 pb-4">
           {#each course.lessons as lesson}
-            <Item href="/courses/{course.id}/lessons/{lesson.id}"
+            <Item
+              href="/courses/{course.id}/{course.stackgroup}/{course.stack}/lessons/{lesson.id}"
               >{lesson.name}</Item
             >
           {/each}

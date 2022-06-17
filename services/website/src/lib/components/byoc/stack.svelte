@@ -18,7 +18,7 @@
     layer="{layers.styles}"
     layerName="styles"
     selectedModule="{layers.styles.modules.find(
-      (module) => module.id === 'tailwind'
+      (module) => module.id === 'css'
     )}"
   />
   <LayerComponent

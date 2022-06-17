@@ -2,8 +2,10 @@
   import type { Load } from "@sveltejs/kit";
 
   export const load: Load = async ({ fetch, params }) => {
-    const { courseid } = params;
-    const response = await fetch(`/api/courses/${courseid}/__data.json`);
+    const { courseid, stackgroup, stack } = params;
+    const response = await fetch(
+      `/api/courses/${courseid}/${stackgroup}/${stack}/__data.json`
+    );
 
     if (response.ok) {
       const course = await response.json();
