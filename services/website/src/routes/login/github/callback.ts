@@ -71,7 +71,7 @@ const _addSystemUserAsRepoCollaborator = async (
   }
 };
 
-const _forkUserRepoToWebstoneStudentsOrg = async (
+const _forkUserRepoToWebstoneOrg = async (
   systemOctokit: Octokit,
   gitHubUser: User
 ) => {
@@ -80,15 +80,15 @@ const _forkUserRepoToWebstoneStudentsOrg = async (
     systemOctokit,
     gitHubUser.providerLogin,
     "webstone-education",
-    "webstonehq-student-repos"
+    "webstonehq"
   );
   console.log(`Forked repo for GitHub user: ${gitHubUser.providerLogin}`);
   console.log(`Renaming repo for GitHub user: ${gitHubUser.providerLogin}`);
   await renameRepository(
     systemOctokit,
-    "webstonehq-student-repos",
+    "webstonehq",
     forkedRepoName,
-    `webstone-education-${gitHubUser.providerLogin}`
+    `s-webstone-education-${gitHubUser.providerLogin}`
   );
   console.log(`Renamed repo for GitHub user: ${gitHubUser.providerLogin}`);
 };
@@ -119,7 +119,7 @@ export const get: RequestHandler = async ({ url }) => {
     userOctokit,
     gitHubUser
   );
-  await _forkUserRepoToWebstoneStudentsOrg(systemOctokit, gitHubUser);
+  await _forkUserRepoToWebstoneOrg(systemOctokit, gitHubUser);
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
@@ -128,7 +128,7 @@ export const get: RequestHandler = async ({ url }) => {
       headers: {
         "set-cookie": [userCookie],
         location:
-          "/courses/sveltekit-css-rest-postgresql?refreshToLoadCookie=true",
+          "/courses/todo-app/framework/sveltekit-css-rest-postgresql?refreshToLoadCookie=true",
       },
     };
   }
