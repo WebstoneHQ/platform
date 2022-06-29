@@ -1,4 +1,5 @@
 import type { Octokit } from "@octokit/core";
+import * as libsodium from "libsodium-wrappers";
 
 export const acceptRepositoryInvitation = async (
   octokit: Octokit,
@@ -31,32 +32,53 @@ export const addRepositoryCollaborator = async (
   return data.id;
 };
 
-export const forkRepository = async (
+export const dispatchRepositoryEvent = async (
   octokit: Octokit,
+  clientPayload: Record<string, unknown>,
+  eventType: string,
   owner: string,
-  repo: string,
-  organization?: string
-): Promise<string> => {
-  // May 22, 2022: REST API because the GraphQL API does not provide this feature
-  const {
-    data: { name },
-  } = await octokit.request("POST /repos/{owner}/{repo}/forks", {
+  repo: string
+) => {
+  await octokit.request("POST /repos/{owner}/{repo}/dispatches", {
     owner,
     repo,
-    organization,
+    event_type: eventType,
+    client_payload: clientPayload,
   });
-  return name;
 };
 
-export const renameRepository = async (
+export const createRepositorySecret = async (
   octokit: Octokit,
   owner: string,
   repo: string,
-  newName: string
+  secretName: string,
+  value: string
 ) => {
-  await octokit.request("PATCH /repos/{owner}/{repo}", {
-    owner,
-    repo,
-    name: newName,
-  });
+  const {
+    data: { key, key_id },
+  } = await octokit.request(
+    "GET /repos/{owner}/{repo}/actions/secrets/public-key",
+    {
+      owner,
+      repo,
+    }
+  );
+
+  const messageBytes = Buffer.from(value);
+  const keyBytes = Buffer.from(key, "base64");
+
+  await libsodium.ready;
+  const encryptedBytes = libsodium.crypto_box_seal(messageBytes, keyBytes);
+  const encryptedValue = Buffer.from(encryptedBytes).toString("base64");
+
+  await octokit.request(
+    "PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}",
+    {
+      owner,
+      repo,
+      secret_name: secretName,
+      encrypted_value: encryptedValue,
+      key_id,
+    }
+  );
 };

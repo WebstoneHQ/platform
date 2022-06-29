@@ -40,9 +40,35 @@ const {
 
 export const cloneTemplateRepository = async (
   userOctokit: Octokit,
-  gitHubUserId: string
+  gitHubUser: User
 ): Promise<void> => {
-  await cloneTemplateRepositoryMutation(userOctokit, gitHubUserId);
+  await cloneTemplateRepositoryMutation(userOctokit, gitHubUser.id);
+  for (let i = 0; i < 5; i++) {
+    // Let's talk about this loop... creating a repo based on a template is an asynchronous operation.
+    // This not-so-elegant loop waits for GitHub to complete that operation.
+    // Yes, I agree. This should be cleaned up at some point.
+    console.log(
+      `Waiting for repository ${gitHubUser.providerLogin}/webstone-education to be created... ${i}/5`
+    );
+    if (
+      await doesRepositoryExist(
+        userOctokit,
+        gitHubUser.providerLogin,
+        "webstone-education"
+      )
+    ) {
+      console.log(
+        `Repository ${gitHubUser.providerLogin}/webstone-education is created.`
+      );
+      return;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  console.error(
+    new Error(
+      `Repository could not be created for student ${gitHubUser.providerLogin} from template.`
+    )
+  );
 };
 
 export const createUser = async (user: User): Promise<PrismaUser> => {

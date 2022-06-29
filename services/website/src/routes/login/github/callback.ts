@@ -16,8 +16,8 @@ import { getGitHubUser } from "$lib/github/graphql-api";
 import {
   acceptRepositoryInvitation,
   addRepositoryCollaborator,
-  forkRepository,
-  renameRepository,
+  createRepositorySecret,
+  dispatchRepositoryEvent,
 } from "$lib/github/rest-api";
 
 const _cloneTemplateRepository = async (
@@ -34,7 +34,7 @@ const _cloneTemplateRepository = async (
     console.log(
       `Cloning template repo for GitHub user: ${gitHubUser.providerLogin}`
     );
-    await cloneTemplateRepository(userOctokit, gitHubUser.id);
+    await cloneTemplateRepository(userOctokit, gitHubUser);
     console.log(
       `Cloned template repo for GitHub user: ${gitHubUser.providerLogin}`
     );
@@ -71,26 +71,74 @@ const _addSystemUserAsRepoCollaborator = async (
   }
 };
 
-const _forkUserRepoToWebstoneOrg = async (
+const _addCourseDeployPrivateKeyToStudentRepo = async (
   systemOctokit: Octokit,
   gitHubUser: User
 ) => {
-  console.log(`Forking repo for GitHub user: ${gitHubUser.providerLogin}`);
-  const forkedRepoName = await forkRepository(
+  console.log(
+    `Adding course deploy private key to student repo: ${gitHubUser.providerLogin}/webstone-education`
+  );
+  await createRepositorySecret(
     systemOctokit,
     gitHubUser.providerLogin,
     "webstone-education",
-    "webstonehq"
+    "COURSE_REPO_PRIVATE_DEPLOY_KEY_TODOAPP_FRAMEWORK_SVELTEKIT_CSS_REST_POSTGRESQL",
+    process.env[
+      "COURSE_REPO_PRIVATE_DEPLOY_KEY_TODOAPP_FRAMEWORK_SVELTEKIT_CSS_REST_POSTGRESQL"
+    ]
   );
-  console.log(`Forked repo for GitHub user: ${gitHubUser.providerLogin}`);
-  console.log(`Renaming repo for GitHub user: ${gitHubUser.providerLogin}`);
-  await renameRepository(
+  console.log(
+    `Added course deploy private key to student repo: ${gitHubUser.providerLogin}/webstone-education`
+  );
+};
+
+const _provideCourseToStudent = async (
+  systemOctokit: Octokit,
+  gitHubUser: User
+) => {
+  // FIXME: Use dynamic values once we have more than one course/stack
+  const courseid = "todoapp";
+  const stackgroup = "framework";
+  const stack = "sveltekit-css-rest-postgresql";
+  console.log(
+    `Providing course ${courseid}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
+  );
+
+  const clientPayload = {
+    course: {
+      id: courseid,
+      stackgroup,
+      stack,
+      privateDeployKeyName:
+        `COURSE_REPO_PRIVATE_DEPLOY_KEY_${courseid}_${stackgroup}_${stack.replaceAll(
+          "-",
+          "_"
+        )}`.toUpperCase(),
+    },
+    git: {
+      branch: `${new Date()
+        .toISOString()
+        .replaceAll(":", "")
+        .replace(/\.\d{3}/, "")}-${courseid}-${stackgroup}-${stack}`,
+      commitmessage: "Add new course",
+    },
+    pr: {
+      title: "New Course 🎉",
+      description: `Hi :wave:,
+
+Fantastic news, a new course is available. Please review this PR and when ready, merge it to update your own course content.`,
+    },
+  };
+  await dispatchRepositoryEvent(
     systemOctokit,
-    "webstonehq",
-    forkedRepoName,
-    `s-webstone-education-${gitHubUser.providerLogin}`
+    clientPayload,
+    "on_new_content_available",
+    gitHubUser.providerLogin,
+    "webstone-education"
   );
-  console.log(`Renamed repo for GitHub user: ${gitHubUser.providerLogin}`);
+  console.log(
+    `Provided course ${courseid}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
+  );
 };
 
 export const get: RequestHandler = async ({ url }) => {
@@ -119,7 +167,8 @@ export const get: RequestHandler = async ({ url }) => {
     userOctokit,
     gitHubUser
   );
-  await _forkUserRepoToWebstoneOrg(systemOctokit, gitHubUser);
+  await _addCourseDeployPrivateKeyToStudentRepo(systemOctokit, gitHubUser);
+  await _provideCourseToStudent(systemOctokit, gitHubUser);
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
