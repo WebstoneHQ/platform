@@ -43,7 +43,7 @@ export const cloneTemplateRepository = async (
   gitHubUser: User
 ): Promise<void> => {
   await cloneTemplateRepositoryMutation(userOctokit, gitHubUser.id);
-  for (let i = 0; i < 5; i++) {
+  for (let i = 1; i <= 5; i++) {
     // Let's talk about this loop... creating a repo based on a template is an asynchronous operation.
     // This not-so-elegant loop waits for GitHub to complete that operation.
     // Yes, I agree. This should be cleaned up at some point.
