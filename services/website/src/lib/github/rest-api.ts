@@ -83,3 +83,23 @@ export const createRepositorySecret = async (
     }
   );
 };
+
+export const getRepositorySecret = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  secretName: string
+) => {
+  const {
+    data: { name },
+  } = await octokit.request(
+    "GET /repos/{owner}/{repo}/actions/secrets/{secret_name}",
+    {
+      owner,
+      repo,
+      secret_name: secretName,
+    }
+  );
+
+  return name;
+};

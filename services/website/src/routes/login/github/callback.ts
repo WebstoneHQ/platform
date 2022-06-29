@@ -3,6 +3,7 @@ import type { RequestHandler } from "@sveltejs/kit";
 
 import {
   cloneTemplateRepository,
+  createRepositorySecret,
   createUser,
   doesRepositoryExist,
   getSystemOctokit,
@@ -16,7 +17,6 @@ import { getGitHubUser } from "$lib/github/graphql-api";
 import {
   acceptRepositoryInvitation,
   addRepositoryCollaborator,
-  createRepositorySecret,
   dispatchRepositoryEvent,
 } from "$lib/github/rest-api";
 

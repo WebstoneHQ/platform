@@ -14,6 +14,11 @@ import {
   queryRepository,
 } from "$lib/github/graphql-api";
 
+import {
+  createRepositorySecret as createRepositorySecretRest,
+  getRepositorySecret,
+} from "$lib/github/rest-api";
+
 const db = new PrismaClient();
 
 const throwInProdIfNotSet = (devValue: string) => {
@@ -183,4 +188,40 @@ export const signJwtAndSerializeCookie = (
       resolve(serializedCookie);
     });
   });
+};
+
+export const createRepositorySecret = async (
+  systemOctokit: Octokit,
+  owner: string,
+  repo: string,
+  secretName: string,
+  value: string
+): Promise<void> => {
+  await createRepositorySecretRest(
+    systemOctokit,
+    owner,
+    repo,
+    secretName,
+    value
+  );
+  for (let i = 1; i <= 5; i++) {
+    // Let's talk about this loop... creating a repo secret is an asynchronous operation.
+    // This not-so-elegant loop waits for GitHub to complete that operation.
+    // Yes, I agree. This should be cleaned up at some point.
+    console.log(
+      `Waiting for secret ${secretName} to be added to repository ${owner}/${repo} to be created... ${i}/5`
+    );
+    if (await getRepositorySecret(systemOctokit, owner, repo, secretName)) {
+      console.log(
+        `Secret ${secretName} created in repository ${owner}/${repo}.`
+      );
+      return;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  console.error(
+    new Error(
+      `Secret ${secretName} could not be created in repository ${owner}/${repo}.`
+    )
+  );
 };
