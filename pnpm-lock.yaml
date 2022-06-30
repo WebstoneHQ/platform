@@ -111,7 +111,6 @@ importers:
       cookie-parser: 1.4.6
       cookie-signature: 1.2.0
       jsonwebtoken: 8.5.1
-      libsodium-wrappers: 0.7.10
       marked: 4.0.16
       octokit: 1.7.1
       php-serialize: 4.0.2
@@ -135,6 +134,7 @@ importers:
       eslint: 8.16.0
       eslint-config-prettier: 8.5.0_eslint@8.16.0
       eslint-plugin-svelte3: 4.0.0_vypdqzeyqutkgs6qzc7qod4c64
+      libsodium-wrappers: 0.7.10
       postcss: 8.4.14
       prettier: 2.6.2
       prettier-plugin-svelte: 2.7.0_kkjbqzpydplecjtkxrgomroeru
@@ -4741,14 +4741,14 @@ packages:
       }
     dependencies:
       libsodium: 0.7.10
-    dev: false
+    dev: true
 
   /libsodium/0.7.10:
     resolution:
       {
         integrity: sha512-eY+z7hDrDKxkAK+QKZVNv92A5KYkxfvIshtBJkmg5TSiCnYqZP3i9OO9whE79Pwgm4jGaoHgkM4ao/b9Cyu4zQ==,
       }
-    dev: false
+    dev: true
 
   /lilconfig/2.0.4:
     resolution:

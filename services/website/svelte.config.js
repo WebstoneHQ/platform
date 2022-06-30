@@ -12,9 +12,6 @@ const config = {
     adapter: adapter(),
     trailingSlash: "always",
     vite: {
-      optimizeDeps: {
-        exclude: ["libsodium-wrappers"],
-      },
       server: {
         hmr: {
           clientPort: process.env.GITPOD_WORKSPACE_URL ? 443 : 3000,
