@@ -1,5 +1,4 @@
 import type { Octokit } from "@octokit/core";
-// import * as libsodium from "libsodium-wrappers";
 import * as libsodium from "libsodium-wrappers";
 
 export const acceptRepositoryInvitation = async (
