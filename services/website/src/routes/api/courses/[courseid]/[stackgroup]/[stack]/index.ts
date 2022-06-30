@@ -29,15 +29,21 @@ export const get: RequestHandler = async ({ params }) => {
   const githubApiCalls = await Promise.allSettled([
     readFile(
       octokit,
-      `courses/${params.courseid}/${params.stackgroup}/${params.stack}/README.md`
+      "WebstoneHQ",
+      `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
+      `README.md`
     ),
     readFileYaml<CourseConfig>(
       octokit,
-      `courses/${params.courseid}/${params.stackgroup}/${params.stack}/config.yaml`
+      "WebstoneHQ",
+      `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
+      `config.yaml`
     ),
     readLessonConfigFiles(
       octokit,
-      `courses/${params.courseid}/${params.stackgroup}/${params.stack}/lessons`
+      "WebstoneHQ",
+      `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
+      `lessons`
     ),
   ]);
   const [

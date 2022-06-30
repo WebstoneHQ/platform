@@ -2,24 +2,11 @@ import type { Octokit } from "@octokit/core";
 
 import { parse as parseYaml } from "yaml";
 
-const REPO_OWNER = "webstonehq";
-const REPO_NAME = "courses";
 const REPO_BRANCH = "main";
 
 type LessonConfig = {
   name: string;
   id: string;
-};
-
-type ListDirectoriesResponse = {
-  repository: {
-    object?: {
-      entries: {
-        name: string;
-        type: "blog" | "tree";
-      }[];
-    };
-  };
 };
 
 type ReadFileResponse = {
@@ -109,43 +96,13 @@ export const getGitHubUser = async (userOctokit: Octokit): Promise<User> => {
   };
 };
 
-export const listDirectories = async (
-  octokit: Octokit,
-  path: string
-): Promise<string[]> => {
-  const result: ListDirectoriesResponse = await octokit.graphql(
-    `query ListDirectories($owner: String!, $name: String!, $expression: String!) {
-    repository(owner: $owner, name: $name) {
-      object(expression: $expression) {
-        ... on Tree {
-          entries {
-            name
-            type
-          }
-        }
-      }
-    }
-  }`,
-    {
-      owner: REPO_OWNER,
-      name: REPO_NAME,
-      expression: `${REPO_BRANCH}:${path}`,
-    }
-  );
-
-  if (!result.repository.object?.entries) {
-    return [];
-  }
-
-  return result.repository.object.entries
-    .filter((entry) => entry.type === "tree")
-    .map((entry) => entry.name);
-};
-
 export const readFile = async (
   octokit: Octokit,
+  owner: string,
+  repo: string,
   path: string
 ): Promise<string> => {
+  const expression = `${REPO_BRANCH}:${path}`;
   const result: ReadFileResponse = await octokit.graphql(
     `query ReadFile($owner: String!, $name: String!, $expression: String!) {
     repository(owner: $owner, name: $name) {
@@ -157,16 +114,16 @@ export const readFile = async (
     }
   }`,
     {
-      owner: REPO_OWNER,
-      name: REPO_NAME,
-      expression: `${REPO_BRANCH}:${path}`,
+      owner,
+      name: repo,
+      expression,
     }
   );
 
   if (!result.repository.object?.text) {
     console.log(result);
     throw new Error(
-      `Cannot read file. Owner: ${REPO_OWNER}; name: ${REPO_NAME}; expression: ${REPO_BRANCH}:${path}`
+      `Cannot read file. Owner: ${owner}; repo: ${repo}; expression: ${expression}`
     );
   }
 
@@ -175,14 +132,18 @@ export const readFile = async (
 
 export const readFileYaml = async <TConfig>(
   octokit: Octokit,
+  owner: string,
+  repo: string,
   path: string
 ): Promise<TConfig> => {
-  const fileContent = await readFile(octokit, path);
+  const fileContent = await readFile(octokit, owner, repo, path);
   return parseYaml(fileContent) as TConfig;
 };
 
 export const readLessonConfigFiles = async (
   octokit: Octokit,
+  owner: string,
+  repo: string,
   path: string
 ): Promise<
   {
@@ -217,8 +178,8 @@ export const readLessonConfigFiles = async (
     }
   }`,
     {
-      owner: REPO_OWNER,
-      name: REPO_NAME,
+      owner,
+      name: repo,
       expression: `${REPO_BRANCH}:${path}`,
     }
   );

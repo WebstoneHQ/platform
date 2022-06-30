@@ -100,7 +100,7 @@
 {#if isCurriculumAvailable}
   <div class="sticky bottom-12 mt-8 flex justify-center text-center">
     <a
-      href="/courses/todo-app/framework/sveltekit-css-rest-postgresql"
+      href="/courses/todoapp/framework/sveltekit-css-rest-postgresql"
       class="w-full rounded-full bg-[#503CFF] py-4 text-white md:w-auto md:px-14"
     >
       <span class="block text-base font-semibold">Learn Now</span>
