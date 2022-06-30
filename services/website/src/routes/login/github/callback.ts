@@ -177,7 +177,7 @@ export const get: RequestHandler = async ({ url }) => {
       headers: {
         "set-cookie": [userCookie],
         location:
-          "/courses/todo-app/framework/sveltekit-css-rest-postgresql?refreshToLoadCookie=true",
+          "/courses/todoapp/framework/sveltekit-css-rest-postgresql?refreshToLoadCookie=true",
       },
     };
   }
