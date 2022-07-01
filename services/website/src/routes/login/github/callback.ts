@@ -94,23 +94,22 @@ const _addCourseDeployPrivateKeyToStudentRepo = async (
 
 const _provideCourseToStudent = async (
   systemOctokit: Octokit,
-  gitHubUser: User
+  gitHubUser: User,
+  courseId: string,
+  stackgroup: string,
+  stack: string
 ) => {
-  // FIXME: Use dynamic values once we have more than one course/stack
-  const courseid = "todoapp";
-  const stackgroup = "framework";
-  const stack = "sveltekit-css-rest-postgresql";
   console.log(
-    `Providing course ${courseid}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
+    `Providing course ${courseId}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
   );
 
   const clientPayload = {
     course: {
-      id: courseid,
+      id: courseId,
       stackgroup,
       stack,
       privateDeployKeyName:
-        `COURSE_REPO_PRIVATE_DEPLOY_KEY_${courseid}_${stackgroup}_${stack.replaceAll(
+        `COURSE_REPO_PRIVATE_DEPLOY_KEY_${courseId}_${stackgroup}_${stack.replaceAll(
           "-",
           "_"
         )}`.toUpperCase(),
@@ -119,7 +118,7 @@ const _provideCourseToStudent = async (
       branch: `${new Date()
         .toISOString()
         .replaceAll(":", "")
-        .replace(/\.\d{3}/, "")}-${courseid}-${stackgroup}-${stack}`,
+        .replace(/\.\d{3}/, "")}-${courseId}-${stackgroup}-${stack}`,
       commitmessage: "Add new course",
     },
     pr: {
@@ -137,19 +136,25 @@ Fantastic news, a new course is available. Please review this PR and when ready,
     "webstone-education"
   );
   console.log(
-    `Provided course ${courseid}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
+    `Provided course ${courseId}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
   );
 };
 
 export const get: RequestHandler = async ({ url }) => {
   const code = url.searchParams.get("code") || "";
-  const state = url.searchParams.get("state") || "";
+  const state = JSON.parse(
+    Buffer.from(url.searchParams.get("state") || "", "base64").toString()
+  ) as GitHubSignUpState;
   const userOctokit = await getUserOctokit(code);
   const gitHubUser = await getGitHubUser(userOctokit);
 
-  if (!(await hasPreordered(state, gitHubUser.providerLogin))) {
+  if (!(await hasPreordered(state.preorderId, gitHubUser.providerLogin))) {
     console.error(
-      `GitHub user ${gitHubUser.providerLogin} tried to sign up with GitHub but has not pre-ordered. OAuth state provided: ${state}`
+      `GitHub user ${
+        gitHubUser.providerLogin
+      } tried to sign up with GitHub but has not pre-ordered. OAuth state provided: ${JSON.stringify(
+        state
+      )}`
     );
     return {
       status: 302,
@@ -168,7 +173,13 @@ export const get: RequestHandler = async ({ url }) => {
     gitHubUser
   );
   await _addCourseDeployPrivateKeyToStudentRepo(systemOctokit, gitHubUser);
-  await _provideCourseToStudent(systemOctokit, gitHubUser);
+  await _provideCourseToStudent(
+    systemOctokit,
+    gitHubUser,
+    state.course.id,
+    state.course.stackgroup,
+    state.course.stack
+  );
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
@@ -176,8 +187,7 @@ export const get: RequestHandler = async ({ url }) => {
       status: 302,
       headers: {
         "set-cookie": [userCookie],
-        location:
-          "/courses/todoapp/framework/sveltekit-css-rest-postgresql?refreshToLoadCookie=true",
+        location: `/courses/${state.course.id}/${state.course.stackgroup}/${state.course.stack}?refreshToLoadCookie=true`,
       },
     };
   }

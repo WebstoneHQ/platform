@@ -1,5 +1,5 @@
 import type { Octokit } from "@octokit/core";
-import * as libsodium from "libsodium-wrappers";
+import * as libsodium from "@devtomio/sodium";
 
 export const acceptRepositoryInvitation = async (
   octokit: Octokit,
@@ -67,7 +67,6 @@ export const createRepositorySecret = async (
   const messageBytes = Buffer.from(value);
   const keyBytes = Buffer.from(key, "base64");
 
-  await libsodium.ready;
   const encryptedBytes = libsodium.crypto_box_seal(messageBytes, keyBytes);
   const encryptedValue = Buffer.from(encryptedBytes).toString("base64");
 

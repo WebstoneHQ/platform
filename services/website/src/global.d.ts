@@ -76,3 +76,12 @@ interface PurchaseInfoGumroad {
   discordusername?: string;
   preorderid?: string;
 }
+
+interface GitHubSignUpState {
+  preorderId: string;
+  course: {
+    id: string;
+    stackgroup: string;
+    stack: string;
+  };
+}
