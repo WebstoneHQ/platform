@@ -15,7 +15,7 @@
     "prebuild": "prisma generate",
     "predev": "prisma migrate dev",
     "preview": "svelte-kit preview",
-    "vercel-build": "prisma migrate deploy && pnpm build"
+    "vercel-build": "prisma migrate deploy && pnpm build && mkdir -p .vercel_build_output/functions/node/render/@devtomio && cp -r ../../node_modules/.pnpm/@devtomio+sodium-linux-x64-gnu@0.3.0/node_modules/@devtomio/sodium-linux-x64-gnu .vercel_build_output/functions/node/render/@devtomio  && ls -ltra .vercel_build_output/functions/node/render/"
   },
   "devDependencies": {
     "@octokit/auth-oauth-user": "^1.3.0",
