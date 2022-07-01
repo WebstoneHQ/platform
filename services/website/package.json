@@ -28,7 +28,6 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/cookie-signature": "^1.0.4",
     "@types/jsonwebtoken": "^8.5.8",
-    "@types/libsodium-wrappers": "^0.7.9",
     "@types/marked": "^4.0.3",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.23.0",
@@ -59,7 +58,6 @@
     "marked": "^4.0.15",
     "octokit": "^1.7.1",
     "php-serialize": "^4.0.2",
-    "tweetsodium": "0.0.5",
     "yaml": "^2.0.1"
   }
 }

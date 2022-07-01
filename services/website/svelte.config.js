@@ -20,9 +20,6 @@ const config = {
             : "localhost",
         },
       },
-      ssr: {
-        noExternal: ["libsodium-wrappers"],
-      },
     },
   },
 };
