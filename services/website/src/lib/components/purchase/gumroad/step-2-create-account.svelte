@@ -55,5 +55,5 @@
       Continue with GitHub
     </a>
   </p>
-  <p class="mt-8 italic">This may take up to 5 seconds...</p>
+  <p class="mt-8 italic">This may take up to 10 seconds...</p>
 </div>
