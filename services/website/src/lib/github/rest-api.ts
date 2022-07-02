@@ -101,3 +101,20 @@ export const getRepositorySecret = async (
 
   return name;
 };
+
+export const getActionsWorkflow = async (
+  octokit: Octokit,
+  owner: string,
+  repo: string,
+  workflowIdOrFilename: string
+) => {
+  const { data } = await octokit.request(
+    "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}",
+    {
+      owner,
+      repo,
+      workflow_id: workflowIdOrFilename,
+    }
+  );
+  return data;
+};

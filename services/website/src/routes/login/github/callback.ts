@@ -18,6 +18,7 @@ import {
   acceptRepositoryInvitation,
   addRepositoryCollaborator,
   dispatchRepositoryEvent,
+  getActionsWorkflow,
 } from "$lib/github/rest-api";
 
 const _cloneTemplateRepository = async (
@@ -89,6 +90,36 @@ const _addCourseDeployPrivateKeyToStudentRepo = async (
   );
   console.log(
     `Added course deploy private key to student repo: ${gitHubUser.providerLogin}/webstone-education`
+  );
+};
+
+const _waitForActionsWorkflowToBeReady = async (
+  systemOctokit: Octokit,
+  gitHubUser: User
+) => {
+  for (let i = 1; i <= 5; i++) {
+    // Let's talk about this loop... enabling Actions on a newly created repo is an asynchronous operation.
+    // This not-so-elegant loop waits for GitHub to complete that operation.
+    // Yes, I agree. This should be cleaned up at some point.
+    console.log(
+      `Waiting for Actions workflow "new-content-available.yml" to be available in repository ${gitHubUser.providerLogin}/webstone-education... ${i}/5`
+    );
+    try {
+      await getActionsWorkflow(
+        systemOctokit,
+        gitHubUser.providerLogin,
+        "webstone-education",
+        "new-content-available.yml"
+      );
+    } catch (_error) {
+      // We can ignore this
+    }
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  console.error(
+    new Error(
+      `Actions workflow "new-content-available.yml" is not available in repository ${gitHubUser.providerLogin}/webstone-education.`
+    )
   );
 };
 
@@ -173,6 +204,7 @@ export const get: RequestHandler = async ({ url }) => {
     gitHubUser
   );
   await _addCourseDeployPrivateKeyToStudentRepo(systemOctokit, gitHubUser);
+  await _waitForActionsWorkflowToBeReady(systemOctokit, gitHubUser);
   await _provideCourseToStudent(
     systemOctokit,
     gitHubUser,
