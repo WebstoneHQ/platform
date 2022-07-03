@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Writable } from "svelte/store";
   import { browser } from "$app/env";
+  import { goto } from "$app/navigation";
   import { page } from "$app/stores";
   import { getContext } from "svelte";
   import {
@@ -31,6 +32,12 @@
   const gitHubStateBase64Encoded = browser
     ? convertToBase64Browser(JSON.stringify(gitHubState))
     : convertToBase64Server(JSON.stringify(gitHubState));
+
+  let btnText = "Continue with GitHub";
+  const continueWithGitHub = () => {
+    btnText = "Please wait...";
+    goto(`/login/github?state=${gitHubStateBase64Encoded}`);
+  };
 </script>
 
 <h2 class="text-2xl font-bold">Create Webstone Education account</h2>
@@ -47,13 +54,13 @@
 
 <div class="text-center">
   <p class="mt-8">
-    <a
-      href="/login/github?state={gitHubStateBase64Encoded}"
-      rel="external"
-      class="rounded-xl border border-black p-4 dark:border-white"
+    <button
+      on:click="{continueWithGitHub}"
+      disabled="{btnText === 'Please wait...'}"
+      class="rounded-xl border border-black p-4 disabled:cursor-wait dark:border-white"
     >
-      Continue with GitHub
-    </a>
+      {btnText}
+    </button>
   </p>
   <p class="mt-8 italic">This may take up to 10 seconds...</p>
 </div>
