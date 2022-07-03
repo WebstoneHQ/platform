@@ -38,13 +38,15 @@
   export let user: User;
 </script>
 
-<article class="prose dark:prose-invert lg:prose-xl">
+{#if user}
+  <HowToLearn gitHubLogin="{user.providerLogin}" />
+{/if}
+
+<article class="prose mt-16 dark:prose-invert lg:prose-xl">
   {@html marked.parse(lessonContent)}
 </article>
 
-{#if user}
-  <HowToLearn gitHubLogin="{user.providerLogin}" />
-{:else}
+{#if !user}
   <PreorderButtonGumroad />
   <PreorderBenefits />
 {/if}

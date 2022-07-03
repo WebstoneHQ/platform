@@ -50,16 +50,16 @@
       <h1 class="text-4xl font-semibold md:text-6xl">{course.name}</h1>
     </div>
     <div class="my-6 px-4 sm:px-6 md:px-0">
-      <div class="mt-4 px-4 md:mt-16 md:px-0">
+      <div class="mt-4 mb-16 px-4 md:mt-16 md:px-0">
         <Stack layers="{layers}" />
       </div>
+      {#if user}
+        <HowToLearn gitHubLogin="{user.providerLogin}" />
+      {/if}
       <article class="prose my-6 dark:prose-invert lg:prose-xl">
         {@html marked.parse(course.description)}
       </article>
-
-      {#if user}
-        <HowToLearn gitHubLogin="{user.providerLogin}" />
-      {:else}
+      {#if !user}
         <PreorderButtonGumroad />
         <PreorderBenefits />
       {/if}
