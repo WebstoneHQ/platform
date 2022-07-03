@@ -21,7 +21,11 @@
     },
     {
       q: "What level of experience is required?",
-      a: "This depends on the course. Generally, basic understanding of Javascript is expected. What's a function? What's an array?",
+      a: "This depends on the course. Generally, basic understanding of programming is expected. What's a function? What's an array?",
+    },
+    {
+      q: "I'm a business owner, can I have private courses?",
+      a: "Yes. We don't have a self-serve UI yet, but please contact us via Twitter (@webstonehq) and we can help you set up a private course. This may be used for structured onboarding, training, demos, etc.",
     },
   ];
 
@@ -141,14 +145,13 @@
     </p>
     <ul class="mt-5 list-inside list-disc space-y-2">
       <li>
-        <Link href="https://www.mikenikles.com/cloud-native-web-development"
-          >Cloud Native Web Development</Link
+        <Link href="https://www.youtube.com/watch?v=OUzaUJ3gEug"
+          >Full Stack Web Development in the Cloud</Link
         >
       </li>
       <li>
-        <Link
-          href="https://mikenikles.gumroad.com/l/a-smart-guide-for-your-career-as-a-software-engineer"
-          >A Smart Guide for Your Career as a Software Engineer</Link
+        <Link href="https://www.mikenikles.com/cloud-native-web-development"
+          >Cloud Native Web Development</Link
         >
       </li>
       <li>
@@ -157,8 +160,9 @@
         >
       </li>
       <li>
-        <Link href="https://www.youtube.com/watch?v=OUzaUJ3gEug"
-          >Full Stack Web Development in the Cloud</Link
+        <Link
+          href="https://mikenikles.gumroad.com/l/a-smart-guide-for-your-career-as-a-software-engineer"
+          >A Smart Guide for Your Career as a Software Engineer</Link
         >
       </li>
     </ul>
