@@ -51,7 +51,7 @@
     </div>
     <div class="my-6 px-4 sm:px-6 md:px-0">
       <div class="mt-4 mb-16 px-4 md:mt-16 md:px-0">
-        <Stack layers="{layers}" />
+        <Stack layers="{layers}" readOnly />
       </div>
       {#if user}
         <HowToLearn gitHubLogin="{user.providerLogin}" />

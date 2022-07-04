@@ -3,6 +3,7 @@
   import LayerComponent from "./layer.svelte";
 
   export let layers: Layers;
+  export let readOnly: boolean = false;
 </script>
 
 <div class="overflow-hidden rounded-3xl drop-shadow-md md:flex">
@@ -13,6 +14,7 @@
     selectedModule="{layers.web.modules.find(
       (module) => module.id === 'sveltekit'
     )}"
+    readOnly="{readOnly}"
   />
   <LayerComponent
     layer="{layers.styles}"
@@ -20,6 +22,7 @@
     selectedModule="{layers.styles.modules.find(
       (module) => module.id === 'css'
     )}"
+    readOnly="{readOnly}"
   />
   <LayerComponent
     layer="{layers.apitype}"
@@ -27,6 +30,7 @@
     selectedModule="{layers.apitype.modules.find(
       (module) => module.id === 'rest'
     )}"
+    readOnly="{readOnly}"
   />
   <LayerComponent
     layer="{layers.database}"
@@ -34,6 +38,7 @@
     selectedModule="{layers.database.modules.find(
       (module) => module.id === 'postgresql'
     )}"
+    readOnly="{readOnly}"
   />
 
   <!-- {#each layerEntries as [layerName, layer]}

@@ -12,32 +12,36 @@
 
   export let layer: Layer;
   export let layerName: string; // "web" | "styles" | "apitype" | "api" | "database";
+  export let readOnly: boolean = false;
   export let selectedModule: Module | undefined = undefined;
 </script>
 
 {#if selectedModule}
-  <!-- Uncomment the next div and remove the subsequent one, plus the svg below, to enable the interactive BYOC -->
-  <!-- div
-    class="flex cursor-pointer flex-col items-center rounded-3xl border bg-[#FBFBFB] py-4 px-6 dark:bg-slate-800 md:w-48"
-    on:click="{() => ($layerToChange = layer)}"
-  -->
   <div
-    class="grid grid-cols-2 grid-rows-2 bg-[#FBFBFB] py-3 px-4 text-center dark:bg-[#333333] md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
+    class:cursor-pointer="{!readOnly}"
+    class=" grid grid-cols-2 grid-rows-2 bg-[#FBFBFB] py-3 px-4 text-center dark:bg-[#333333] md:flex md:w-48 md:flex-1 md:flex-col md:items-center md:py-5 md:px-4"
+    on:click="{() => {
+      if (!readOnly) {
+        $layerToChange = layer;
+      }
+    }}"
   >
     <h2 class="order-2 flex items-center font-semibold md:order-1">
       <span>{selectedModule.name}</span>
-      <!-- svg
-        class="ml-1"
-        width="13"
-        height="8"
-        viewBox="0 0 13 8"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M12.5 2.00009L11.09 0.590088L6.5 5.17009L1.91 0.590087L0.5 2.00009L6.5 8.00009L12.5 2.00009Z"
-          fill="#503CFF"></path>
-      </svg -->
+      {#if !readOnly}
+        <svg
+          class="ml-1"
+          width="13"
+          height="8"
+          viewBox="0 0 13 8"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M12.5 2.00009L11.09 0.590088L6.5 5.17009L1.91 0.590087L0.5 2.00009L6.5 8.00009L12.5 2.00009Z"
+            fill="#503CFF"></path>
+        </svg>
+      {/if}
     </h2>
     <div class="order-1 row-span-2 md:order-2 md:mt-3">
       <ModuleIcon layerId="{layerName}" moduleId="{selectedModule.id}" />

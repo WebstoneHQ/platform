@@ -299,8 +299,10 @@
           <div class="flex flex-wrap gap-4">
             {#each $layerToChange.modules as module}
               <div
-                on:click="{() => changeSelection(module)}"
-                class="grid max-w-sm cursor-pointer grid-cols-3 gap-4 rounded-2xl border-4 border-solid border-transparent p-2 hover:border-black"
+                on:click="{() => !module.status && changeSelection(module)}"
+                class:cursor-not-allowed="{module.status}"
+                class:cursor-pointer="{!module.status}"
+                class="grid max-w-sm grid-cols-3 gap-4 rounded-2xl border-4 border-solid border-transparent p-2 hover:border-black"
               >
                 <div class="row-span-2">
                   <ModuleIcon
