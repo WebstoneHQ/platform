@@ -15,11 +15,12 @@
   href="{href}"
   class:bg-gray-100="{isActive}"
   class:text-gray-900="{isActive}"
-  class:hover:bg-gray-50="{!isActive}"
-  class:hover:text-gray-900="{!isActive}"
   class:ml-10="{href.match(/lessons\/\d{2}-\d[1-9]-/)}"
   class:md:ml-8="{href.match(/lessons\/\d{2}-\d[1-9]-/)}"
   class="group flex items-center rounded-md py-2 px-2 text-base font-medium md:text-sm"
 >
-  {lessonNumber}. <slot />
+  <span
+    class:group-hover:bg-gray-50="{!isActive}"
+    class:group-hover:text-gray-900="{!isActive}">{lessonNumber}.</span
+  >&nbsp;<slot />
 </a>
