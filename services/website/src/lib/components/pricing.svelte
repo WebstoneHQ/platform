@@ -7,8 +7,8 @@
           Early Adopter Pricing
         </h2>
         <p class="mt-4 text-xl">
-          If you're not satisfied, contact us within the first 14 days and we'll
-          send you a full refund.
+          For a limited time, we offer a pay once, access forever license. After
+          that, there will be a monthly subscription fee.
         </p>
       </div>
     </div>
