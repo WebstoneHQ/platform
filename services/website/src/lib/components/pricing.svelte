@@ -132,7 +132,7 @@
             class="py-8 px-6 text-center lg:flex lg:flex-shrink-0 lg:flex-col lg:justify-center lg:p-12"
           >
             <p class="text-lg font-medium leading-6">
-              Pay once, own it forever
+              Pay once, access it forever
             </p>
             <div
               class="mt-4 flex items-center justify-center text-5xl font-extrabold"
