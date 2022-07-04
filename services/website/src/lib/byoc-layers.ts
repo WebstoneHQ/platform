@@ -25,49 +25,42 @@ export const layers: Layers = {
     title: "Web & API framework",
     modules: [
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use Angular to develop the course's web frontend.",
         id: "angular",
         name: "Angular",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use NextJS to develop the course's web frontend.",
         id: "nextjs",
         name: "NextJS",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use NuxtJS to develop the course's web frontend.",
         id: "nuxtjs",
         name: "NuxtJS",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use React to develop the course's web frontend.",
         id: "react",
         name: "React",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use Svelte to develop the course's web frontend.",
         id: "svelte",
         name: "Svelte",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use SvelteKit to develop the course's web frontend.",
         id: "sveltekit",
         name: "SvelteKit",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use Vue.js to develop the course's web frontend.",
         id: "vue",
         name: "Vue.js",
         status: "Coming soon",
@@ -79,49 +72,42 @@ export const layers: Layers = {
     title: "Styling",
     modules: [
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use Bootstrap to style the web application.",
         id: "bootstrap",
         name: "Bootstrap",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use Chakra UI to style the web application.",
         id: "chakraui",
         name: "Chakra UI",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use CSS to style the web application.",
         id: "css",
         name: "CSS",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use styled components to style the web application.",
         id: "styledcomponents",
         name: "styled components",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use Tailwind CSS to style the web application.",
         id: "tailwind",
         name: "Tailwind CSS",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use UnoCSS to style the web application.",
         id: "unocss",
         name: "UnoCSS",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context.",
+        description: "Use Windi CSS to style the web application.",
         id: "windicss",
         name: "Windi CSS",
         status: "Coming soon",
@@ -134,14 +120,14 @@ export const layers: Layers = {
     modules: [
       {
         description:
-          "TODO: Description text for this framework or technology to help provide context",
+          "Use GraphQL to communicate between the frontend and the API.",
         id: "graphql",
         name: "GraphQL",
         status: "Coming soon",
       },
       {
         description:
-          "TODO: Description text for this framework or technology to help provide context",
+          "Use REST to communicate between the frontend and the API.",
         id: "rest",
         name: "REST",
       },
@@ -152,50 +138,43 @@ export const layers: Layers = {
     title: "API framework",
     modules: [
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use Go to develop the API.",
         id: "go",
         name: "Go",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use Java to develop the API.",
         id: "java",
         name: "Java",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use NextJS to develop the API.",
         id: "nextjs",
         name: "NextJS",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use Node.js to develop the API.",
         id: "nodejs",
         name: "Node.js",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use NuxtJS to develop the API.",
         id: "nuxtjs",
         name: "NuxtJS",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use Rust to develop the API.",
         id: "rust",
         name: "Rust",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use SvelteKit to develop the API.",
         id: "sveltekit",
         name: "SvelteKit",
       },
@@ -206,29 +185,25 @@ export const layers: Layers = {
     title: "Database",
     modules: [
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use Mongo DB to persist data.",
         id: "mongodb",
         name: "Mongo DB",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use MySQL to persist data.",
         id: "mysql",
         name: "MySQL",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use PlanetScale to persist data.",
         id: "planetscale",
         name: "PlanetScale",
         status: "Coming soon",
       },
       {
-        description:
-          "TODO: Description text for this framework or technology to help provide context",
+        description: "Use PostgreSQL to persist data.",
         id: "postgresql",
         name: "PostgreSQL",
       },
