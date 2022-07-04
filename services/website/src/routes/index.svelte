@@ -5,6 +5,7 @@
   import Faq from "$lib/components/faq.svelte";
   import ModulesMarquee from "$lib/components/modules-marquee.svelte";
   import Link from "$lib/components/link.svelte";
+  import Pricing from "$lib/components/pricing.svelte";
 
   const faqs = [
     {
@@ -134,7 +135,7 @@
   <img
     src="/mike-profile.jpg"
     alt="Mike's headshot"
-    class="mx-auto h-60 w-80 rounded-xl object-cover"
+    class="mx-auto h-60 w-80 rounded-xl object-cover grayscale"
   />
   <div>
     <h2 class="mt-2 font-bold text-[#503cff] md:mt-0">Your educator</h2>
@@ -167,6 +168,10 @@
       </li>
     </ul>
   </div>
+</Container>
+
+<Container class="mt-32">
+  <Pricing />
 </Container>
 
 <Container class="mt-32">
