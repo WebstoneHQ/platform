@@ -13,7 +13,7 @@
     },
     {
       q: "For how long will I benefit from the one-time pre-order price?",
-      a: "Forever.",
+      a: "Forever. Buy today and get updates for life.",
     },
     {
       q: "How is this different from Udemy, freeCodeCamp, Educative, etc.?",
@@ -24,7 +24,7 @@
       a: "This depends on the course. Generally, basic understanding of programming is expected. What's a function? What's an array?",
     },
     {
-      q: "I'm a business owner, can I have private courses?",
+      q: "I'm a business owner, can I create private courses?",
       a: "Yes. We don't have a self-serve UI yet, but please contact us via Twitter (@webstonehq) and we can help you set up a private course. This may be used for structured onboarding, training, demos, etc.",
     },
   ];
