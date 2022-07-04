@@ -17,7 +17,7 @@ import { getGitHubUser } from "$lib/github/graphql-api";
 import {
   acceptRepositoryInvitation,
   addRepositoryCollaborator,
-  dispatchRepositoryEvent,
+  // dispatchRepositoryEvent,
   getActionsWorkflow,
 } from "$lib/github/rest-api";
 
@@ -123,53 +123,50 @@ const _waitForActionsWorkflowToBeReady = async (
   );
 };
 
-const _provideCourseToStudent = async (
-  systemOctokit: Octokit,
-  gitHubUser: User,
-  courseId: string,
-  stackgroup: string,
-  stack: string
-) => {
-  console.log(
-    `Providing course ${courseId}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
-  );
+// const _provideCourseToStudent = async (
+//   systemOctokit: Octokit,
+//   gitHubUser: User,
+//   courseId: string,
+//   stackgroup: string,
+//   stack: string
+// ) => {
+//   console.log(
+//     `Providing course ${courseId}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
+//   );
 
-  const clientPayload = {
-    course: {
-      id: courseId,
-      stackgroup,
-      stack,
-      privateDeployKeyName:
-        `COURSE_REPO_PRIVATE_DEPLOY_KEY_${courseId}_${stackgroup}_${stack.replaceAll(
-          "-",
-          "_"
-        )}`.toUpperCase(),
-    },
-    git: {
-      branch: `${new Date()
-        .toISOString()
-        .replaceAll(":", "")
-        .replace(/\.\d{3}/, "")}-${courseId}-${stackgroup}-${stack}`,
-      commitmessage: "Add new course",
-    },
-    pr: {
-      title: "New Course 🎉",
-      description: `Hi :wave:,
+//   const clientPayload = {
+//     course: {
+//       id: courseId,
+//       stackgroup,
+//       stack,
+//       privateDeployKeyName:
+//         `COURSE_REPO_PRIVATE_DEPLOY_KEY_${courseId}_${stackgroup}_${stack.replaceAll(
+//           "-",
+//           "_"
+//         )}`.toUpperCase(),
+//     },
+//     git: {
+//       branch: `new-course-${courseId}-${stackgroup}-${stack}`,
+//       commitmessage: "Add new course",
+//     },
+//     pr: {
+//       title: "New Course 🎉",
+//       description: `Hi :wave:,
 
-Fantastic news, a new course is available. Please review this PR and when ready, merge it to update your own course content.`,
-    },
-  };
-  await dispatchRepositoryEvent(
-    systemOctokit,
-    clientPayload,
-    "on_new_content_available",
-    gitHubUser.providerLogin,
-    "webstone-education"
-  );
-  console.log(
-    `Provided course ${courseId}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
-  );
-};
+// Fantastic news, a new course is available. Please review this PR and when ready, merge it to update your own course content.`,
+//     },
+//   };
+//   await dispatchRepositoryEvent(
+//     systemOctokit,
+//     clientPayload,
+//     "on_new_content_available",
+//     gitHubUser.providerLogin,
+//     "webstone-education"
+//   );
+//   console.log(
+//     `Provided course ${courseId}-${stackgroup}-${stack} to student ${gitHubUser.providerLogin}`
+//   );
+// };
 
 export const get: RequestHandler = async ({ url }) => {
   const code = url.searchParams.get("code") || "";
@@ -205,13 +202,13 @@ export const get: RequestHandler = async ({ url }) => {
   );
   await _addCourseDeployPrivateKeyToStudentRepo(systemOctokit, gitHubUser);
   await _waitForActionsWorkflowToBeReady(systemOctokit, gitHubUser);
-  await _provideCourseToStudent(
-    systemOctokit,
-    gitHubUser,
-    state.course.id,
-    state.course.stackgroup,
-    state.course.stack
-  );
+  // await _provideCourseToStudent(
+  //   systemOctokit,
+  //   gitHubUser,
+  //   state.course.id,
+  //   state.course.stackgroup,
+  //   state.course.stack
+  // );
 
   if (persistedUser) {
     const userCookie = await signJwtAndSerializeCookie(persistedUser);
