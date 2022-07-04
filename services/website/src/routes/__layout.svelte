@@ -24,7 +24,7 @@
   <title>Learn full-stack web development | Webstone Education</title>
   <meta
     name="description"
-    content="Webstone Education is on a mission to simplify full-stack web development education."
+    content="With Webstone Education, you choose your tech stack and we provide continuous course updates."
   />
   <meta
     property="og:title"
@@ -32,7 +32,7 @@
   />
   <meta
     property="og:description"
-    content="Webstone Education is on a mission to simplify full-stack web development education."
+    content="With Webstone Education, you choose your tech stack and we provide continuous course updates."
   />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://webstone.app" />
