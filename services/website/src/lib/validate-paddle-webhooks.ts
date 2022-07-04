@@ -1,5 +1,5 @@
-import crypto from "crypto";
-import Serialize from "php-serialize";
+import { createVerify } from "crypto";
+import { serialize } from "php-serialize";
 
 type JsonWithStrings = {
   [key: string]: string;
@@ -80,8 +80,8 @@ export const isValidateWebhook = (body: FormData): boolean => {
     }
   }
 
-  const serialized = Serialize.serialize(sortedBodyJson);
-  const verifier = crypto.createVerify("sha1");
+  const serialized = serialize(sortedBodyJson);
+  const verifier = createVerify("sha1");
   verifier.update(serialized);
   verifier.end();
 

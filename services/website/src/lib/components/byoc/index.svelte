@@ -1,4 +1,6 @@
 <script lang="ts" context="module">
+  import type { Module } from "$lib/byoc-layers";
+
   export type CurriculumConfigurationWebOptions =
     | "angular"
     | "nextjs"
@@ -31,614 +33,60 @@
     | "postgresql";
 
   export type CurriculumSelections = {
-    web?: CurriculumConfigurationWebOptions;
-    styles?: CurriculumConfigurationStylesOptions;
-    apitype?: CurriculumConfigurationApiTypeOptions;
-    api?: CurriculumConfigurationApiOptions;
-    database?: CurriculumConfigurationDatabaseOptions;
+    web: Module;
+    styles: Module;
+    apitype: Module;
+    api: Module;
+    database: Module;
   };
 </script>
 
 <script lang="ts">
   import { setContext } from "svelte";
-  import { writable, Writable } from "svelte/store";
+  import { writable, type Writable } from "svelte/store";
+  import {
+    contextKeyCurriculum,
+    contextKeyCurriculumChangeModuleModal,
+  } from "$lib/context-keys";
   import { enhance } from "$lib/actions/form";
-  import { contextKeyCurriculum } from "$lib/context-keys";
-
-  import Module from "$lib/components/byoc/module.svelte";
-  import Section from "$lib/components/byoc/section.svelte";
+  import { layers } from "$lib/byoc-layers";
+  // import PreorderBenefits from "$lib/components/preorder-benefits.svelte";
+  import Stack from "./stack.svelte";
+  import ChangeModuleModal from "./change-module-modal.svelte";
 
   const signUpSuccessful = async (_: Response, form: HTMLFormElement) => {
     form.reset();
     form.style.setProperty("--success", "visible");
   };
 
-  const curriculumSelections: Writable<CurriculumSelections> = writable({});
-  setContext(contextKeyCurriculum, curriculumSelections);
+  const curriculumSelection: Writable<CurriculumSelections> = writable({
+    web: layers.web.modules.find(
+      (module) => module.id === "sveltekit"
+    ) as Module,
+    styles: layers.styles.modules.find(
+      (module) => module.id === "css"
+    ) as Module,
+    apitype: layers.apitype.modules.find(
+      (module) => module.id === "rest"
+    ) as Module,
+    api: layers.api.modules.find(
+      (module) => module.id === "sveltekit"
+    ) as Module,
+    database: layers.database.modules.find(
+      (module) => module.id === "postgresql"
+    ) as Module,
+  });
+  setContext(contextKeyCurriculum, curriculumSelection);
+  setContext(contextKeyCurriculumChangeModuleModal, writable());
 
-  let sectionToShow:
-    | "web"
-    | "styles"
-    | "apitype"
-    | "api"
-    | "database"
-    | "completed";
-  $: sectionToShow = !$curriculumSelections.web
-    ? "web"
-    : !$curriculumSelections.styles
-    ? "styles"
-    : !$curriculumSelections.apitype
-    ? "apitype"
-    : !$curriculumSelections.api
-    ? "api"
-    : !$curriculumSelections.database
-    ? "database"
-    : "completed";
+  $: isCurriculumSelectionComplete = Object.values($curriculumSelection).every(
+    (module) => module
+  );
+  $: isCurriculumAvailable = Object.values($curriculumSelection).every(
+    (module) => module && !module.status
+  );
 
-  let curriculumId: string;
-  let isCurriculumSubmitted = false;
-  $: if (sectionToShow === "completed" && !isCurriculumSubmitted) {
-    isCurriculumSubmitted = true;
-    fetch("/api/curriculum", {
-      body: JSON.stringify($curriculumSelections),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((body) => {
-        curriculumId = body.curriculumId;
-      });
-  }
-
-  // https://docs.microsoft.com/en-us/javascript/api/@azure/keyvault-certificates/requireatleastone?view=azure-node-latest
-  // type RequireAtLeastOne<T> = { [K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>; }[keyof T]
-
-  // type CurriculumConfigurationStyles = {
-  //   [key in CurriculumConfigurationStylesOptions]: {}
-  // }
-
-  // type CurriculumConfigurationDatabase = {
-  //   [key in CurriculumConfigurationDatabaseOptions]: {}
-  // };
-
-  // type CurriculumConfigurationApi = {
-  //   [key in CurriculumConfigurationApiOptions]: {
-  //     database: CurriculumConfigurationDatabase
-  //   }
-  // };
-
-  // type CurriculumConfigurationApiType = {
-  //   [key in CurriculumConfigurationApiTypeOptions]: {
-  //     api: RequireAtLeastOne<CurriculumConfigurationApi>
-  //   }
-  // }
-
-  // type CurriculumConfigurationWeb = {
-  //   [key in CurriculumConfigurationWebOptions]: {
-  //     styles: Partial<CurriculumConfigurationStyles>;
-  //     apitype: CurriculumConfigurationApiType;
-  //   };
-  // };
-
-  // type CurriculumConfiguration = {
-  //   web: CurriculumConfigurationWeb
-  // };
-
-  const curriculumConfiguration = {
-    /* TODO: Generate this based on the available course modules in the private https://github.com/WebstoneHQ/courses repo */
-    web: {
-      angular: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      nextjs: {
-        styles: {
-          bootstrap: {},
-          chakraui: {},
-          css: {},
-          styledcomponents: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              nextjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              nextjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      nuxtjs: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              nuxtjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              nextjs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      react: {
-        styles: {
-          bootstrap: {},
-          chakraui: {},
-          css: {},
-          styledcomponents: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      svelte: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      sveltekit: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              sveltekit: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              sveltekit: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-      vue: {
-        styles: {
-          bootstrap: {},
-          css: {},
-          tailwind: {},
-          unocss: {},
-          windicss: {},
-        },
-        apitype: {
-          graphql: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-          rest: {
-            api: {
-              go: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              java: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              nodejs: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-              rust: {
-                database: {
-                  mongodb: {},
-                  mysql: {},
-                  planetscale: {},
-                  postgresql: {},
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  };
-
-  const getAvailableWebFrameworks = (): CurriculumConfigurationWebOptions[] => {
-    return Object.keys(
-      // @ts-ignore
-      curriculumConfiguration.web
-    ) as CurriculumConfigurationWebOptions[];
-  };
-
-  const getAvailableStyles = (): CurriculumConfigurationStylesOptions[] => {
-    if ($curriculumSelections.web) {
-      return Object.keys(
-        // @ts-ignore
-        curriculumConfiguration.web[$curriculumSelections.web].styles
-      ) as CurriculumConfigurationStylesOptions[];
-    }
-    return [];
-  };
-
-  const getAvailableApiTypes = (): CurriculumConfigurationApiTypeOptions[] => {
-    if ($curriculumSelections.web) {
-      return Object.keys(
-        // @ts-ignore
-        curriculumConfiguration.web[$curriculumSelections.web].apitype
-      ) as CurriculumConfigurationApiTypeOptions[];
-    }
-    return [];
-  };
-
-  const getAvailableApis = (): CurriculumConfigurationApiOptions[] => {
-    if ($curriculumSelections.web && $curriculumSelections.apitype) {
-      return Object.keys(
-        // @ts-ignore
-        curriculumConfiguration.web[$curriculumSelections.web].apitype[
-          $curriculumSelections.apitype
-        ].api
-      ) as CurriculumConfigurationApiOptions[];
-    }
-    return [];
-  };
-
-  const getAvailableDatabases =
-    (): CurriculumConfigurationDatabaseOptions[] => {
-      if (
-        $curriculumSelections.web &&
-        $curriculumSelections.apitype &&
-        $curriculumSelections.api
-      ) {
-        return Object.keys(
-          // @ts-ignore
-          curriculumConfiguration.web[$curriculumSelections.web].apitype[
-            $curriculumSelections.apitype
-          ].api[$curriculumSelections.api].database
-        ) as CurriculumConfigurationDatabaseOptions[];
-      }
-      return [];
-    };
-
-  $: currentCurriculumSelections = Object.entries($curriculumSelections) as [
-    keyof CurriculumSelections,
-    (
-      | CurriculumConfigurationWebOptions
-      | CurriculumConfigurationStylesOptions
-      | CurriculumConfigurationApiTypeOptions
-      | CurriculumConfigurationApiOptions
-      | CurriculumConfigurationDatabaseOptions
-    )
-  ][];
+  // $: layerEntries = Object.entries(layers) as [keyof Layers, Layer][];
 </script>
 
 <style>
@@ -647,99 +95,62 @@
   }
 </style>
 
-<div class="min-h-[15rem]">
-  {#if sectionToShow === "web"}
-    <Section title="1. Select a web framework">
-      {#each getAvailableWebFrameworks() as name}
-        <Module layer="web" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
+<Stack layers="{layers}" />
 
-  {#if sectionToShow === "styles"}
-    <Section title="2. Select a type of styling">
-      {#each getAvailableStyles() as name}
-        <Module layer="styles" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "apitype"}
-    <Section title="3. Select a type of API">
-      {#each getAvailableApiTypes() as name}
-        <Module layer="apitype" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "api"}
-    <Section title="4. Select an API framework">
-      {#each getAvailableApis() as name}
-        <Module layer="api" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "database"}
-    <Section title="5. Select a database">
-      {#each getAvailableDatabases() as name}
-        <Module layer="database" name="{name}" />
-      {/each}
-    </Section>
-  {/if}
-
-  {#if sectionToShow === "completed"}
-    <div class="pt-2">
-      <p class="max-w-3xl text-lg font-semibold leading-7">🎉 That's it</p>
-      <p class="mt-4 max-w-3xl text-lg leading-7">
-        Thank you. Please provide your email address to qualify for the <strong
-          >early adopter pricing</strong
-        > and to get notified when your course is available.
-      </p>
-      <form
-        action="/api/sign-up.json"
-        method="post"
-        use:enhance="{{
-          result: signUpSuccessful,
-        }}"
-        class="mt-12"
-      >
-        <div class="sm:flex sm:w-full sm:max-w-lg">
-          <div class="min-w-0 flex-1">
-            <input type="hidden" name="curriculumId" value="{curriculumId}" />
-            <label for="hero-email" class="sr-only">Email address</label>
-            <input
-              id="hero-email"
-              type="email"
-              name="email"
-              class="block w-full rounded-md border border-gray-300 px-5 py-3 text-base text-black placeholder-gray-500 shadow-sm focus:border-rose-500 focus:ring-rose-500"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          <div class="mt-4 sm:mt-0 sm:ml-3">
+{#if isCurriculumAvailable}
+  <div class="sticky bottom-12 mt-8 flex justify-center text-center">
+    <a
+      href="/courses/todoapp/framework/sveltekit-css-rest-postgresql"
+      class="w-full rounded-full bg-[#503CFF] py-4 text-white md:w-auto md:px-14"
+    >
+      <span class="block text-base font-semibold">Learn Now</span>
+    </a>
+  </div>
+  <!-- <PreorderBenefits /> -->
+{:else if isCurriculumSelectionComplete}
+  <div class="mt-6 flex flex-col items-center">
+    <p class="text-center text-2xl font-semibold">
+      We'll let you know when this curriculum is available
+    </p>
+    <form
+      action="/api/sign-up.json-TODO-does-not-work-yet"
+      method="post"
+      use:enhance="{{
+        result: signUpSuccessful,
+      }}"
+      class="mt-5"
+    >
+      <div class="flex justify-center">
+        <div class="relative">
+          <input
+            type="email"
+            required
+            name="email"
+            class="w-80 rounded-3xl bg-transparent py-6 focus:shadow focus:outline-none md:w-[32rem] md:text-lg"
+            placeholder="Enter your email"
+          />
+          <div class="absolute top-2 right-2">
             <button
               type="submit"
-              class="block w-full rounded-md border border-transparent bg-orange-500 px-5 py-3 text-base font-medium text-slate-900 shadow hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+              class="rounded-3xl bg-[#503CFF] py-4 px-10 font-semibold text-white md:text-lg"
               >Notify me</button
             >
           </div>
         </div>
-        <div class="mt-4" style="visibility: var(--success);">
-          <p>Thank you, we will send you updates.</p>
-        </div>
-      </form>
-    </div>
-  {/if}
+      </div>
+      <div class="mt-4 text-center" style="visibility: var(--success);">
+        <p>Thank you, we will send you updates.</p>
+      </div>
+    </form>
+  </div>
+{/if}
+<div class="mx-auto mt-7 text-center">
+  <a
+    href="https://forms.zohopublic.com/webstonetechnologies/form/WebstoneEducationCustomCurriculum/formperma/g1Eig2cKU-DbEDaC6IHrE_CgBnGUgNtt3x-KLlAqC9Q"
+    target="_blank"
+    class="font-bold text-[#1d1d1f] dark:text-white"
+    >Request a custom curriculum ></a
+  >
 </div>
 
-<div class="min-h-[8rem]">
-  {#if $curriculumSelections.web}
-    <p class="mt-6 max-w-3xl text-lg leading-7">Your curriculum</p>
-    <div class="flex flex-wrap space-x-2">
-      {#each currentCurriculumSelections as [layer, name]}
-        <Module layer="{layer}" name="{name}" readOnly />
-      {/each}
-    </div>
-  {/if}
-</div>
+<ChangeModuleModal />

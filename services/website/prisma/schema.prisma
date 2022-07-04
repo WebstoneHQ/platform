@@ -63,3 +63,15 @@ model User {
   @@unique([provider, provider_id])
   @@map("users")
 }
+
+model Preorder {
+  created_at                   DateTime @default(now())
+  id                           String   @id @default(cuid())
+  form_discord_username        String
+  form_email                   String
+  form_github_username         String
+  form_license_key             String
+  gumroad_license_verification Json
+
+  @@map("preorders")
+}

@@ -1,30 +1,63 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = ({ params }) => {
-    const { courseid } = params;
+  export const load: Load = async ({ fetch, params }) => {
+    const { courseid, stackgroup, stack } = params;
+    const response = await fetch(
+      `/api/courses/${courseid}/${stackgroup}/${stack}/__data.json`
+    );
+
+    if (response.ok) {
+      const course = await response.json();
+      return {
+        props: {
+          course,
+        },
+        stuff: {
+          course,
+        },
+      };
+    }
+
     return {
-      props: {
-        courseid,
-      },
+      props: {},
     };
   };
 </script>
 
 <script lang="ts">
-  export let courseid: string;
+  import { beforeNavigate } from "$app/navigation";
+  import {
+    contextKeyCoursesIsOffCanvasMenuOpen,
+    contextKeyCourse,
+  } from "$lib/context-keys";
+  import { setContext } from "svelte";
+  import { writable } from "svelte/store";
+  import MenuDesktop from "$lib/components/courses/layout/menus/desktop.svelte";
+  import MenuMobile from "$lib/components/courses/layout/menus/mobile.svelte";
+  import Nav from "$lib/components/courses/layout/nav.svelte";
+
+  export let course: Course;
+
+  const isOffCanvasMenuOpen = writable(false);
+  setContext(contextKeyCoursesIsOffCanvasMenuOpen, isOffCanvasMenuOpen);
+  setContext(contextKeyCourse, course);
+
+  beforeNavigate(() => {
+    $isOffCanvasMenuOpen = false;
+  });
 </script>
 
-<div class="flex">
-  <div class="w-1/5">
-    <h2>Todo app ({courseid})</h2>
-    <ul>
-      <li>Lesson 1</li>
-      <li>Lesson 2</li>
-      <li>Lesson 3</li>
-    </ul>
-  </div>
-  <div class="w-4/5">
-    <slot />
+<div>
+  <MenuMobile />
+  <MenuDesktop />
+
+  <div class="md:pl-64">
+    <div class="mx-auto flex max-w-4xl flex-col md:px-8 xl:px-0">
+      <Nav />
+      <main class="flex-1 px-4 md:px-0">
+        <slot />
+      </main>
+    </div>
   </div>
 </div>

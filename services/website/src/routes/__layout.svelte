@@ -20,9 +20,33 @@
   setContext(contextKeyUser, user);
 </script>
 
+<svelte:head>
+  <title>Learn full-stack web development | Webstone Education</title>
+  <meta
+    name="description"
+    content="With Webstone Education, you choose your tech stack and we provide continuous course updates."
+  />
+  <meta
+    property="og:title"
+    content="Learn full-stack web development | Webstone Education"
+  />
+  <meta
+    property="og:description"
+    content="With Webstone Education, you choose your tech stack and we provide continuous course updates."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://webstone.app" />
+  <meta property="og:image" content="https://webstone.app/og-image.png" />
+</svelte:head>
+
 <div
-  class="min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-200"
+  class="flex min-h-screen flex-col bg-white text-black antialiased dark:bg-[#272727] dark:text-[#FAFAFA]"
 >
-  <!-- <Nav /> -->
-  <slot />
+  <div class="flex-grow">
+    <!-- <Nav /> -->
+    <slot />
+  </div>
+  <footer class="mx-auto mt-32 max-w-5xl flex-shrink-0 px-4 pb-10 md:px-0">
+    &copy; {new Date().getFullYear()} Webstone Technologies Inc. All rights reserved.
+  </footer>
 </div>

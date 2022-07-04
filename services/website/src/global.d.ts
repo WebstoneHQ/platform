@@ -1,13 +1,42 @@
 /// <reference types="@sveltejs/kit" />
 
+interface Lesson {
+  id: string;
+  name: string;
+}
+
+interface Stack {
+  web: string;
+  styles: string;
+  apitype: string;
+  api: string;
+  database: string;
+}
+
+interface Course {
+  description: string;
+  id: string;
+  lessons: Lesson[];
+  name: string;
+  stack: string;
+  stackgroup: string;
+}
+
 type PaddleCheckoutOpen = {
   allowQuantity: boolean;
+  country?: string;
   disableLogout: boolean;
+  email?: string;
+  frameInitialHeight: number;
+  frameStyle: string;
+  frameTarget: string;
   passthrough: string;
+  postcode?: string;
   product: number;
 };
 
 type PaddleSetup = {
+  eventCallback: (event: Record<string, unknown>) => void;
   vendor: number;
 };
 
@@ -30,4 +59,29 @@ interface User {
   providerEmail: string;
   providerId: string;
   providerLogin: string;
+}
+
+interface PurchaseInfo {
+  country?: string;
+  email?: string;
+  postcode?: string;
+  tax: string;
+  total: string;
+}
+
+interface PurchaseInfoGumroad {
+  email?: string;
+  githubusername?: string;
+  licensekey?: string;
+  discordusername?: string;
+  preorderid?: string;
+}
+
+interface GitHubSignUpState {
+  preorderId: string;
+  course: {
+    id: string;
+    stackgroup: string;
+    stack: string;
+  };
 }

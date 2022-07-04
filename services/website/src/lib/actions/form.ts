@@ -48,14 +48,14 @@ export const enhance = (
     }
   };
 
-  form.addEventListener("submit", () => {
-    Promise.all([handleSubmit]).catch(() => console.error());
+  form.addEventListener("submit", (event: Event) => {
+    handleSubmit(event).catch(() => console.error());
   });
 
   return {
     destroy() {
-      form.removeEventListener("submit", () => {
-        Promise.all([handleSubmit]).catch(() => console.error());
+      form.removeEventListener("submit", (event: Event) => {
+        handleSubmit(event).catch(() => console.error());
       });
     },
   };
