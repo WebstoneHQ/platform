@@ -59,10 +59,10 @@
   <h1
     class="text-center text-6xl font-bold text-[#1d1d1f] dark:text-white md:text-8xl md:font-extrabold"
   >
-    Learn with context.
+    Interactive courses
   </h1>
   <h2 class="mt-4 text-center text-3xl text-[#6e6d7a]">
-    Simplify your web dev education
+    You choose your tech stack. We provide continuous course updates.
   </h2>
   <div class="mt-4 px-4 md:mt-16 md:px-0">
     <Byoc />
