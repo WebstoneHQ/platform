@@ -5,8 +5,10 @@
   const lessonId = href.split("/").pop();
   const lessonNumber =
     lessonId.split("-")[1] === "00"
-      ? lessonId.split("-")[0]
-      : `${lessonId.split("-")[0]}.${lessonId.split("-")[1]}`;
+      ? lessonId.split("-")[0].replace(/^0/, "")
+      : `${lessonId.split("-")[0].replace(/^0/, "")}.${lessonId
+          .split("-")[1]
+          .replace(/^0/, "")}`;
 </script>
 
 <a
