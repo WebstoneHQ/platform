@@ -146,7 +146,7 @@
             <div class="mt-6">
               <div class="rounded-md shadow">
                 <a
-                  class="gumroad-button"
+                  class="gumroad-button w-full"
                   href="https://mikenikles.gumroad.com/l/webstone-education-preorder?wanted=true"
                   >Enroll on</a
                 >
