@@ -1,13 +1,10 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = async ({ session, stuff }) => {
+  export const load: Load = async ({ stuff }) => {
     if (stuff.course) {
       return {
-        props: {
-          course: stuff.course,
-          user: session.user,
-        },
+        props: {},
       };
     }
 
@@ -23,7 +20,7 @@
   import { marked } from "marked";
   import { browser } from "$app/env";
   import { page } from "$app/stores";
-  import { contextKeyCourse } from "$lib/context-keys";
+  import { contextKeyCourse, contextKeyUser } from "$lib/context-keys";
   import { layers } from "$lib/byoc-layers";
   import Stack from "$lib/components/byoc/stack.svelte";
   // import PreorderButton from "$lib/components/preorder-button.svelte";
@@ -31,9 +28,8 @@
   import PreorderButtonGumroad from "$lib/components/preorder-button-gumroad.svelte";
   import PreorderBenefits from "$lib/components/preorder-benefits.svelte";
 
-  export let user: User;
-
   const course = getContext<Course>(contextKeyCourse);
+  const user = getContext<User>(contextKeyUser);
 
   onMount(() => {
     if ($page.url.searchParams.has("refreshToLoadCookie")) {

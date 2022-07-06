@@ -1,7 +1,7 @@
 <script lang="ts" context="module">
   import type { Load } from "@sveltejs/kit";
 
-  export const load: Load = async ({ fetch, params, session, stuff }) => {
+  export const load: Load = async ({ fetch, params, stuff }) => {
     if (stuff.course) {
       const response = await fetch(
         `/api/courses/${params.courseid}/${params.stackgroup}/${params.stack}/lessons/${params.lessonid}/__data.json`
@@ -16,7 +16,6 @@
       return {
         props: {
           lessonContent: await response.text(),
-          user: session.user,
         },
       };
     }
@@ -30,12 +29,15 @@
 
 <script lang="ts">
   import { marked } from "marked";
+  import { getContext } from "svelte";
+  import { contextKeyUser } from "$lib/context-keys";
   import HowToLearn from "$lib/components/how-to-learn.svelte";
   import PreorderButtonGumroad from "$lib/components/preorder-button-gumroad.svelte";
   import PreorderBenefits from "$lib/components/preorder-benefits.svelte";
 
   export let lessonContent: string;
-  export let user: User;
+
+  const user = getContext<User>(contextKeyUser);
 </script>
 
 {#if user}

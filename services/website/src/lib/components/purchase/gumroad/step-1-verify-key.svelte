@@ -43,7 +43,6 @@
   };
 </script>
 
-<h2 class="text-2xl font-bold">Pre-order verification</h2>
 <p class="mt-4">
   Please fill in the form below to verify your Webstone Education license.
 </p>
@@ -56,13 +55,10 @@
     pending: licenseVerificationPending,
     result: licenseVerificationSuccessful,
   }}"
-  class="space-y-8 divide-y divide-gray-200"
+  class="space-y"
 >
   <div class="space-y-8 divide-y divide-gray-200 sm:space-y-5">
     <div class="space-y-6 pt-8 sm:space-y-5 sm:pt-10">
-      <div>
-        <h1 class="text-lg font-medium leading-6">Pre-order verification</h1>
-      </div>
       <div class="space-y-6 sm:space-y-5">
         <div
           class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:border-t sm:border-gray-200 sm:pt-5"
@@ -72,6 +68,7 @@
           </label>
           <div class="mt-1 sm:col-span-2 sm:mt-0">
             <input
+              autofocus
               type="email"
               name="email"
               id="email"
