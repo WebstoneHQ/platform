@@ -12,7 +12,9 @@
 <p class="mt-2 text-center text-[#6e6d7a] dark:text-white">
   Preorders are handled by Gumroad.com. You will receive a license key via
   email.<br />Already enrolled?
-  <a href="./verify-license" class="underline underline-offset-1"
-    >Verify your key</a
+  <a
+    href="/courses/{$page.params.courseid}/{$page.params.stackgroup}/{$page
+      .params.stack}/verify-license"
+    class="underline underline-offset-1">Verify your key</a
   > .
 </p>

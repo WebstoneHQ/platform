@@ -2,6 +2,8 @@ import type { Octokit } from "@octokit/core";
 
 import { parse as parseYaml } from "yaml";
 
+import { getSystemOctokit } from "$lib/github/helpers";
+
 const REPO_BRANCH = "main";
 
 type LessonConfig = {
@@ -44,10 +46,10 @@ type QueryRepositoryResponse = {
 };
 
 export const cloneTemplateRepositoryMutation = async (
-  octokit: Octokit,
+  userOctokit: Octokit,
   ownerId: string
 ): Promise<void> => {
-  await octokit.graphql(
+  await userOctokit.graphql(
     `mutation($ownerId: ID!) {
     cloneTemplateRepository(input: {
       description: "Your Webstone Education courses. Learn more at https://webstone.app."
@@ -97,13 +99,12 @@ export const getGitHubUser = async (userOctokit: Octokit): Promise<User> => {
 };
 
 export const readFile = async (
-  octokit: Octokit,
   owner: string,
   repo: string,
   path: string
 ): Promise<string> => {
   const expression = `${REPO_BRANCH}:${path}`;
-  const result: ReadFileResponse = await octokit.graphql(
+  const result: ReadFileResponse = await getSystemOctokit().graphql(
     `query ReadFile($owner: String!, $name: String!, $expression: String!) {
     repository(owner: $owner, name: $name) {
       object(expression: $expression) {
@@ -131,17 +132,15 @@ export const readFile = async (
 };
 
 export const readFileYaml = async <TConfig>(
-  octokit: Octokit,
   owner: string,
   repo: string,
   path: string
 ): Promise<TConfig> => {
-  const fileContent = await readFile(octokit, owner, repo, path);
+  const fileContent = await readFile(owner, repo, path);
   return parseYaml(fileContent) as TConfig;
 };
 
 export const readLessonConfigFiles = async (
-  octokit: Octokit,
   owner: string,
   repo: string,
   path: string
@@ -151,8 +150,9 @@ export const readLessonConfigFiles = async (
     name: string;
   }[]
 > => {
-  const result: ReadLessonConfigFilesResponse = await octokit.graphql(
-    `query ReadLessonConfigFiles($owner: String!, $name: String!, $expression: String!) {
+  const result: ReadLessonConfigFilesResponse =
+    await getSystemOctokit().graphql(
+      `query ReadLessonConfigFiles($owner: String!, $name: String!, $expression: String!) {
     repository(owner: $owner, name: $name) {
       object(expression: $expression) {
         ... on Tree {
@@ -177,12 +177,12 @@ export const readLessonConfigFiles = async (
       }
     }
   }`,
-    {
-      owner,
-      name: repo,
-      expression: `${REPO_BRANCH}:${path}`,
-    }
-  );
+      {
+        owner,
+        name: repo,
+        expression: `${REPO_BRANCH}:${path}`,
+      }
+    );
 
   if (!result.repository.object?.entries) {
     return [];
@@ -207,11 +207,11 @@ export const readLessonConfigFiles = async (
 };
 
 export const queryRepository = async (
-  octokit: Octokit,
+  userOctokit: Octokit,
   owner: string,
   name: string
 ): Promise<{ name?: string }> => {
-  const result: QueryRepositoryResponse = await octokit.graphql(
+  const result: QueryRepositoryResponse = await userOctokit.graphql(
     `query QueryRepository($owner: String!, $name: String!) {
     repository(owner: $owner, name: $name) {
       name
