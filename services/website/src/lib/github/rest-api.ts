@@ -36,20 +36,6 @@ export const addRepositoryCollaborator = async (
   return data.id;
 };
 
-export const dispatchRepositoryEvent = async (
-  clientPayload: Record<string, unknown>,
-  eventType: string,
-  owner: string,
-  repo: string
-) => {
-  await getSystemOctokit().request("POST /repos/{owner}/{repo}/dispatches", {
-    owner,
-    repo,
-    event_type: eventType,
-    client_payload: clientPayload,
-  });
-};
-
 export const createRepositorySecret = async (
   owner: string,
   repo: string,
@@ -84,6 +70,36 @@ export const createRepositorySecret = async (
   );
 };
 
+export const dispatchRepositoryEvent = async (
+  clientPayload: Record<string, unknown>,
+  eventType: string,
+  owner: string,
+  repo: string
+) => {
+  await getSystemOctokit().request("POST /repos/{owner}/{repo}/dispatches", {
+    owner,
+    repo,
+    event_type: eventType,
+    client_payload: clientPayload,
+  });
+};
+
+export const getActionsWorkflow = async (
+  owner: string,
+  repo: string,
+  workflowIdOrFilename: string
+) => {
+  const { data } = await getSystemOctokit().request(
+    "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}",
+    {
+      owner,
+      repo,
+      workflow_id: workflowIdOrFilename,
+    }
+  );
+  return data;
+};
+
 export const getRepositorySecret = async (
   owner: string,
   repo: string,
@@ -103,18 +119,17 @@ export const getRepositorySecret = async (
   return name;
 };
 
-export const getActionsWorkflow = async (
+export const updateRepository = async (
+  userOctokit: Octokit,
   owner: string,
   repo: string,
-  workflowIdOrFilename: string
+  requestParameters: {
+    visibility: "private";
+  }
 ) => {
-  const { data } = await getSystemOctokit().request(
-    "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}",
-    {
-      owner,
-      repo,
-      workflow_id: workflowIdOrFilename,
-    }
-  );
-  return data;
+  await userOctokit.request("PATCH /repos/{owner}/{repo}", {
+    owner,
+    repo,
+    ...requestParameters,
+  });
 };
