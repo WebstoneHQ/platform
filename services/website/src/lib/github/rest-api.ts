@@ -1,24 +1,28 @@
 import type { Octokit } from "@octokit/core";
 import * as libsodium from "@devtomio/sodium";
 
+import { getSystemOctokit } from "$lib/github/helpers";
+
 export const acceptRepositoryInvitation = async (
-  octokit: Octokit,
   invitationId: number
 ): Promise<void> => {
   // May 22, 2022: REST API because the GraphQL API does not provide this feature
-  await octokit.request("PATCH /user/repository_invitations/{invitation_id}", {
-    invitation_id: invitationId,
-  });
+  await getSystemOctokit().request(
+    "PATCH /user/repository_invitations/{invitation_id}",
+    {
+      invitation_id: invitationId,
+    }
+  );
 };
 
 export const addRepositoryCollaborator = async (
-  octokit: Octokit,
+  userOctokit: Octokit,
   owner: string,
   repo: string,
   username: string
 ): Promise<number> => {
   // May 22, 2022: REST API because the GraphQL API does not provide this feature
-  const { data } = await octokit.request(
+  const { data } = await userOctokit.request(
     "PUT /repos/{owner}/{repo}/collaborators/{username}",
     {
       owner,
@@ -33,13 +37,12 @@ export const addRepositoryCollaborator = async (
 };
 
 export const dispatchRepositoryEvent = async (
-  octokit: Octokit,
   clientPayload: Record<string, unknown>,
   eventType: string,
   owner: string,
   repo: string
 ) => {
-  await octokit.request("POST /repos/{owner}/{repo}/dispatches", {
+  await getSystemOctokit().request("POST /repos/{owner}/{repo}/dispatches", {
     owner,
     repo,
     event_type: eventType,
@@ -48,7 +51,6 @@ export const dispatchRepositoryEvent = async (
 };
 
 export const createRepositorySecret = async (
-  octokit: Octokit,
   owner: string,
   repo: string,
   secretName: string,
@@ -56,7 +58,7 @@ export const createRepositorySecret = async (
 ) => {
   const {
     data: { key, key_id },
-  } = await octokit.request(
+  } = await getSystemOctokit().request(
     "GET /repos/{owner}/{repo}/actions/secrets/public-key",
     {
       owner,
@@ -70,7 +72,7 @@ export const createRepositorySecret = async (
   const encryptedBytes = libsodium.crypto_box_seal(messageBytes, keyBytes);
   const encryptedValue = Buffer.from(encryptedBytes).toString("base64");
 
-  await octokit.request(
+  await getSystemOctokit().request(
     "PUT /repos/{owner}/{repo}/actions/secrets/{secret_name}",
     {
       owner,
@@ -83,14 +85,13 @@ export const createRepositorySecret = async (
 };
 
 export const getRepositorySecret = async (
-  octokit: Octokit,
   owner: string,
   repo: string,
   secretName: string
 ) => {
   const {
     data: { name },
-  } = await octokit.request(
+  } = await getSystemOctokit().request(
     "GET /repos/{owner}/{repo}/actions/secrets/{secret_name}",
     {
       owner,
@@ -103,12 +104,11 @@ export const getRepositorySecret = async (
 };
 
 export const getActionsWorkflow = async (
-  octokit: Octokit,
   owner: string,
   repo: string,
   workflowIdOrFilename: string
 ) => {
-  const { data } = await octokit.request(
+  const { data } = await getSystemOctokit().request(
     "GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}",
     {
       owner,

@@ -1,7 +1,5 @@
 import type { RequestHandler } from "@sveltejs/kit";
 
-import { Octokit } from "octokit";
-
 import {
   readFile,
   readFileYaml,
@@ -13,8 +11,6 @@ type CourseConfig = {
   id: string;
   name: string;
 };
-
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 const cache = new Map<string, Course>();
 
@@ -28,19 +24,16 @@ export const get: RequestHandler = async ({ params }) => {
 
   const githubApiCalls = await Promise.allSettled([
     readFile(
-      octokit,
       "WebstoneHQ",
       `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
       `README.md`
     ),
     readFileYaml<CourseConfig>(
-      octokit,
       "WebstoneHQ",
       `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
       `config.yaml`
     ),
     readLessonConfigFiles(
-      octokit,
       "WebstoneHQ",
       `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
       `lessons`

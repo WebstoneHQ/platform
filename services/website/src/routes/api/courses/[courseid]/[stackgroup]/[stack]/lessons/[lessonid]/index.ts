@@ -1,10 +1,10 @@
 import type { RequestHandler } from "@sveltejs/kit";
 
-import { Octokit } from "octokit";
+// import { Octokit } from "octokit";
 
 import { readFile } from "$lib/github/graphql-api";
 
-const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+// const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
 
 const cache = new Map<string, string>();
 
@@ -21,7 +21,6 @@ export const get: RequestHandler = async ({ params }) => {
     idDigitsMatch[2]
   }]${params.lessonid.substring("xx-xx-".length)}`;
   const lessonContent = await readFile(
-    octokit,
     "WebstoneHQ",
     `c-${params.courseid}-${params.stackgroup}-${params.stack}`,
     `lessons/${lessonDirName}/README.md`

@@ -68,7 +68,6 @@
           </label>
           <div class="mt-1 sm:col-span-2 sm:mt-0">
             <input
-              autofocus
               type="email"
               name="email"
               id="email"
