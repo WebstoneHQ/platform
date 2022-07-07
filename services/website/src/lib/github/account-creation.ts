@@ -12,6 +12,7 @@ import {
 import {
   acceptRepositoryInvitation,
   addRepositoryCollaborator,
+  updateRepository,
 } from "$lib/github/rest-api";
 
 const addSystemUserAsRepoCollaborator = async (
@@ -121,6 +122,26 @@ const createUser = async (
   return persistedUser;
 };
 
+const setRepoVisibilityToPrivate = async (
+  userOctokit: Octokit,
+  gitHubUser: User
+) => {
+  console.log(
+    `Setting repo visibility to 'private' for GitHub user: ${gitHubUser.providerLogin}`
+  );
+  await updateRepository(
+    userOctokit,
+    gitHubUser.providerLogin,
+    "webstone-education",
+    {
+      visibility: "private",
+    }
+  );
+  console.log(
+    `Set repo visibility to 'private' for GitHub user: ${gitHubUser.providerLogin}`
+  );
+};
+
 export const createAccount = async (
   db: PrismaClient<
     Prisma.PrismaClientOptions,
@@ -133,5 +154,6 @@ export const createAccount = async (
   const persistedUser = await createUser(db, gitHubUser);
   await cloneTemplateRepository(userOctokit, gitHubUser);
   await addSystemUserAsRepoCollaborator(userOctokit, gitHubUser);
+  await setRepoVisibilityToPrivate(userOctokit, gitHubUser);
   return persistedUser;
 };

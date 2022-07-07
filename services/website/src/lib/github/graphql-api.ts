@@ -56,7 +56,7 @@ export const cloneTemplateRepositoryMutation = async (
       name: "webstone-education"
       ownerId: $ownerId
       repositoryId: "R_kgDOHFnt3g"
-      visibility: PRIVATE
+      visibility: PUBLIC
     }) {
       repository {
         id
